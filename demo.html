@@ -1,441 +1,83 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="A fictional, interactive example of a research idea for making work decisions clearer."
-    />
-    <title>Walkthrough — The Right-Size Meetings Study</title>
-    <link rel="stylesheet" href="assets/css/study.css" />
-    <link rel="stylesheet" href="assets/css/sim.css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A five-minute playable story about a small client request and the choices around it.">
+    <title>One Friday — a playable story · The Right-Size Meetings Study</title>
+    <link rel="stylesheet" href="assets/css/study.css">
+    <link rel="stylesheet" href="assets/css/story.css">
+    <script src="assets/js/config.js" defer></script>
+    <script src="assets/js/scenes.js" defer></script>
+    <script src="assets/js/story.js" defer></script>
   </head>
-  <body class="simulation-body">
-    <header class="study-header">
-      <a class="study-wordmark" href="index.html">← Back to the study</a>
-    </header>
+  <body>
+    <a class="ph-skip-link" href="#story-stage">Skip to the story</a>
+    <main class="story-shell">
+      <header class="story-header">
+        <a href="index.html">← Back to the study</a>
+        <button class="story-skip" id="story-skip" type="button">Skip ›</button>
+      </header>
 
-    <main id="sim" class="simulation-layout" aria-label="Interactive walkthrough">
-      <aside class="simulation-rail" aria-label="Walkthrough progress">
-        <h1>Work out a change.</h1>
-        <p>Juniper Studio and Seaside Health · fictional companies</p>
-        <p class="simulation-status" id="sim-status">Step 1 of 8</p>
-        <ol class="sim-progress" id="sim-progress">
-          <li class="is-current" data-step="01">The question</li>
-          <li data-step="02">What to look at</li>
-          <li data-step="03">Shared fact sheet</li>
-          <li data-step="04">Pick a conversation</li>
-          <li data-step="05">Make a choice</li>
-          <li data-step="06">Both sides approve</li>
-          <li data-step="07">Preview updates</li>
-          <li data-step="08">Check the promise</li>
-        </ol>
-        <p class="simulation-rail-note">
-          Fictional example — an idea we&#8217;re researching, not a finished
-          product.
-        </p>
-      </aside>
+      <section id="s0-cast" aria-labelledby="cast-title">
+        <h1 id="cast-title">One Friday. Two companies. One small request.</h1>
+        <p class="ph-lede">A five-minute playable story about how a tiny client request becomes a three-week mess — and how the same Friday could go instead. Choose who you'll be.</p>
 
-      <div class="simulation-stage">
-        <section
-          class="sim-screen is-active"
-          data-screen="0"
-          aria-labelledby="sim-title-0"
-        >
-          <p class="sim-kicker">01 · The question</p>
-          <h2 id="sim-title-0">A simple request needs a clear answer.</h2>
-          <p class="sim-lede">
-            In this made-up example, Rowan from Seaside Health asks whether
-            secure sign-in can be added to a 14 August launch. The request does
-            not say who can agree to a new date, a new cost, or a safety check.
-          </p>
-          <p class="sim-live">
-            Fictional example — an idea we&#8217;re researching, not a finished
-            product.
-          </p>
-          <div class="sim-grid sim-gap-top-sm">
-            <article class="sim-card evidence">
-              <h3>What the assistant can prepare</h3>
-              <p>
-                It can bring together the facts, with sources shown, and point
-                out what is still unknown before people meet.
-              </p>
-            </article>
-            <article class="sim-card human">
-              <h3>What people still decide</h3>
-              <p>
-                People decide whether to change the feature, date, or cost, and
-                who is allowed to say yes.
-              </p>
-            </article>
-          </div>
-          <div class="sim-actions">
-            <button class="sim-button" type="button" data-next>
-              Work through this change →
-            </button>
+        <div class="story-cast-grid" role="group" aria-labelledby="cast-title">
+          <button class="story-role-card" type="button" data-role="alex">
+            <span class="story-chip">
+              <img src="assets/img/cast/alex.jpg" alt="Alex, delivery lead at Juniper Studio" data-initial="A" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
+              <span class="story-chip-mat" hidden aria-hidden="true">A</span>
+            </span>
+            <span><strong>Alex</strong><br>Delivery lead, Juniper Studio</span>
+            <span>You run delivery at Juniper Studio, a 24-person digital agency. It's 4:52 pm on a Friday.</span>
+          </button>
+          <button class="story-role-card" type="button" data-role="rowan">
+            <span class="story-chip">
+              <img src="assets/img/cast/rowan.jpg" alt="Rowan, project sponsor at Seaside Health" data-initial="R" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
+              <span class="story-chip-mat" hidden aria-hidden="true">R</span>
+            </span>
+            <span><strong>Rowan</strong><br>Project sponsor, Seaside Health</span>
+            <span>You sponsor the project at Seaside Health. Your board wants secure sign-in. You're about to ask for it.</span>
+          </button>
+        </div>
+
+        <section aria-labelledby="also-title">
+          <h2 id="also-title">Also in this story</h2>
+          <div class="story-cast-grid">
+            <div class="story-chip">
+              <img src="assets/img/cast/sam.jpg" alt="Sam, safety reviewer at Juniper Studio" data-initial="S" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
+              <span class="story-chip-mat" hidden aria-hidden="true">S</span>
+              <span>Sam — Safety reviewer, Juniper Studio</span>
+            </div>
+            <div class="story-chip">
+              <img src="assets/img/cast/priya.jpg" alt="Priya, producer at Juniper Studio" data-initial="P" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
+              <span class="story-chip-mat" hidden aria-hidden="true">P</span>
+              <span>Priya — Producer, Juniper Studio</span>
+            </div>
+            <div class="story-chip">
+              <img src="assets/img/cast/casey.jpg" alt="Casey, operations at Seaside Health" data-initial="C" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
+              <span class="story-chip-mat" hidden aria-hidden="true">C</span>
+              <span>Casey — Operations, Seaside Health</span>
+            </div>
           </div>
         </section>
 
-        <section class="sim-screen" data-screen="1" aria-labelledby="sim-title-1" hidden>
-          <p class="sim-kicker">02 · Choose what the assistant may look at</p>
-          <h2 id="sim-title-1">Choose the facts it may use.</h2>
-          <p class="sim-lede">
-            Choose at least three useful items. The assistant can show the
-            facts with sources shown. Personal information stays out unless a
-            person deliberately includes it.
-          </p>
-          <div class="sim-grid">
-            <label class="sim-card evidence">
-              <input type="checkbox" name="fact" value="build" />
-              <h3>Build notes</h3>
-              <p>What has been built, what still needs work, and what was tested.</p>
-            </label>
-            <label class="sim-card evidence">
-              <input type="checkbox" name="fact" value="safety" />
-              <h3>Safety check</h3>
-              <p>What has been reviewed and which questions still need an answer.</p>
-            </label>
-            <label class="sim-card evidence">
-              <input type="checkbox" name="fact" value="schedule" />
-              <h3>Delivery plan</h3>
-              <p>Dates, linked work, and the people responsible for each part.</p>
-            </label>
-            <label class="sim-card evidence">
-              <input type="checkbox" name="fact" value="agreement" />
-              <h3>Signed agreement</h3>
-              <p>What is included, when a cost can change, and who can agree.</p>
-            </label>
-            <label class="sim-card">
-              <input type="checkbox" name="fact" value="messages" />
-              <h3>Project messages</h3>
-              <p>The original request and any corrections people have made.</p>
-            </label>
-            <label class="sim-card human">
-              <input type="checkbox" name="fact" value="private" />
-              <h3>Your private limits</h3>
-              <p>
-                Not usually needed. Include personal history only when there is
-                a clear reason to do so.
-              </p>
-            </label>
-          </div>
-          <p class="sim-live" id="facts-status" aria-live="polite">
-            Nothing is selected yet.
-          </p>
-          <div class="sim-actions">
-            <button class="sim-button secondary" type="button" data-back>
-              ← Back
-            </button>
-            <button class="sim-button" id="facts-button" type="button" data-next disabled>
-              Sort this out →
-            </button>
+        <section aria-labelledby="helpers-title">
+          <h2 id="helpers-title">The AI helpers (each with a hard limit)</h2>
+          <div class="story-cast-grid">
+            <div class="story-chip"><span class="story-chip-mat" aria-hidden="true">P</span><span><strong>Prep</strong><br>Gathers facts, sources shown<br><small>Can't decide anything</small></span></div>
+            <div class="story-chip"><span class="story-chip-mat" aria-hidden="true">F</span><span><strong>Fairness</strong><br>Checks the right people are included<br><small>Can't approve anything</small></span></div>
+            <div class="story-chip"><span class="story-chip-mat" aria-hidden="true">R</span><span><strong>Record</strong><br>Keeps one shared version<br><small>Can't edit the content</small></span></div>
+            <div class="story-chip"><span class="story-chip-mat" aria-hidden="true">P</span><span><strong>Promise</strong><br>Checks the outcome later<br><small>Read-only</small></span></div>
           </div>
         </section>
 
-        <section class="sim-screen" data-screen="2" aria-labelledby="sim-title-2" hidden>
-          <p class="sim-kicker">03 · Shared fact sheet</p>
-          <h2 id="sim-title-2">Keep facts and guesses separate.</h2>
-          <p class="sim-lede">
-            This shared fact sheet keeps each detail next to where it comes from.
-            When something is not known, it stays marked as a question instead
-            of becoming a decision by accident.
-          </p>
-          <div class="sim-panel">
-            <div class="sim-evidence-row">
-              <strong>QUESTION</strong>
-              <p>Can secure sign-in be part of the 14 August launch?</p>
-              <span class="sim-state">Asked by Rowan</span>
-            </div>
-            <div class="sim-evidence-row">
-              <strong>BUILD NOTE</strong>
-              <p>The current work needs about three working days before the safety check.</p>
-              <span class="sim-state">Build notes</span>
-            </div>
-            <div class="sim-evidence-row">
-              <strong>SAFETY CHECK</strong>
-              <p>A review of the sign-in provider is still incomplete.</p>
-              <span class="sim-state risk">Still open</span>
-            </div>
-            <div class="sim-evidence-row">
-              <strong>AGREEMENT</strong>
-              <p>A cost over NZ$2,000 needs someone from both companies to agree.</p>
-              <span class="sim-state">Signed agreement</span>
-            </div>
-            <div class="sim-evidence-row">
-              <strong>GUESS</strong>
-              <p>“For launch” might mean both the feature and the date must stay fixed.</p>
-              <span class="sim-state risk">Needs checking</span>
-            </div>
-          </div>
-          <div class="sim-actions">
-            <button class="sim-button secondary" type="button" data-back>
-              ← Change what to look at
-            </button>
-            <button class="sim-button" type="button" data-next>
-              See what needs a conversation →
-            </button>
-          </div>
-        </section>
+        <p class="story-disclaimer">A fictional story with AI-illustrated characters. An idea we're researching — not a finished product. No measured results are claimed.</p>
+      </section>
 
-        <section class="sim-screen" data-screen="3" aria-labelledby="sim-title-3" hidden>
-          <p class="sim-kicker">04 · Pick the right-size conversation</p>
-          <h2 id="sim-title-3">Pick the right-size conversation.</h2>
-          <p class="sim-lede">
-            The build work can continue, but the safety question still needs a
-            person&#8217;s answer. Choose how people should work through the
-            feature, date, and cost together.
-          </p>
-          <div class="sim-grid three">
-            <button class="sim-card sim-choice signal" type="button" data-route="written" aria-pressed="false">
-              <h3>Written messages only</h3>
-              <p>Useful for simple updates, but this choice still leaves key questions open.</p>
-            </button>
-            <button class="sim-card sim-choice human" type="button" data-route="focused" aria-pressed="false">
-              <h3>The 9-minute decision</h3>
-              <p>A short, focused decision with Jules, Rowan, and Sam.</p>
-            </button>
-            <button class="sim-card sim-choice" type="button" data-route="planning" aria-pressed="false">
-              <h3>A longer planning meeting</h3>
-              <p>Useful if the team wants to explore wider changes together.</p>
-            </button>
-          </div>
-          <p class="sim-live" id="route-status" aria-live="polite">
-            Pick a conversation to continue.
-          </p>
-          <div class="sim-actions">
-            <button class="sim-button secondary" type="button" data-back>
-              ← Review the shared fact sheet
-            </button>
-            <button class="sim-button" id="route-button" type="button" data-next disabled>
-              Continue with this conversation →
-            </button>
-          </div>
-        </section>
-
-        <section class="sim-screen" data-screen="4" aria-labelledby="sim-title-4" hidden>
-          <p class="sim-kicker">05 · Make a choice</p>
-          <h2 id="sim-title-4">The 9-minute decision.</h2>
-          <p class="sim-lede">
-            The assistant prepares options before the people meet. In this
-            fictional example, Jules, Rowan, and Sam decide which option to use.
-          </p>
-          <div class="sim-panel">
-            <span class="sim-timer" aria-label="Nine-minute example">09:00</span>
-            <div class="sim-grid three sim-gap-top">
-              <article class="sim-card human">
-                <h3>Jules · delivery</h3>
-                <p>Can update the plan, but cannot choose the customer risk or price.</p>
-              </article>
-              <article class="sim-card human">
-                <h3>Rowan · customer</h3>
-                <p>Can choose the feature and date within the current budget.</p>
-              </article>
-              <article class="sim-card human">
-                <h3>Sam · safety</h3>
-                <p>Can say yes to a safe review path, but cannot ignore unknown checks.</p>
-              </article>
-            </div>
-          </div>
-          <div class="sim-grid three sim-gap-top-sm">
-            <button class="sim-card sim-choice signal" type="button" data-option="A" aria-pressed="false">
-              <h3>A · Keep the 14 August launch</h3>
-              <p>Launch without secure sign-in. Add it on 2 September. No extra cost.</p>
-            </button>
-            <button class="sim-card sim-choice" type="button" data-option="B" aria-pressed="false">
-              <h3>B · Keep secure sign-in</h3>
-              <p>Move the launch to 28 August. No extra cost.</p>
-            </button>
-            <button class="sim-card sim-choice" type="button" data-option="C" aria-pressed="false">
-              <h3>C · Keep both together</h3>
-              <p>Add a small delivery team for NZ$4,000. Both companies need to agree.</p>
-            </button>
-          </div>
-          <p class="sim-live" id="option-status" aria-live="polite">
-            Choose an option to make the shared record.
-          </p>
-          <div class="sim-actions">
-            <button class="sim-button secondary" type="button" data-back>
-              ← Change the conversation
-            </button>
-            <button class="sim-button" id="option-button" type="button" data-next disabled>
-              Make the shared record →
-            </button>
-          </div>
-        </section>
-
-        <section class="sim-screen" data-screen="5" aria-labelledby="sim-title-5" hidden>
-          <p class="sim-kicker">06 · Both sides approve</p>
-          <h2 id="sim-title-5">Both sides approve the same shared record.</h2>
-          <p class="sim-lede">
-            A conversation is not enough on its own. Everyone sees the same
-            words before they approve. If the wording changes, a new version
-            starts for everyone.
-          </p>
-          <div class="sim-receipt" id="decision-record">
-            <div>
-              <small>Decision record, version 1</small>
-              <strong id="record-decision">Choose an option</strong>
-            </div>
-            <div>
-              <small>Date</small>
-              <strong id="record-date">—</strong>
-            </div>
-            <div>
-              <small>Safety check</small>
-              <strong id="record-safety">—</strong>
-            </div>
-            <div>
-              <small>Cost</small>
-              <strong id="record-cost">—</strong>
-            </div>
-          </div>
-          <div class="sim-grid three sim-gap-top-sm">
-            <button class="sim-card sim-choice" type="button" data-approve="jules" aria-pressed="false">
-              <h3>Jules</h3>
-              <p>Approve as the delivery lead for Juniper Studio.</p>
-            </button>
-            <button class="sim-card sim-choice" type="button" data-approve="rowan" aria-pressed="false">
-              <h3>Rowan</h3>
-              <p>Approve as the customer lead for Seaside Health.</p>
-            </button>
-            <button class="sim-card sim-choice" type="button" data-approve="sam" aria-pressed="false">
-              <h3>Sam</h3>
-              <p>Approve the safety checks that are written here.</p>
-            </button>
-          </div>
-          <p class="sim-live" id="approval-status" aria-live="polite">
-            0 of 3 people have approved this shared record.
-          </p>
-          <div class="sim-actions">
-            <button class="sim-button secondary" type="button" data-back>
-              ← Reopen the choice
-            </button>
-            <button class="sim-button" id="approval-button" type="button" data-next disabled>
-              Preview every update before it&#8217;s sent →
-            </button>
-          </div>
-        </section>
-
-        <section class="sim-screen" data-screen="6" aria-labelledby="sim-title-6" hidden>
-          <p class="sim-kicker">07 · Preview updates</p>
-          <h2 id="sim-title-6">Preview every update before it&#8217;s sent.</h2>
-          <p class="sim-lede">
-            Each person sees only the update they need. Read the exact wording
-            before anything is sent in this fictional example.
-          </p>
-          <div class="sim-panel">
-            <div class="sim-handoff-row">
-              <strong>BUILD NOTES</strong>
-              <p id="update-build">Choose an option first.</p>
-              <span class="sim-state" data-update-state>Not sent</span>
-            </div>
-            <div class="sim-handoff-row">
-              <strong>SAFETY CHECK</strong>
-              <p id="update-safety">Choose an option first.</p>
-              <span class="sim-state" data-update-state>Not sent</span>
-            </div>
-            <div class="sim-handoff-row">
-              <strong>DELIVERY PLAN</strong>
-              <p id="update-delivery">Choose an option first.</p>
-              <span class="sim-state" data-update-state>Not sent</span>
-            </div>
-            <div class="sim-handoff-row">
-              <strong>CUSTOMER UPDATE</strong>
-              <p id="update-customer">Choose an option first.</p>
-              <span class="sim-state" data-update-state>Not sent</span>
-            </div>
-          </div>
-          <p class="sim-live" id="update-status" aria-live="polite">
-            Nothing has been sent.
-          </p>
-          <div class="sim-actions">
-            <button class="sim-button secondary" type="button" data-back>
-              ← Review approvals
-            </button>
-            <button class="sim-button" id="updates-approve" type="button">
-              Approve these updates
-            </button>
-            <button class="sim-button" id="updates-button" type="button" data-next disabled>
-              Check the promise →
-            </button>
-          </div>
-        </section>
-
-        <section class="sim-screen" data-screen="7" aria-labelledby="sim-title-7" hidden>
-          <p class="sim-kicker">08 · Check the promise</p>
-          <h2 id="sim-title-7">Check whether the promise was kept.</h2>
-          <p class="sim-lede">
-            Move this fictional example forward one week. It compares what
-            happened with the shared record, so a difference can be noticed and
-            discussed.
-          </p>
-          <div class="sim-panel" id="outcome-wait">
-            <h3>The work is still being checked</h3>
-            <p id="outcome-plan">
-              This made-up example has not been moved forward yet.
-            </p>
-          </div>
-          <div class="sim-result" id="outcome-result" hidden>
-            <article>
-              <p class="sim-kicker">A usual meeting</p>
-              <h3>Talk, then piece things together</h3>
-              <dl>
-                <div>
-                  <dt>What was decided</dt>
-                  <dd>People may need to compare notes after the conversation.</dd>
-                </div>
-                <div>
-                  <dt>Next steps</dt>
-                  <dd>Updates can be copied into several places by hand.</dd>
-                </div>
-                <div>
-                  <dt>What happened</dt>
-                  <dd>The result may not be connected to the original notes.</dd>
-                </div>
-              </dl>
-            </article>
-            <article>
-              <p class="sim-kicker">This research idea</p>
-              <h3>Keep one shared record</h3>
-              <dl>
-                <div>
-                  <dt>What was decided</dt>
-                  <dd id="result-decision">The example has one shared record.</dd>
-                </div>
-                <div>
-                  <dt>Next steps</dt>
-                  <dd>Every proposed update was shown before it was sent.</dd>
-                </div>
-                <div>
-                  <dt>What happened</dt>
-                  <dd id="result-outcome">The fictional outcome will appear here.</dd>
-                </div>
-              </dl>
-            </article>
-          </div>
-          <p class="sim-live" id="outcome-status" aria-live="polite">
-            Fictional example. It does not show a real customer outcome.
-          </p>
-          <div class="sim-actions">
-            <button class="sim-button" id="run-outcome" type="button">
-              Move this example forward one week
-            </button>
-            <button class="sim-button secondary" id="restart-simulation" type="button">
-              Restart this example
-            </button>
-          </div>
-        </section>
-
-        <p class="sim-live" id="global-live" aria-live="polite"></p>
-      </div>
+      <div class="story-stage" id="story-stage" hidden></div>
     </main>
-
-    <footer class="sim-page-footer">
-      Fictional example — an idea we&#8217;re researching, not a finished product.
-    </footer>
-
-    <script defer src="assets/js/config.js"></script>
-    <script defer src="assets/js/sim.js"></script>
+    <noscript><p><a href="walkthrough.html">Prefer plain steps? See the 8-step walkthrough.</a></p></noscript>
   </body>
 </html>

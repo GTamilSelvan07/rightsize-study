@@ -6,7 +6,22 @@
     return;
   }
 
-  const orderedSteps = ["welcome", "A", "B", "C", "C2", "D", "D2", "E", "F", "G", "H", "thanks"];
+  const orderedSteps = ["welcome", "A", "A2", "B", "C", "C2", "D", "D2", "E", "E2", "F", "G", "H", "thanks"];
+  const stepDisplayNames = {
+    welcome: "Welcome",
+    A: "About you",
+    A2: "Your toolkit",
+    B: "AI at work",
+    C: "The annoying parts",
+    C2: "When the client changes the plan",
+    D: "The idea",
+    D2: "Your numbers",
+    E: "Try it",
+    E2: "About your world",
+    F: "Straight answers",
+    G: "What it's worth",
+    H: "Last page",
+  };
   const c2FollowUpKeys = ["c2_arrived_where", "c2_resolve_time", "c2_costs", "c2_cost_money", "c2_workaround", "c2_freq"];
   const sections = new Map(
     [...app.querySelectorAll(".survey-step")].map((section) => [section.dataset.step, section]),
@@ -15,16 +30,28 @@
   const progressTrack = document.querySelector(".progress-track");
   const progressFill = document.querySelector(".progress-fill");
   const progressLabel = document.querySelector(".progress-label");
+  const savedIndicator = document.querySelector("[data-saved-indicator]");
   const answers = () => window.Store.getState().answers;
   let currentIndex = Math.min(
     orderedSteps.length - 1,
     Math.max(0, Number(window.Store.getState().stepIndex) || 0),
   );
   let enteredAt = Date.now();
+  let aiQuestionFallbackTimer = null;
+  let savedIndicatorTimer = null;
+  let isTransitioning = false;
 
   const selectedValue = (name) => {
     const selected = document.querySelector(`[name="${name}"]:checked`);
     return selected ? selected.value : "";
+  };
+
+  const motionIsAllowed = () => window.matchMedia("(prefers-reduced-motion: no-preference)").matches;
+
+  const syncSelectedCardStates = (scope = app) => {
+    scope.querySelectorAll(".ph-check-row, .likert label").forEach((row) => {
+      row.classList.toggle("is-checked", Boolean(row.querySelector("input:checked")));
+    });
   };
 
   const isClientBranchVisible = () => selectedValue("a_client_facing") !== "no";
@@ -161,6 +188,17 @@
       Object.assign(data, window.CompactDemo.getData());
     }
 
+    if (section.dataset.step === "E2") {
+      const aiq = window.Store.getState().aiq.status === "ready" || window.Store.getState().aiq.status === "fallback"
+        ? window.Store.getState().aiq
+        : window.Store.useFallbackAiQuestions();
+      data.ai_q1 = aiq.questions[0];
+      data.ai_a1 = section.querySelector('[name="ai_a1"]').value;
+      data.ai_q2 = aiq.questions[1];
+      data.ai_a2 = section.querySelector('[name="ai_a2"]').value;
+      data.ai_gen_ok = aiq.gen === true;
+    }
+
     if (section.dataset.step === "G") {
       data.g_vw_order_ok = updateVanWestendorp();
     }
@@ -205,6 +243,23 @@
     if (hideFollowUp) {
       clearC2FollowUp();
     }
+    syncSelectedCardStates(followUp);
+  };
+
+  const updateToolkitTools = (event) => {
+    const none = document.querySelector('[name="a2_pm_tools"][value="none"]');
+    if (!none) {
+      return;
+    }
+    if (event.target.value === "none" && event.target.checked) {
+      document.querySelectorAll('[name="a2_pm_tools"]').forEach((control) => {
+        if (control !== none) {
+          control.checked = false;
+        }
+      });
+    } else if (event.target.value !== "none" && event.target.checked) {
+      none.checked = false;
+    }
   };
 
   const updatePilotApprover = () => {
@@ -247,7 +302,7 @@
     progressTrack.setAttribute("aria-valuemax", String(visible.length));
     progressTrack.setAttribute("aria-valuenow", String(now));
     progressFill.style.width = `${(now / visible.length) * 100}%`;
-    progressLabel.textContent = `Step ${now} of ${visible.length}`;
+    progressLabel.textContent = `${stepDisplayNames[stepName]} · Step ${now} of ${visible.length}`;
   };
 
   const updateThanks = () => {
@@ -255,6 +310,7 @@
     document.querySelector("[data-thanks-minutes]").textContent = String(minutes);
     const link = `demo.html?r=${encodeURIComponent(window.Store.getState().rid)}`;
     document.querySelector("[data-thanks-demo-link]").href = link;
+    document.querySelector("[data-thanks-walkthrough-link]").href = `walkthrough.html?r=${encodeURIComponent(window.Store.getState().rid)}`;
   };
 
   const recordTime = () => {
@@ -276,8 +332,67 @@
     return currentIndex;
   };
 
-  const showStep = (nextIndex, shouldFocus = true) => {
-    currentIndex = findVisibleIndex(nextIndex, 1);
+  const clearAiQuestionFallbackTimer = () => {
+    if (aiQuestionFallbackTimer !== null) {
+      window.clearTimeout(aiQuestionFallbackTimer);
+      aiQuestionFallbackTimer = null;
+    }
+  };
+
+  const renderAiQuestions = () => {
+    const section = sections.get("E2");
+    const aiq = window.Store.getState().aiq;
+    if (!section || (aiq.status !== "ready" && aiq.status !== "fallback")) {
+      return false;
+    }
+
+    clearAiQuestionFallbackTimer();
+    section.querySelector("[data-aiq-loading]").hidden = true;
+    section.querySelector("[data-aiq-form]").hidden = false;
+    section.querySelectorAll("[data-aiq-label]").forEach((label, index) => {
+      label.textContent = aiq.questions[index] || "";
+    });
+    section.querySelector("[data-aiq-tailored]").hidden = !aiq.gen;
+    return true;
+  };
+
+  const prepareAiQuestions = () => {
+    const section = sections.get("E2");
+    if (!section) {
+      return;
+    }
+    if (renderAiQuestions()) {
+      return;
+    }
+
+    section.querySelector("[data-aiq-loading]").hidden = false;
+    section.querySelector("[data-aiq-form]").hidden = true;
+    const request = window.Store.requestAiQuestions();
+    if (renderAiQuestions()) {
+      return;
+    }
+    void request.then(() => {
+      if (currentSection().dataset.step === "E2") {
+        renderAiQuestions();
+      }
+    });
+    clearAiQuestionFallbackTimer();
+    aiQuestionFallbackTimer = window.setTimeout(() => {
+      if (currentSection().dataset.step === "E2" && !renderAiQuestions()) {
+        window.Store.useFallbackAiQuestions();
+        renderAiQuestions();
+      }
+    }, 6000);
+  };
+
+  const prefetchAiQuestions = (step) => {
+    if ((step === "C" && !isClientBranchVisible()) || step === "C2") {
+      void window.Store.requestAiQuestions();
+    }
+  };
+
+  const activateStep = (nextIndex, shouldFocus) => {
+    currentIndex = nextIndex;
     sections.forEach((section) => section.classList.remove("active"));
     const section = currentSection();
     section.classList.add("active");
@@ -293,16 +408,44 @@
     if (section.dataset.step === "E" && window.CompactDemo) {
       window.CompactDemo.start();
     }
+    if (section.dataset.step === "E2") {
+      prepareAiQuestions();
+    } else {
+      clearAiQuestionFallbackTimer();
+    }
     if (shouldFocus) {
       const heading = section.querySelector("h1, h2");
       window.setTimeout(() => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        window.scrollTo({ top: 0, behavior: motionIsAllowed() ? "smooth" : "auto" });
         heading.focus({ preventScroll: true });
       }, 0);
     }
   };
 
+  const showStep = (nextIndex, shouldFocus = true) => {
+    const resolvedIndex = findVisibleIndex(nextIndex, 1);
+    const outgoing = currentSection();
+    const incoming = sections.get(orderedSteps[resolvedIndex]);
+    const shouldAnimate = shouldFocus && outgoing && outgoing !== incoming && motionIsAllowed();
+
+    if (!shouldAnimate) {
+      activateStep(resolvedIndex, shouldFocus);
+      return;
+    }
+
+    isTransitioning = true;
+    outgoing.classList.add("is-leaving");
+    window.setTimeout(() => {
+      outgoing.classList.remove("is-leaving");
+      isTransitioning = false;
+      activateStep(resolvedIndex, shouldFocus);
+    }, 150);
+  };
+
   const goNext = () => {
+    if (isTransitioning) {
+      return;
+    }
     const section = currentSection();
     if (!validateStep(section)) {
       return;
@@ -319,11 +462,12 @@
     }
     window.Store.setAnswers(data);
     void window.Store.submit(section.dataset.step, data);
+    prefetchAiQuestions(section.dataset.step);
     showStep(currentIndex + 1);
   };
 
   const goBack = () => {
-    if (currentIndex === 0) {
+    if (currentIndex === 0 || isTransitioning) {
       return;
     }
     recordTime();
@@ -363,6 +507,16 @@
     updateC2Visibility();
     updatePilotApprover();
     updateVanWestendorp();
+    syncSelectedCardStates();
+  };
+
+  const resumeAiQuestionPrefetch = () => {
+    const saved = answers();
+    const completedC = Boolean(saved.c_email_meetings);
+    const completedC2 = Object.hasOwn(saved, "c2_incident_when");
+    if (completedC && (saved.a_client_facing === "no" || completedC2)) {
+      void window.Store.requestAiQuestions();
+    }
   };
 
   const setupComparison = () => {
@@ -411,6 +565,22 @@
     }
   };
 
+  const pulseSavedIndicator = () => {
+    if (!savedIndicator) {
+      return;
+    }
+    savedIndicator.classList.remove("is-pulsing");
+    void savedIndicator.offsetWidth;
+    savedIndicator.classList.add("is-pulsing");
+    if (savedIndicatorTimer !== null) {
+      window.clearTimeout(savedIndicatorTimer);
+    }
+    savedIndicatorTimer = window.setTimeout(() => {
+      savedIndicator.classList.remove("is-pulsing");
+      savedIndicatorTimer = null;
+    }, 900);
+  };
+
   app.addEventListener("click", (event) => {
     if (event.target.closest("[data-next]")) {
       goNext();
@@ -446,6 +616,9 @@
         none.checked = false;
       }
     }
+    if (name === "a2_pm_tools") {
+      updateToolkitTools(event);
+    }
     if (name === "c2_incident_when") {
       updateC2Visibility();
     }
@@ -462,6 +635,7 @@
     if (name === "a_client_facing") {
       updateProgress();
     }
+    syncSelectedCardStates();
     const field = event.target.closest("[data-required], [data-key]");
     if (field) {
       clearFieldError(field);
@@ -488,7 +662,9 @@
     currentIndex = orderedSteps.indexOf("D");
   }
   showStep(currentIndex, false);
+  resumeAiQuestionPrefetch();
   setupComparison();
+  window.addEventListener("study:persisted", pulseSavedIndicator);
 
   window.Survey = {
     getCurrentStep: () => orderedSteps[currentIndex],

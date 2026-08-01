@@ -371,7 +371,10 @@
         >
           <span class="progress-fill"></span>
         </div>
-        <span class="progress-label">Step 1 of 11</span>
+        <div class="progress-meta">
+          <span class="progress-label">Welcome · Step 1 of 13</span>
+          <span class="saved-indicator" data-saved-indicator aria-hidden="true">Saved on this device ✓</span>
+        </div>
       </div>
     </div>
 
@@ -381,6 +384,11 @@
         <p class="ph-lede">
           A 7-minute anonymous study about meetings, decisions, and follow-through. You'll also try a short interactive demo of an early product idea and tell us, honestly, what it would be worth. Nothing here is for sale.
         </p>
+        <ul class="welcome-chips" aria-label="Study details">
+          <li>≈8 minutes</li>
+          <li>Anonymous by default</li>
+          <li>Interactive demo inside</li>
+        </ul>
         <figure class="img-frame">
           <img src="assets/img/hero.jpg" loading="lazy" decoding="async" alt="Scattered calendar blocks converging into one small block" />
         </figure>
@@ -403,6 +411,7 @@
 
       <section class="survey-step" data-step="A" aria-labelledby="a-heading">
         <h2 id="a-heading" tabindex="-1">About you and your week</h2>
+        <p class="section-intro">A few quick details help us understand your working week.</p>
         <div class="ph-form-grid">
           <div class="ph-field" data-required data-key="a_country">
             <label class="ph-label" for="a-country">Country</label>
@@ -465,6 +474,22 @@
             </select>
           </div>
 
+          <fieldset class="ph-field" data-required data-key="a_experience_years">
+            <legend class="ph-label">How many years have you been doing this kind of work?</legend>
+            <label class="ph-check-row"><input type="radio" name="a_experience_years" value="Under 2" /><span>Under 2</span></label>
+            <label class="ph-check-row"><input type="radio" name="a_experience_years" value="2–5" /><span>2–5</span></label>
+            <label class="ph-check-row"><input type="radio" name="a_experience_years" value="6–10" /><span>6–10</span></label>
+            <label class="ph-check-row"><input type="radio" name="a_experience_years" value="11–20" /><span>11–20</span></label>
+            <label class="ph-check-row"><input type="radio" name="a_experience_years" value="More than 20" /><span>More than 20</span></label>
+          </fieldset>
+
+          <fieldset class="ph-field" data-required data-key="a_work_mode">
+            <legend class="ph-label">How does your team mostly work?</legend>
+            <label class="ph-check-row"><input type="radio" name="a_work_mode" value="Mostly remote" /><span>Mostly remote</span></label>
+            <label class="ph-check-row"><input type="radio" name="a_work_mode" value="Hybrid" /><span>Hybrid</span></label>
+            <label class="ph-check-row"><input type="radio" name="a_work_mode" value="Mostly in an office" /><span>Mostly in an office</span></label>
+          </fieldset>
+
           <fieldset class="ph-field ph-field-full" data-required data-key="a_client_facing">
             <legend class="ph-label">Do you work directly with external clients on projects — agency, consultancy, freelance, or professional services?</legend>
             <label class="ph-check-row"><input type="radio" name="a_client_facing" value="yes_mostly" /><span>Yes, that's most of my work</span></label>
@@ -485,8 +510,65 @@
         <div class="step-actions"><button class="ph-button ph-button-ghost" type="button" data-back>Back</button><button class="ph-button ph-button-primary" type="button" data-next>Continue →</button></div>
       </section>
 
+      <section class="survey-step" data-step="A2" aria-labelledby="a2-heading">
+        <h2 id="a2-heading" tabindex="-1">Your toolkit</h2>
+        <p class="section-intro">A quick look at the tools and routines around your work.</p>
+        <div class="ph-form-grid">
+          <fieldset class="ph-field" data-required data-key="a_team_size">
+            <legend class="ph-label">How big is your immediate team?</legend>
+            <label class="ph-check-row"><input type="radio" name="a_team_size" value="Just me" /><span>Just me</span></label>
+            <label class="ph-check-row"><input type="radio" name="a_team_size" value="2–5" /><span>2–5</span></label>
+            <label class="ph-check-row"><input type="radio" name="a_team_size" value="6–15" /><span>6–15</span></label>
+            <label class="ph-check-row"><input type="radio" name="a_team_size" value="16–50" /><span>16–50</span></label>
+            <label class="ph-check-row"><input type="radio" name="a_team_size" value="More than 50" /><span>More than 50</span></label>
+          </fieldset>
+
+          <fieldset class="ph-field" data-required data-key="a_decision_authority">
+            <legend class="ph-label">When it comes to buying tools for your team, you…</legend>
+            <label class="ph-check-row"><input type="radio" name="a_decision_authority" value="own" /><span>Own the budget</span></label>
+            <label class="ph-check-row"><input type="radio" name="a_decision_authority" value="influence" /><span>Recommend and influence the choice</span></label>
+            <label class="ph-check-row"><input type="radio" name="a_decision_authority" value="provided" /><span>Use what's provided</span></label>
+          </fieldset>
+
+          <fieldset class="ph-field ph-field-full" data-required data-key="a2_pm_tools">
+            <legend class="ph-label">Where does your team's work actually live? (all that apply)</legend>
+            <label class="ph-check-row"><input type="checkbox" name="a2_pm_tools" value="Jira" /><span>Jira</span></label>
+            <label class="ph-check-row"><input type="checkbox" name="a2_pm_tools" value="Linear" /><span>Linear</span></label>
+            <label class="ph-check-row"><input type="checkbox" name="a2_pm_tools" value="Asana" /><span>Asana</span></label>
+            <label class="ph-check-row"><input type="checkbox" name="a2_pm_tools" value="ClickUp" /><span>ClickUp</span></label>
+            <label class="ph-check-row"><input type="checkbox" name="a2_pm_tools" value="Trello" /><span>Trello</span></label>
+            <label class="ph-check-row"><input type="checkbox" name="a2_pm_tools" value="Monday" /><span>Monday</span></label>
+            <label class="ph-check-row"><input type="checkbox" name="a2_pm_tools" value="Notion" /><span>Notion</span></label>
+            <label class="ph-check-row"><input type="checkbox" name="a2_pm_tools" value="Spreadsheets" /><span>Spreadsheets</span></label>
+            <label class="ph-check-row"><input type="checkbox" name="a2_pm_tools" value="Other" /><span>Other</span></label>
+            <label class="ph-check-row"><input type="checkbox" name="a2_pm_tools" value="none" /><span>No shared tracker</span></label>
+          </fieldset>
+
+          <fieldset class="ph-field ph-field-full" data-required data-key="a2_meeting_platform">
+            <legend class="ph-label">Which meeting tools do you use most? (all that apply)</legend>
+            <label class="ph-check-row"><input type="checkbox" name="a2_meeting_platform" value="Zoom" /><span>Zoom</span></label>
+            <label class="ph-check-row"><input type="checkbox" name="a2_meeting_platform" value="Google Meet" /><span>Google Meet</span></label>
+            <label class="ph-check-row"><input type="checkbox" name="a2_meeting_platform" value="Microsoft Teams" /><span>Microsoft Teams</span></label>
+            <label class="ph-check-row"><input type="checkbox" name="a2_meeting_platform" value="Slack huddles" /><span>Slack huddles</span></label>
+            <label class="ph-check-row"><input type="checkbox" name="a2_meeting_platform" value="Mostly in person" /><span>Mostly in person</span></label>
+            <label class="ph-check-row"><input type="checkbox" name="a2_meeting_platform" value="Other" /><span>Other</span></label>
+          </fieldset>
+
+          <fieldset class="ph-field" data-required data-key="a2_who_runs_meetings">
+            <legend class="ph-label">Who usually runs the meetings you attend?</legend>
+            <label class="ph-check-row"><input type="radio" name="a2_who_runs_meetings" value="I run most of them" /><span>I run most of them</span></label>
+            <label class="ph-check-row"><input type="radio" name="a2_who_runs_meetings" value="A teammate or manager" /><span>A teammate or manager</span></label>
+            <label class="ph-check-row"><input type="radio" name="a2_who_runs_meetings" value="Rotates — no one really owns it" /><span>Rotates — no one really owns it</span></label>
+            <label class="ph-check-row"><input type="radio" name="a2_who_runs_meetings" value="Depends entirely" /><span>Depends entirely</span></label>
+          </fieldset>
+        </div>
+        <p class="status-line" data-status aria-live="polite"></p>
+        <div class="step-actions"><button class="ph-button ph-button-ghost" type="button" data-back>Back</button><button class="ph-button ph-button-primary" type="button" data-next>Continue →</button></div>
+      </section>
+
       <section class="survey-step" data-step="B" aria-labelledby="b-heading">
         <h2 id="b-heading" tabindex="-1">AI at work today</h2>
+        <p class="section-intro">Tell us what AI looks like in your day-to-day work.</p>
         <div class="ph-form-grid">
           <fieldset class="ph-field" data-required data-key="b_tools">
             <legend class="ph-label">Which AI tools do you use?</legend>
@@ -535,6 +617,7 @@
 
       <section class="survey-step" data-step="C" aria-labelledby="c-heading">
         <h2 id="c-heading" tabindex="-1">The annoying parts</h2>
+        <p class="section-intro">These questions are about meetings that take more than they give.</p>
         <div class="ph-form-grid">
           <fieldset class="ph-field" data-required data-key="c_email_meetings">
             <legend class="ph-label">In a normal week, how many of your meetings could have been an email or a short message?</legend>
@@ -573,7 +656,7 @@
 
       <section class="survey-step" data-step="C2" aria-labelledby="c2-heading">
         <h2 id="c2-heading" tabindex="-1">When the client changes the plan</h2>
-        <p class="ph-lede">Think of the last real time a client asked to change the scope, the deadline, or the price in the middle of a project.</p>
+        <p class="section-intro">Think of the last real time a client asked to change the scope, deadline, or price in the middle of a project.</p>
         <div class="ph-form-grid">
           <fieldset class="ph-field ph-field-full" data-required data-key="c2_incident_when">
             <legend class="ph-label">When did this happen?</legend>
@@ -647,6 +730,7 @@
 
       <section class="survey-step" data-step="D" aria-labelledby="d-heading">
         <h2 id="d-heading" tabindex="-1">An idea we're testing</h2>
+        <p class="section-intro">Here is the idea in plain English.</p>
         <div class="story-block">
           <p>Most meetings exist to move work along: agree on a change, unblock a decision, check a promise was kept. Imagine your calendar had one extra button: <strong>'Sort this out.'</strong></p>
           <p>Before anyone books an hour, an assistant reads what's allowed to be read — the plan, the agreement, the current status — prepares the facts, and works out the one thing that still genuinely needs people. Then it books only that: sometimes a message, sometimes two people for nine minutes, sometimes a proper meeting. Afterwards, everyone sees the same record of what was agreed — and the promise gets checked.</p>
@@ -670,12 +754,13 @@
         <fieldset class="ph-field" data-required data-key="d_looks_like_you">
           <legend class="ph-label">Does the 'before' picture look like meetings where you work?</legend>
           <div class="likert">
-            <label><input type="radio" name="d_looks_like_you" value="1" /><span>1<br />Not at all</span></label>
+            <label aria-label="1 — Not at all"><input type="radio" name="d_looks_like_you" value="1" /><span>1</span></label>
             <label><input type="radio" name="d_looks_like_you" value="2" /><span>2</span></label>
             <label><input type="radio" name="d_looks_like_you" value="3" /><span>3</span></label>
             <label><input type="radio" name="d_looks_like_you" value="4" /><span>4</span></label>
-            <label><input type="radio" name="d_looks_like_you" value="5" /><span>5<br />Exactly</span></label>
+            <label aria-label="5 — Exactly"><input type="radio" name="d_looks_like_you" value="5" /><span>5</span></label>
           </div>
+          <div class="likert-scale-labels" aria-hidden="true"><span>Not at all</span><span>Exactly</span></div>
         </fieldset>
         <p class="status-line" data-status aria-live="polite"></p>
         <div class="step-actions"><button class="ph-button ph-button-ghost" type="button" data-back>Back</button><button class="ph-button ph-button-primary" type="button" data-next>Continue →</button></div>
@@ -683,6 +768,7 @@
 
       <section class="survey-step" data-step="D2" aria-labelledby="d2-heading">
         <h2 id="d2-heading" tabindex="-1">Your own numbers</h2>
+        <p class="section-intro">Use your own estimates — there are no right answers.</p>
         <div class="ph-form-grid">
           <div class="ph-field ph-field-full" data-required data-key="calc_meetings">
             <label class="ph-label" for="calc-meetings">Meetings you attend in a typical week</label>
@@ -730,6 +816,7 @@
 
       <section class="survey-step" data-step="E" aria-labelledby="e-heading">
         <h2 id="e-heading" tabindex="-1">Try it — 90 seconds</h2>
+        <p class="section-intro">Try the short example, then tell us what you think.</p>
         <div class="demo-shell" id="compact-demo" aria-label="Interactive example">
           <div class="demo-dots" aria-label="Example progress">
             <span class="demo-dot is-current" data-demo-dot="1"></span><span class="demo-dot" data-demo-dot="2"></span><span class="demo-dot" data-demo-dot="3"></span><span class="demo-dot" data-demo-dot="4"></span><span class="demo-dot" data-demo-dot="5"></span>
@@ -810,18 +897,43 @@
         <div class="step-actions"><button class="ph-button ph-button-ghost" type="button" data-back>Back</button><button class="ph-button ph-button-primary" type="button" data-next>Continue →</button></div>
       </section>
 
+      <section class="survey-step" data-step="E2" aria-labelledby="e2-heading">
+        <h2 id="e2-heading" tabindex="-1">About your world</h2>
+        <p class="section-intro">Two short questions, in your own words.</p>
+        <div class="ai-question-loading" data-aiq-loading aria-live="polite">
+          Preparing two questions about your week<span class="ai-loading-dots" aria-hidden="true"><span>.</span><span>.</span><span>.</span></span>
+        </div>
+        <div class="ai-question-form" data-aiq-form hidden>
+          <p class="ai-tailored-tag" data-aiq-tailored hidden>Tailored from your earlier answers by an AI assistant.</p>
+          <div class="ph-form-grid">
+            <div class="ph-field ph-field-full" data-key="ai_a1">
+              <label class="ph-label" data-aiq-label="1" for="ai-a1"></label>
+              <textarea class="ph-textarea ai-question-answer" id="ai-a1" name="ai_a1" rows="3" maxlength="600"></textarea>
+            </div>
+            <div class="ph-field ph-field-full" data-key="ai_a2">
+              <label class="ph-label" data-aiq-label="2" for="ai-a2"></label>
+              <textarea class="ph-textarea ai-question-answer" id="ai-a2" name="ai_a2" rows="3" maxlength="600"></textarea>
+            </div>
+          </div>
+        </div>
+        <p class="status-line" data-status aria-live="polite"></p>
+        <div class="step-actions"><button class="ph-button ph-button-ghost" type="button" data-back>Back</button><button class="ph-button ph-button-primary" type="button" data-next>Continue →</button></div>
+      </section>
+
       <section class="survey-step" data-step="F" aria-labelledby="f-heading">
         <h2 id="f-heading" tabindex="-1">Straight answers</h2>
+        <p class="section-intro">Tell us what feels useful, and what does not.</p>
         <div class="ph-form-grid">
           <fieldset class="ph-field ph-field-full" data-required data-key="f_value">
-            <legend class="ph-label">How valuable would this be in your work?</legend>
-            <div class="likert">
-              <label><input type="radio" name="f_value" value="1" /><span>1<br />Not at all</span></label>
+          <legend class="ph-label">How valuable would this be in your work?</legend>
+          <div class="likert">
+              <label aria-label="1 — Not at all"><input type="radio" name="f_value" value="1" /><span>1</span></label>
               <label><input type="radio" name="f_value" value="2" /><span>2</span></label>
               <label><input type="radio" name="f_value" value="3" /><span>3</span></label>
               <label><input type="radio" name="f_value" value="4" /><span>4</span></label>
-              <label><input type="radio" name="f_value" value="5" /><span>5<br />Extremely</span></label>
+              <label aria-label="5 — Extremely"><input type="radio" name="f_value" value="5" /><span>5</span></label>
             </div>
+            <div class="likert-scale-labels" aria-hidden="true"><span>Not at all</span><span>Extremely</span></div>
           </fieldset>
 
           <fieldset class="ph-field" data-required data-key="f_most_valuable">
@@ -873,7 +985,7 @@
 
       <section class="survey-step" data-step="G" aria-labelledby="g-heading">
         <h2 id="g-heading" tabindex="-1">What it's worth</h2>
-        <p class="ph-lede">Imagine this for one team of about 10 people, priced per month in US dollars. There are no right answers — gut feel is fine.</p>
+        <p class="section-intro">Imagine this for one team of about 10 people, priced per month in US dollars. There are no right answers — gut feel is fine.</p>
         <div class="ph-form-grid">
           <div class="ph-field" data-required data-key="g_vw_too_cheap">
             <label class="ph-label" for="g-vw-too-cheap">At what monthly price would it feel so cheap you'd doubt it works?</label>
@@ -910,6 +1022,7 @@
 
       <section class="survey-step" data-step="H" aria-labelledby="h-heading">
         <h2 id="h-heading" tabindex="-1">Last page</h2>
+        <p class="section-intro">A few final questions and an optional way to stay in touch.</p>
         <div class="ph-form-grid">
           <div class="ph-field ph-field-full" data-key="h_email">
             <label class="ph-label" for="h-email">Leave an email if you'd like early access or the study results. (Optional — everything else stays anonymous.)</label>
@@ -936,16 +1049,19 @@
       </section>
 
       <section class="survey-step" data-step="thanks" aria-labelledby="thanks-heading">
+        <div class="thanks-mark" aria-hidden="true">✓</div>
         <h2 id="thanks-heading" tabindex="-1">Thank you — that genuinely helps.</h2>
+        <p class="section-intro">Your answers are safely on their way.</p>
         <p class="ph-lede">You spent about <strong data-thanks-minutes>0</strong> minutes answering.</p>
         <figure class="img-frame"><img src="assets/img/thanks.jpg" loading="lazy" decoding="async" alt="A desk with a small thank-you note beside a calendar" /></figure>
         <div class="thanks-links">
-          <button class="ph-button ph-button-primary" type="button" data-copy-link>Copy this study link</button>
-          <a class="ph-button ph-button-ghost" data-thanks-demo-link>Explore the full walkthrough</a>
-          <a class="ph-button ph-button-ghost" href="privacy.html">Privacy</a>
+          <a class="thanks-link-card" data-thanks-demo-link>Explore the full story demo</a>
+          <a class="thanks-link-card" data-thanks-walkthrough-link>See the walkthrough</a>
+          <button class="ph-button ph-button-ghost thanks-copy-link" type="button" data-copy-link>Copy this study link</button>
         </div>
         <p class="status-line" data-thanks-status aria-live="polite"></p>
         <p class="callout">We read every answer. If you left an email, you'll hear from us only about this study.</p>
+        <p class="thanks-privacy"><a href="privacy.html">Privacy</a></p>
       </section>
     </main>
 

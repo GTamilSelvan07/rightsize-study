@@ -14,16 +14,17 @@ const here = dirname(fileURLToPath(import.meta.url));
 const outDir = process.argv[2] || join(here, "out");
 mkdirSync(outDir, { recursive: true });
 
-const { styleSuffix, images } = JSON.parse(
-  readFileSync(join(here, "prompts.json"), "utf8"),
-);
+const promptsFile = process.argv[3] || join(here, "prompts.json");
+const spec = JSON.parse(readFileSync(promptsFile, "utf8"));
+const { styleSuffix, images } = spec;
 
 const MODEL = "gemini-2.5-flash-image";
 const URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
 
 async function generate(img, withAspect) {
+  const suffix = (img.suffixKey && spec[img.suffixKey]) || styleSuffix;
   const body = {
-    contents: [{ parts: [{ text: img.prompt + styleSuffix }] }],
+    contents: [{ parts: [{ text: img.prompt + suffix }] }],
     generationConfig: withAspect
       ? { responseModalities: ["IMAGE"], imageConfig: { aspectRatio: img.aspect } }
       : { responseModalities: ["IMAGE"] },

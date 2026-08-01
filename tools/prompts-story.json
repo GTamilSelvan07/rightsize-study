@@ -1,0 +1,32 @@
+{
+  "styleSuffix": " Flat geometric editorial illustration, minimal, generous negative space, off-white background (#f7f7f5), near-black ink (#0e0f12) linework, accent colors limited to: lime (#d8f15b), deep orchid (#853a78), blue (#3150c8). No text, no letters, no numbers, no logos, no watermarks, no realistic human faces.",
+  "portraitSuffix": " Flat geometric editorial illustration portrait, bust framing, one single stylized character with simplified abstract facial features — clearly illustrated, not photorealistic, not a real person — generous negative space, off-white background (#f7f7f5), near-black ink (#0e0f12) linework, accent colors limited to: lime (#d8f15b), deep orchid (#853a78), blue (#3150c8). No text, no letters, no numbers, no logos, no watermarks.",
+  "images": [
+    { "id": "alex", "aspect": "1:1", "suffixKey": "portraitSuffix",
+      "prompt": "Portrait of a delivery lead at a digital agency: headset resting around the neck, deep orchid accent jacket, one small lime spark shape near the temple, warm confident posture, slight smile." },
+    { "id": "rowan", "aspect": "1:1", "suffixKey": "portraitSuffix",
+      "prompt": "Portrait of a project sponsor at a health organisation: blue accent blazer, small geometric heart motif on the lapel, steady thoughtful expression, composed and direct." },
+    { "id": "sam", "aspect": "1:1", "suffixKey": "portraitSuffix",
+      "prompt": "Portrait of a calm safety reviewer: round spectacles drawn as two perfect geometric circles, a small checklist shape in the breast pocket, precise neutral expression." },
+    { "id": "priya", "aspect": "1:1", "suffixKey": "portraitSuffix",
+      "prompt": "Portrait of a sharp production manager: a lime pencil bar tucked over one ear, layered paper shapes behind the shoulder, alert friendly expression." },
+    { "id": "casey", "aspect": "1:1", "suffixKey": "portraitSuffix",
+      "prompt": "Portrait of an operations manager: simple geometric folded arms, a blue clipboard shape at the side, pragmatic direct expression." },
+    { "id": "agent-prep", "aspect": "1:1",
+      "prompt": "A compact geometric emblem: a magnifying-glass circle hovering over three stacked source cards, blue linework, one lime dot. Emblem only, centered, no figure." },
+    { "id": "agent-fairness", "aspect": "1:1",
+      "prompt": "A compact geometric emblem: a perfectly balanced beam holding two equal circles, one deep orchid and one blue, exact symmetry. Emblem only, centered, no figure." },
+    { "id": "agent-record", "aspect": "1:1",
+      "prompt": "A compact geometric emblem: a single receipt card with one bold version tab, two thin lines anchoring it from opposite sides. Emblem only, centered, no figure." },
+    { "id": "agent-promise", "aspect": "1:1",
+      "prompt": "A compact geometric emblem: a lime check mark traveling along a dotted return path back toward a small record card. Emblem only, centered, no figure." },
+    { "id": "old-way-chaos", "aspect": "16:9",
+      "prompt": "Friday-evening chat chaos: dozens of overlapping message bubbles raining down toward one small figure at a tiny desk, a large clock shape at the edge, dense and heavy on the left side, no resolution in sight." },
+    { "id": "calendar-wall", "aspect": "16:9",
+      "prompt": "A wall of identical meeting blocks stacking up to fill an entire week grid, eight small figure silhouettes queueing into a single block, oppressive repetition, muted tones with one deep orchid block." },
+    { "id": "rewind", "aspect": "16:9",
+      "prompt": "Chat message bubbles flowing backward along a smooth curved arc toward a single glowing lime point of origin, gentle motion streaks, hopeful, light and airy." },
+    { "id": "payoff", "aspect": "3:2",
+      "prompt": "One slim bright lime bar standing beside a huge muted grey block, and beneath them a single receipt card bridging two abstract buildings, calm, resolved, spacious." }
+  ]
+}
