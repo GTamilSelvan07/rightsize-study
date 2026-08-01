@@ -46,7 +46,8 @@
     return selected ? selected.value : "";
   };
 
-  const motionIsAllowed = () => window.matchMedia("(prefers-reduced-motion: no-preference)").matches;
+  const motionIsAllowed = () => typeof window.matchMedia === "function"
+    && window.matchMedia("(prefers-reduced-motion: no-preference)").matches;
 
   const syncSelectedCardStates = (scope = app) => {
     scope.querySelectorAll(".ph-check-row, .likert label").forEach((row) => {
@@ -513,7 +514,7 @@
   const resumeAiQuestionPrefetch = () => {
     const saved = answers();
     const completedC = Boolean(saved.c_email_meetings);
-    const completedC2 = Object.hasOwn(saved, "c2_incident_when");
+    const completedC2 = Object.prototype.hasOwnProperty.call(saved, "c2_incident_when");
     if (completedC && (saved.a_client_facing === "no" || completedC2)) {
       void window.Store.requestAiQuestions();
     }

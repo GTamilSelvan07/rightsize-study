@@ -447,7 +447,6 @@ h3 {
   border: 0.125rem solid var(--ph-color-border-control);
   border-radius: var(--ph-radius-full);
   background: var(--ph-color-surface-strong);
-  transition: background var(--ph-duration-fast) var(--ph-ease-enter), border-color var(--ph-duration-fast) var(--ph-ease-enter);
 }
 
 .ph-switch-track::after {
@@ -459,7 +458,6 @@ h3 {
   border-radius: 50%;
   background: var(--ph-color-text-secondary);
   content: "";
-  transition: transform var(--ph-duration-fast) var(--ph-ease-emphasized);
 }
 
 .ph-switch input:checked + .ph-switch-track {
@@ -490,15 +488,6 @@ h3 {
   font-weight: 700;
   line-height: 1;
   text-decoration: none;
-  transition: background-color var(--ph-duration-fast) var(--ph-ease-enter), border-color var(--ph-duration-fast) var(--ph-ease-enter), color var(--ph-duration-fast) var(--ph-ease-enter), transform var(--ph-duration-fast) var(--ph-ease-enter);
-}
-
-.ph-button:hover {
-  transform: translateY(-0.0625rem);
-}
-
-.ph-button:active {
-  transform: translateY(0);
 }
 
 .ph-button-primary {
@@ -579,7 +568,6 @@ h3 {
   height: 100%;
   border-radius: inherit;
   background: var(--ph-color-signal);
-  transition: width var(--ph-duration-moderate) var(--ph-ease-enter);
 }
 
 .progress-label {
@@ -834,6 +822,30 @@ h3 {
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
+  }
+
+  .ph-switch-track {
+    transition: background-color 220ms cubic-bezier(0.2, 0.7, 0.2, 1), border-color 220ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .ph-switch-track::after {
+    transition: transform 220ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .ph-button {
+    transition: background-color 220ms cubic-bezier(0.2, 0.7, 0.2, 1), border-color 220ms cubic-bezier(0.2, 0.7, 0.2, 1), color 220ms cubic-bezier(0.2, 0.7, 0.2, 1), transform 220ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .ph-button:hover {
+    transform: translateY(-0.0625rem);
+  }
+
+  .ph-button:active {
+    transform: translateY(0);
+  }
+
+  .progress-fill {
+    transition: width 220ms cubic-bezier(0.2, 0.7, 0.2, 1);
   }
 
   .survey-step.active {

@@ -77,7 +77,7 @@
         return createState();
       }
 
-      const isLegacy = !savedFromCurrentSchema || Number(saved.storageVersion) < STORAGE_VERSION;
+      const isLegacy = !savedFromCurrentSchema || Number(saved.storageVersion) !== STORAGE_VERSION;
 
       return {
         storageVersion: STORAGE_VERSION,

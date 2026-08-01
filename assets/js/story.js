@@ -252,10 +252,17 @@
     await new Promise((resolve) => {
       const start = performance.now();
       const duration = 900;
+      let done = false;
+      const finish = () => {
+        if (done) return;
+        done = true;
+        target.textContent = `${prefix || ""}${to.toLocaleString("en-NZ")}`;
+        resolve();
+      };
       const frame = (now) => {
-        if (prefersReduced()) {
-          target.textContent = `${prefix || ""}${to.toLocaleString("en-NZ")}`;
-          resolve();
+        if (done) return;
+        if (prefersReduced() || state.abortBeat) {
+          finish();
           return;
         }
         const progress = Math.min(1, (now - start) / duration);
@@ -265,10 +272,13 @@
         if (progress < 1) {
           window.requestAnimationFrame(frame);
         } else {
-          resolve();
+          finish();
         }
       };
       window.requestAnimationFrame(frame);
+      // rAF never fires in unfocused or occluded windows — guarantee resolution
+      // so the story cannot hang for tab-switchers.
+      setTimeout(finish, duration + 400);
     });
   }
 

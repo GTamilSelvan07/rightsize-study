@@ -70,7 +70,6 @@
         height: 100%;
         border-radius: inherit;
         background: var(--ph-neutral-500);
-        transition: width 900ms var(--ph-ease-emphasized);
       }
 
       .attention-row.after .attention-fill {
@@ -202,31 +201,6 @@
         opacity: 0.4;
       }
 
-      .demo-screen.is-preparing .demo-checklist li {
-        animation: checklist-item 420ms var(--ph-ease-enter) forwards;
-      }
-
-      .demo-screen.is-preparing .demo-checklist li:nth-child(2) {
-        animation-delay: 850ms;
-      }
-
-      .demo-screen.is-preparing .demo-checklist li:nth-child(3) {
-        animation-delay: 1700ms;
-      }
-
-      .demo-screen.is-preparing .demo-checklist li:nth-child(4) {
-        animation-delay: 2550ms;
-      }
-
-      @keyframes checklist-item {
-        to {
-          border-color: var(--ph-color-success);
-          background: var(--ph-color-success-surface);
-          color: var(--ph-color-text-primary);
-          opacity: 1;
-        }
-      }
-
       .demo-options {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -322,6 +296,37 @@
 
       .currency-input .ph-input {
         padding-left: 1.75rem;
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        .attention-fill {
+          transition: width 900ms var(--ph-ease-emphasized);
+        }
+
+        .demo-screen.is-preparing .demo-checklist li {
+          animation: checklist-item 420ms var(--ph-ease-enter) forwards;
+        }
+
+        .demo-screen.is-preparing .demo-checklist li:nth-child(2) {
+          animation-delay: 850ms;
+        }
+
+        .demo-screen.is-preparing .demo-checklist li:nth-child(3) {
+          animation-delay: 1700ms;
+        }
+
+        .demo-screen.is-preparing .demo-checklist li:nth-child(4) {
+          animation-delay: 2550ms;
+        }
+
+        @keyframes checklist-item {
+          to {
+            border-color: var(--ph-color-success);
+            background: var(--ph-color-success-surface);
+            color: var(--ph-color-text-primary);
+            opacity: 1;
+          }
+        }
       }
 
       @media (max-width: 40rem) {
@@ -649,7 +654,7 @@
 
       <section class="survey-step" data-step="C2" aria-labelledby="c2-heading">
         <h2 id="c2-heading" tabindex="-1">When the client changes the plan</h2>
-        <p class="section-intro">Think of the last real time a client asked to change the scope, deadline, or price in the middle of a project.</p>
+        <p class="section-intro">Think of the last real time a client asked to change the scope, the deadline, or the price in the middle of a project.</p>
         <div class="ph-form-grid">
           <fieldset class="ph-field ph-field-full" data-required data-key="c2_incident_when">
             <legend class="ph-label">When did this happen?</legend>
