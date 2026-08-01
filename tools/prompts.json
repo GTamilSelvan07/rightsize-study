@@ -1,0 +1,40 @@
+{
+  "styleSuffix": " Flat geometric editorial illustration, minimal, generous negative space, off-white background (#f7f7f5), near-black ink (#0e0f12) linework, accent colors limited to: lime (#d8f15b), deep orchid (#853a78), blue (#3150c8). No text, no letters, no numbers, no logos, no watermarks, no realistic human faces.",
+  "images": [
+    {
+      "id": "hero",
+      "aspect": "16:9",
+      "prompt": "Dozens of scattered calendar meeting blocks drifting across the canvas, gradually converging into one small glowing lime block on the right; a sense of calm order emerging from clutter."
+    },
+    {
+      "id": "before-after",
+      "aspect": "16:9",
+      "prompt": "Split composition. Left half: a crowded meeting table with eight abstract geometric figures hunched around it, muted neutral tones, dense and heavy. Right half: three abstract geometric figures gathered around a single bright card with a lime accent, airy, light, spacious."
+    },
+    {
+      "id": "ai-prepares",
+      "aspect": "3:2",
+      "prompt": "A messy stack of overlapping documents on the left being sorted by abstract geometric arms into three tidy, neatly aligned option cards on the right; blue accent lines indicating verified facts flowing from documents to cards."
+    },
+    {
+      "id": "both-approve",
+      "aspect": "3:2",
+      "prompt": "Two abstract stamps entering from opposite edges of the frame, one deep orchid and one blue, pressing together onto one shared card in the center; perfect symmetry, a feeling of mutual agreement."
+    },
+    {
+      "id": "shared-record",
+      "aspect": "3:2",
+      "prompt": "A single receipt-like card held taut in the middle between two abstract geometric buildings on opposite sides; thin lines connect both buildings to the card; balance, neutrality, trust."
+    },
+    {
+      "id": "promise-kept",
+      "aspect": "3:2",
+      "prompt": "A bold lime check mark stamped over a calendar date tile, with one thin blue line tracing back to a small record card in the corner; a sense of verification and quiet completion."
+    },
+    {
+      "id": "thanks",
+      "aspect": "1:1",
+      "prompt": "A single small lime square centered in generous off-white negative space, with one subtle radiating outline around it; quiet, complete, final."
+    }
+  ]
+}
