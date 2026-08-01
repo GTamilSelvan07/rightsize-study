@@ -11,3 +11,5 @@
 .story-role-card > span:not(.story-chip) { color: var(--story-ink); }
 .story-role-card > span:not(.story-chip) strong { font-size: var(--ph-font-size-md); }
 .story-role-card > span:last-child { color: var(--ph-neutral-700); font-size: var(--ph-font-size-xs); font-weight: 400; }
+
+[hidden] { display: none !important; }

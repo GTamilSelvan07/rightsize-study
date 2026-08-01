@@ -408,7 +408,10 @@ h3 {
   box-shadow: inset 0 0 0 0.0625rem var(--ph-color-signal), var(--ph-shadow-low);
 }
 
-.ph-check-row.is-checked::after,
+.ph-check-row.is-checked::after {
+  opacity: 1;
+}
+
 .ph-check-row:has(input:checked)::after {
   opacity: 1;
 }
@@ -656,7 +659,11 @@ h3 {
   opacity: 0;
 }
 
-.likert label.is-checked,
+.likert label.is-checked {
+  background: var(--ph-color-action-primary);
+  color: var(--ph-color-text-inverse);
+}
+
 .likert label:has(input:checked) {
   background: var(--ph-color-action-primary);
   color: var(--ph-color-text-inverse);
@@ -1000,3 +1007,6 @@ h3 {
     transition: none !important;
   }
 }
+
+/* Author display rules must never defeat the hidden attribute */
+[hidden] { display: none !important; }
