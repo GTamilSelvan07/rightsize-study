@@ -506,3 +506,65 @@ label.sim-card:has(input:checked) {
     width: 100%;
   }
 }
+
+.walk-scene {
+  margin: 0 0 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.75rem;
+}
+
+.walk-scene img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.walk-scenario,
+.walk-happens {
+  max-width: 44rem;
+  margin: 0 0 0.5rem;
+  color: var(--sim-muted);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.walk-scenario b,
+.walk-happens b,
+.walk-try b {
+  display: block;
+  margin-bottom: 0.15rem;
+  color: var(--ph-color-signal);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.walk-try {
+  margin: 1.1rem 0 0.4rem;
+}
+
+p.walk-disclaimer {
+  margin: 0 0 var(--ph-space-6);
+  color: var(--sim-muted);
+  font-size: 0.66rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 47.5rem) {
+  .simulation-stage .walk-scene {
+    width: calc(100% + clamp(3rem, 8vw, 7rem));
+    margin-right: calc(0rem - clamp(1.5rem, 4vw, 3.5rem));
+    margin-left: calc(0rem - clamp(1.5rem, 4vw, 3.5rem));
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+  }
+
+  .walk-scenario,
+  .walk-happens {
+    max-width: none;
+  }
+}

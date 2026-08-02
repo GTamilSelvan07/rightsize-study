@@ -1,0 +1,23 @@
+{
+  "styleSuffix": " Photorealistic editorial photography, cinematic natural light, shallow depth of field, modern open-plan office, 35mm documentary style, realistic skin texture, natural imperfect framing. Fictional people. Any screens softly out of focus. No readable text anywhere, no logos, no watermarks.",
+  "images": [
+    { "id": "walk-hero", "aspect": "16:9",
+      "prompt": "A dim office at dusk, city lights outside the window; a woman in her mid-thirties with shoulder-length dark hair wearing a plum blazer reads something on a laptop, her face lit by the screen, coat half on — she was about to leave." },
+    { "id": "walk-s1", "aspect": "16:9",
+      "prompt": "Over-the-shoulder view of a woman in her mid-thirties with shoulder-length dark hair wearing a plum blazer looking at a laptop showing an open email, late golden-hour light across the desk, a wall clock nearly at five in the background, papers and a cold coffee nearby." },
+    { "id": "walk-s2", "aspect": "16:9",
+      "prompt": "A woman in her mid-thirties with shoulder-length dark hair wearing a plum blazer at a tidy desk, deliberately sliding two document folders toward a laptop while a third folder stays apart under her hand, morning light, focused expression." },
+    { "id": "walk-s3", "aspect": "16:9",
+      "prompt": "Two colleagues leaning toward a large monitor in an office, one pointing at the screen showing a softly blurred structured document, sticky notes on the desk edge, bright daylight, collaborative mood." },
+    { "id": "walk-s4", "aspect": "16:9",
+      "prompt": "A small glass meeting room with exactly three chairs, a middle-aged man with round glasses in a grey cardigan holding the door as a woman in her forties with short black hair wearing a navy blazer walks in, a large empty open-plan office visible behind them, wall clock showing ten o'clock." },
+    { "id": "walk-s5", "aspect": "16:9",
+      "prompt": "A laptop on a wooden desk showing a softly blurred three-tile video call, beside it a woman in her mid-thirties with shoulder-length dark hair wearing a plum blazer speaking mid-sentence with a calm gesture, small meeting timer visible as a blurred element, warm daylight." },
+    { "id": "walk-s6", "aspect": "16:9",
+      "prompt": "Split composition: two different hands on two separate devices — a phone held by a woman in her forties with short black hair wearing a navy blazer, and a laptop trackpad under the hand of a woman in a plum blazer — each screen showing the same softly blurred document card, two different desks, symmetry of agreement." },
+    { "id": "walk-s7", "aspect": "16:9",
+      "prompt": "A middle-aged man with round glasses in a grey cardigan reviewing a monitor showing a softly blurred project task board, one hand hovering over the mouse, deliberate and unhurried, office plants in the background." },
+    { "id": "walk-s8", "aspect": "16:9",
+      "prompt": "A bright morning desk, a fresh coffee steaming beside a laptop showing a softly blurred dashboard with one prominent green check element, a woman in her mid-thirties with shoulder-length dark hair wearing a plum blazer relaxed in the background chatting with a colleague, sense of quiet resolution." }
+  ]
+}
