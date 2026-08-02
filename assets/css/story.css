@@ -13,3 +13,67 @@
 .story-role-card > span:last-child { color: var(--ph-neutral-700); font-size: var(--ph-font-size-xs); font-weight: 400; }
 
 [hidden] { display: none !important; }
+
+/* ===== v2: realistic chat-app window, invite card, quick replies ===== */
+.story-chatapp { border: 1px solid var(--ph-neutral-200); border-radius: 0.875rem; background: #fff; box-shadow: var(--ph-shadow-medium, 0 8px 24px rgba(0,0,0,.35)); overflow: hidden; color: var(--story-ink); }
+.story-chatapp-bar { display: flex; align-items: center; gap: 0.6rem; padding: 0.55rem 0.9rem; background: #f2f2ee; border-bottom: 1px solid var(--ph-neutral-200); }
+.story-chatapp-dots { display: inline-flex; gap: 0.3rem; }
+.story-chatapp-dots i { width: 0.55rem; height: 0.55rem; border-radius: 50%; background: #d6d6d0; }
+.story-chatapp-bar strong { font-family: var(--ph-font-family-mono); font-size: 0.78rem; }
+.story-chatapp-bar em { font-style: normal; color: var(--ph-neutral-600); font-size: 0.68rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.story-chatlog { display: grid; gap: 0.1rem; padding: 0.6rem 0.4rem; max-height: 26rem; overflow-y: auto; }
+.story-msg { display: grid; grid-template-columns: 2.25rem minmax(0, 1fr); gap: 0.7rem; align-items: start; padding: 0.5rem 0.7rem; border-radius: 0.5rem; border: 0; background: transparent; box-shadow: none; color: var(--story-ink); width: 100%; }
+.story-msg:hover { background: #f7f7f2; }
+.story-msg-avatar { position: relative; width: 2.25rem; height: 2.25rem; }
+.story-msg-avatar img { width: 100%; height: 100%; border-radius: 0.5rem; object-fit: cover; border: 1px solid var(--ph-neutral-200); background: #fff; }
+.story-msg-fallback { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border-radius: 0.5rem; background: var(--ph-color-evidence-surface); color: var(--ph-color-evidence); font-weight: 700; font-family: var(--ph-font-family-display); }
+.story-msg-head { display: flex; align-items: baseline; gap: 0.45rem; flex-wrap: wrap; }
+.story-msg-head b { font-size: 0.86rem; color: var(--story-ink); display: inline; margin: 0; }
+.story-msg-head time { color: var(--ph-neutral-500); font-size: 0.68rem; }
+.story-msg-tag { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.08rem 0.3rem; border-radius: 0.25rem; }
+.story-msg-tag.is-you { background: var(--ph-color-human-surface); color: var(--ph-color-human); }
+.story-msg-tag.is-app { border: 1px solid var(--ph-neutral-300); color: var(--ph-neutral-600); background: #fafaf7; }
+.story-msg-body p { margin: 0.15rem 0 0; font-size: 0.95rem; line-height: 1.45; color: var(--story-ink); }
+.story-msg.is-player { background: var(--ph-color-human-surface); box-shadow: inset 3px 0 0 var(--ph-color-human); }
+.story-msg.is-player:hover { background: var(--ph-color-human-surface); }
+.story-msg.is-agent .story-msg-avatar img { object-fit: contain; padding: 0.15rem; background: var(--ph-color-evidence-surface); }
+.story-msg.is-typing { color: var(--ph-neutral-500); }
+.story-typing-dots { display: inline-flex; gap: 0.25rem; padding-top: 0.5rem; }
+.story-typing-dots i { width: 0.4rem; height: 0.4rem; border-radius: 50%; background: var(--ph-neutral-400); }
+.story-app-btn { margin-top: 0.55rem; border: 0; border-radius: var(--ph-radius-full); background: var(--ph-color-signal); color: var(--story-ink); font: 700 0.85rem var(--ph-font-family-sans); padding: 0.65rem 1.2rem; min-height: 2.75rem; cursor: pointer; }
+.story-app-btn.is-done { background: var(--ph-color-success-surface); color: var(--ph-color-success); cursor: default; animation: none; }
+.story-invite { border: 1px solid var(--ph-neutral-200); border-radius: 0.875rem; background: #fff; color: var(--story-ink); padding: 1.1rem 1.2rem; box-shadow: var(--ph-shadow-low); display: grid; gap: 0.45rem; }
+.story-invite-badge { justify-self: start; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ph-color-evidence); border: 1px solid var(--ph-color-evidence); border-radius: var(--ph-radius-full); padding: 0.18rem 0.5rem; }
+.story-invite h3 { margin: 0.2rem 0 0; font-size: 1.15rem; }
+.story-invite-when { margin: 0; color: var(--ph-neutral-600); font-size: 0.85rem; }
+.story-invite-faces { display: flex; margin-top: 0.3rem; }
+.story-invite-faces .story-msg-avatar { width: 2rem; height: 2rem; margin-left: -0.45rem; }
+.story-invite-faces .story-msg-avatar:first-child { margin-left: 0; }
+.story-invite-faces .story-msg-avatar img, .story-invite-faces .story-msg-fallback { width: 2rem; height: 2rem; border-radius: 50%; border: 2px solid #fff; font-size: 0.75rem; }
+.story-invite-count { margin: 0.15rem 0 0; color: var(--ph-neutral-600); font-size: 0.78rem; }
+.story-invite-actions { display: flex; gap: 0.45rem; margin-top: 0.5rem; flex-wrap: wrap; }
+.story-invite-btn { pointer-events: none; border-radius: var(--ph-radius-full); padding: 0.5rem 1rem; font-size: 0.8rem; font-weight: 700; border: 1px solid var(--ph-neutral-300); color: var(--ph-neutral-600); }
+.story-invite-btn:first-child { border-color: var(--ph-color-signal); background: var(--ph-color-signal); color: var(--story-ink); }
+section.story-choice { cursor: default; padding: 1rem 1.1rem; }
+section.story-choice::after { content: none; }
+.story-choice h3 { margin: 0 0 0.25rem; font-size: 0.98rem; }
+.story-choice .story-cards { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.55rem; grid-template-columns: none; }
+.story-choice .story-cards .story-card { width: auto; flex: 0 1 auto; padding: 0.65rem 1.15rem; border-radius: var(--ph-radius-full); min-height: 2.75rem; font-weight: 600; font-size: 0.88rem; }
+@media (prefers-reduced-motion: no-preference) {
+  .story-msg { animation: story-in 0.26s var(--story-ease) both; }
+  .story-typing-dots i { animation: story-dot 0.7s var(--story-ease) infinite alternate; }
+  .story-typing-dots i:nth-child(2) { animation-delay: 0.18s; }
+  .story-typing-dots i:nth-child(3) { animation-delay: 0.36s; }
+  .story-app-btn:not(.is-done) { animation: story-throb 1.6s ease-in-out infinite; }
+  @keyframes story-throb { 0%, 100% { box-shadow: 0 0 0 0 rgba(216, 241, 91, 0.55); } 55% { box-shadow: 0 0 0 0.65rem rgba(216, 241, 91, 0); } }
+  @keyframes story-kenburns { 0% { transform: scale(1.05) translate(0, 0); } to { transform: scale(1.22) translate(var(--kb-pan, -2%, -1%)); } }
+}
+@media (width <= 30rem) {
+  .story-chatlog { max-height: 60vh; padding: 0.4rem 0.2rem; }
+  .story-msg { grid-template-columns: 1.9rem minmax(0, 1fr); gap: 0.5rem; padding: 0.45rem 0.5rem; }
+  .story-msg-avatar, .story-msg-fallback { width: 1.9rem; height: 1.9rem; }
+  .story-chatapp-bar em { display: none; }
+  .story-choice .story-cards { flex-direction: column; }
+  .story-choice .story-cards .story-card { width: 100%; }
+  .story-invite-actions .story-invite-btn { flex: 1 1 auto; text-align: center; }
+}

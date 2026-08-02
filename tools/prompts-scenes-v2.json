@@ -1,0 +1,26 @@
+{
+  "styleSuffix": " Flat geometric editorial illustration, minimal, generous negative space, warm off-white background, near-black ink linework, accent colors limited to: bright yellow-green lime, deep plum purple, and medium royal blue. Absolutely no text, no letters, no numbers, no codes, no labels, no watermarks, no realistic human faces.",
+  "portraitSuffix": " Flat geometric editorial illustration portrait, bust framing, one single stylized character with simplified abstract facial features - clearly illustrated, not photorealistic, not a real person - generous negative space, warm off-white background, near-black ink linework, accent colors limited to: bright yellow-green lime, deep plum purple, and medium royal blue. Absolutely no text, no letters, no numbers, no watermarks.",
+  "images": [
+    {
+      "id": "old-way-chaos",
+      "aspect": "16:9",
+      "prompt": "Friday-evening chat chaos: dozens of overlapping message bubbles raining down toward one small figure at a tiny desk, a large clock shape at the edge, dense and heavy on the left side, no resolution in sight. No writing of any kind anywhere in the image."
+    },
+    {
+      "id": "calendar-wall",
+      "aspect": "16:9",
+      "prompt": "A wall of identical meeting blocks stacking up to fill an entire week grid, eight small figure silhouettes queueing into a single block, oppressive repetition, muted tones with one deep orchid block. No writing of any kind anywhere in the image."
+    },
+    {
+      "id": "rewind",
+      "aspect": "16:9",
+      "prompt": "Chat message bubbles flowing backward along a smooth curved arc toward a single glowing lime point of origin, gentle motion streaks, hopeful, light and airy. No writing of any kind anywhere in the image."
+    },
+    {
+      "id": "payoff",
+      "aspect": "3:2",
+      "prompt": "One slim bright lime bar standing beside a huge muted grey block, and beneath them a single receipt card bridging two abstract buildings, calm, resolved, spacious. No writing of any kind anywhere in the image."
+    }
+  ]
+}

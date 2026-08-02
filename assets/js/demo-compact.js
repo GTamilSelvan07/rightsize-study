@@ -51,20 +51,20 @@
 
   const receipt = {
     A: {
-      change: "Secure login arrives 2 weeks after launch",
-      date: "Launch stays on the 14th",
+      change: "Secure sign-in arrives 2 September",
+      date: "Launch stays on 14 August",
       owner: "Provider product team",
       price: "Unchanged",
     },
     B: {
-      change: "Secure login stays in the launch",
-      date: "Launch moves 2 weeks later",
+      change: "Secure sign-in stays in the launch",
+      date: "Launch moves to 28 August",
       owner: "Provider and client project leads",
       price: "Unchanged",
     },
     C: {
       change: "Extra people join for 3 weeks",
-      date: "Launch stays on the 14th",
+      date: "Launch stays on 14 August",
       owner: "Provider delivery lead and client approver",
       price: "Extra budget sign-off needed",
     },

@@ -201,26 +201,89 @@
     state.visibleAt = now;
   }
 
-  async function appendMessage(log, step) {
-    const text = resolveText(step.text);
-    if (!text) return;
-    const from = resolveFrom(step.from);
-    const person = story.cast[from] || { name: "You", kind: "human" };
-    const typing = element("div", "story-typing", `${person.name} is typing`);
-    typing.setAttribute("aria-hidden", "true");
-    if (!prefersReduced()) append(log, typing);
-    await wait(Math.min(1200, 250 + text.length * 18));
-    typing.remove();
+  function getChat(context) {
+    const marker = context.scene.id;
+    let app = context.log.querySelector(`.story-chatapp[data-scene="${marker}"]`);
+    if (!app) {
+      app = element("section", "story-chatapp");
+      app.dataset.scene = marker;
+      const bar = element("header", "story-chatapp-bar");
+      const dots = element("span", "story-chatapp-dots");
+      dots.append(element("i"), element("i"), element("i"));
+      const name = element("strong", "", "# seaside-launch");
+      const meta = element("em", "", "Shared channel · Juniper Studio + Seaside Health");
+      bar.append(dots, name, meta);
+      const feed = element("div", "story-chatlog");
+      app.append(bar, feed);
+      append(context.log, app);
+    }
+    return app.querySelector(".story-chatlog");
+  }
 
-    const isPlayer = step.player || from === state.role;
-    const classes = ["story-bubble"];
+  function avatarFor(person) {
+    const wrap = element("span", "story-msg-avatar");
+    const initial = (person.name || "?").charAt(0);
+    if (person.img) {
+      const img = document.createElement("img");
+      img.src = person.img;
+      img.alt = "";
+      img.loading = "lazy";
+      const fallback = element("span", "story-msg-fallback", initial);
+      fallback.hidden = true;
+      img.onerror = () => {
+        img.hidden = true;
+        fallback.hidden = false;
+      };
+      wrap.append(img, fallback);
+    } else {
+      wrap.append(element("span", "story-msg-fallback", initial));
+    }
+    return wrap;
+  }
+
+  function messageRow(person, { isPlayer = false, time = "" } = {}) {
+    const classes = ["story-msg"];
     if (isPlayer) classes.push("is-player");
     if (person.kind === "agent") classes.push("is-agent");
-    const bubble = element("article", classes.join(" "));
-    const meta = element("div", "story-time");
-    meta.textContent = step.time ? `${person.name} · ${step.time}` : person.name;
-    bubble.append(meta, element("p", "", text));
-    append(log, bubble);
+    const row = element("article", classes.join(" "));
+    row.append(avatarFor(person));
+    const body = element("div", "story-msg-body");
+    const head = element("header", "story-msg-head");
+    head.append(element("b", "", person.name));
+    if (isPlayer) head.append(element("span", "story-msg-tag is-you", "you"));
+    if (person.kind === "agent") head.append(element("span", "story-msg-tag is-app", "APP"));
+    if (time) head.append(element("time", "", time));
+    body.append(head);
+    row.append(body);
+    return { row, body };
+  }
+
+  async function appendMessage(context, step) {
+    const text = resolveText(step.text);
+    if (!text) return;
+    const chat = getChat(context);
+    const from = resolveFrom(step.from);
+    const person = story.cast[from] || { name: "You", kind: "human" };
+
+    if (!prefersReduced()) {
+      const { row, body } = messageRow(person, {});
+      row.classList.add("is-typing");
+      row.setAttribute("aria-hidden", "true");
+      const dots = element("span", "story-typing-dots");
+      dots.append(element("i"), element("i"), element("i"));
+      body.append(dots);
+      append(chat, row);
+      await wait(Math.min(1400, 350 + text.length * 18));
+      row.remove();
+    } else {
+      await wait(0);
+    }
+
+    const isPlayer = step.player || from === state.role;
+    const { row, body } = messageRow(person, { isPlayer, time: step.time || "" });
+    body.append(element("p", "", text));
+    append(chat, row);
+    chat.scrollTop = chat.scrollHeight;
   }
 
   function appendNote(log, text) {
@@ -331,12 +394,30 @@
 
   const renderers = {
     async msg(context, step) {
-      await appendMessage(context.log, step);
+      await appendMessage(context, step);
     },
     async note(context, step) {
       appendNote(context.log, resolveText(step.text));
     },
     async continue(context, step) {
+      // "Press: X" renders as an assistant app action inside the chat window.
+      if (/^Press:\s*/i.test(step.text)) {
+        const chat = getChat(context);
+        const assistant = { name: "Assistant", kind: "agent", img: story.cast.prep && story.cast.prep.img };
+        const { row, body } = messageRow(assistant, {});
+        row.classList.add("is-action");
+        body.append(element("p", "", "One button appears, attached to the request."));
+        const button = element("button", "story-app-btn", step.text.replace(/^Press:\s*/i, ""));
+        button.type = "button";
+        body.append(button);
+        append(chat, row);
+        focusSoon(button);
+        await waitForButton(button);
+        button.disabled = true;
+        button.classList.add("is-done");
+        button.textContent += " ✓";
+        return;
+      }
       const button = element("button", `story-continue${step.primary ? " is-primary" : ""}`, step.text);
       button.type = "button";
       append(context.log, button);
@@ -372,12 +453,29 @@
       appendNote(context.log, chosen.option.reply);
     },
     async calendar(context, step) {
-      const calendar = element("section", "story-calendar");
-      calendar.append(element("h3", "", step.title));
-      const block = element("div", "story-cal-block");
-      block.append(element("strong", "", `${step.people} people`), element("span", "", `${step.minutes} minutes`));
-      calendar.append(block);
-      append(context.log, calendar);
+      const invite = element("section", "story-invite");
+      const badge = element("span", "story-invite-badge", "Meeting invitation");
+      const title = element("h3", "", step.title);
+      const when = element("p", "story-invite-when", `Tuesday · 10:00 – 11:00 am · video call`);
+      const guests = element("div", "story-invite-guests");
+      const faces = element("div", "story-invite-faces");
+      const known = ["alex", "rowan", "sam", "priya", "casey"];
+      known.forEach((id) => faces.append(avatarFor(story.cast[id] || { name: id })));
+      ["T", "J", "M"].slice(0, Math.max(0, step.people - known.length)).forEach((ch) => {
+        faces.append(avatarFor({ name: ch }));
+      });
+      const count = element("p", "story-invite-count",
+        `${step.people} guests · ${step.minutes} minutes held on every calendar`);
+      guests.append(faces, count);
+      const actions = element("div", "story-invite-actions");
+      ["Accept", "Maybe", "Decline"].forEach((label) => {
+        const b = element("span", "story-invite-btn", label);
+        b.setAttribute("aria-hidden", "true");
+        actions.append(b);
+      });
+      invite.append(badge, title, when, guests, actions);
+      append(context.log, invite);
+      await wait(400);
     },
     async quotes(context, step) {
       const quotes = element("div", "story-quotes");

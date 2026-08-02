@@ -1,0 +1,222 @@
+<meta charset="utf-8">
+<title>Proposed additions — Right-Size Meetings survey and story</title>
+<style>
+  :root { color-scheme: light dark; --ink:#16181d; --ink2:#3e4453; --ink3:#6b7284;
+          --bg:#fbfbfc; --card:#fff; --rule:#e4e7ee; --accent:#1b3a6b; --soft:#e9eef7; }
+  @media (prefers-color-scheme: dark) {
+    :root { --ink:#e7eaf0; --ink2:#b4bbc9; --ink3:#868e9f; --bg:#101318; --card:#171b22;
+            --rule:#222831; --accent:#8fb3ee; --soft:#1a2434; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:2rem 1.25rem 5rem; background:var(--bg); color:var(--ink);
+         font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; }
+  main { max-width: 54rem; margin: 0 auto; }
+  h1 { font-size: clamp(1.6rem, 4vw, 2.3rem); line-height:1.15; margin:0 0 .4rem; letter-spacing:-.02em; }
+  .lede { color: var(--ink2); max-width: 42rem; margin:0 0 2rem; }
+  h2 { font-size:1.3rem; margin:2.6rem 0 .3rem; letter-spacing:-.01em; }
+  h2 + p.note { color: var(--ink3); margin:0 0 1.2rem; font-size:.94rem; }
+  .item { background:var(--card); border:1px solid var(--rule); border-radius:10px;
+          padding:1rem 1.15rem; margin:0 0 .85rem; }
+  .item h3 { font-size:1.02rem; margin:0 0 .15rem; }
+  .meta { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.72rem;
+          letter-spacing:.06em; text-transform:uppercase; color:var(--ink3); margin:0 0 .6rem; }
+  .q { font-weight:600; margin:.1rem 0 .5rem; }
+  ul.opts { margin:.2rem 0 .6rem; padding-left:1.1rem; }
+  ul.opts li { margin:.12rem 0; color:var(--ink2); }
+  .why { border-left:3px solid var(--accent); background:var(--soft); padding:.5rem .75rem;
+         border-radius:0 6px 6px 0; font-size:.92rem; color:var(--ink2); margin:.6rem 0 0; }
+  .why b { color:var(--ink); }
+  code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em;
+         background:var(--soft); padding:.08em .35em; border-radius:3px; }
+  table { border-collapse:collapse; width:100%; font-size:.92rem; margin:.5rem 0 0; }
+  th,td { text-align:left; padding:.45rem .6rem; border-bottom:1px solid var(--rule); vertical-align:top; }
+  th { font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--ink3); }
+  .wrap { overflow-x:auto; }
+  .done { color:var(--ink2); }
+</style>
+<main>
+
+<h1>Proposed additions</h1>
+<p class="lede">Seven survey items and three story beats, drafted to your ~10-minute ceiling.
+Nothing here is wired in yet. Wording is in the house voice already used in
+<code>index.html</code> — plain, concrete, no jargon.</p>
+
+<h2>Part 1 — Survey items</h2>
+<p class="note">Six single-select plus one optional free-text. Estimated added burden: 2–3 minutes.
+Placed in the three sections that are currently thinnest for analysis.</p>
+
+<div class="item">
+  <p class="meta">New · section C (The annoying parts) · <code>c_authority</code> · single select</p>
+  <p class="q">When a client asks for something new mid-project, how clear is it who can say yes to a new date or a new cost?</p>
+  <ul class="opts">
+    <li>Always clear — one named person decides</li>
+    <li>Usually clear</li>
+    <li>Depends on the client</li>
+    <li>Usually unclear — it gets worked out as we go</li>
+    <li>Never clear</li>
+  </ul>
+  <p class="why"><b>Why this one first.</b> Your whole story turns on the line
+  <em>“Nobody said who can say yes to a new date, a new cost, or a safety check.”</em>
+  Right now nothing in the survey measures that. This item is the quantitative counterpart
+  to the narrative, and it is the variable most likely to separate the people who need your
+  idea from the people who do not.</p>
+</div>
+
+<div class="item">
+  <p class="meta">New · section C · <code>c_quick_request_rework</code> · single select</p>
+  <p class="q">How often does a request that sounded small turn into a week or more of extra work?</p>
+  <ul class="opts">
+    <li>Most months</li>
+    <li>Every few months</li>
+    <li>Once or twice a year</li>
+    <li>Almost never</li>
+  </ul>
+  <p class="why">Gives you a base rate for the exact failure the story dramatises, so you can
+  say how common it is rather than only that it happens.</p>
+</div>
+
+<div class="item">
+  <p class="meta">New · section B (AI at work) · <code>b_verify</code> · single select</p>
+  <p class="q">When an AI tool gives you something you will act on, what do you do first?</p>
+  <ul class="opts">
+    <li>Check it against the source myself</li>
+    <li>Skim it for anything obviously wrong</li>
+    <li>Use it as-is if it looks reasonable</li>
+    <li>Use it as-is</li>
+    <li>I don’t act on AI output</li>
+  </ul>
+  <p class="why">Trust calibration. Your four helpers are defined by their limits
+  (<em>“can’t decide anything”</em>, <em>“can’t approve anything”</em>), and this tells you
+  whether people already behave as if limits matter — or whether the limits are solving a
+  problem they don’t think they have.</p>
+</div>
+
+<div class="item">
+  <p class="meta">New · section B · <code>b_allow_without_human</code> · multi select</p>
+  <p class="q">Which of these would you let an AI do without a person approving it first?</p>
+  <ul class="opts">
+    <li>Gather facts and show where they came from</li>
+    <li>Write a first draft of a message</li>
+    <li>Send a message to a client</li>
+    <li>Flag that someone is missing from a decision</li>
+    <li>Record what was agreed</li>
+    <li>Change a date or a cost</li>
+    <li>None of these</li>
+  </ul>
+  <p class="why">This is the one that directly tests your design. The list is deliberately
+  your four helpers’ jobs plus two things they are <em>not</em> allowed to do. If people
+  already draw the line where you drew it, that is a finding; if they draw it somewhere
+  else, that is a bigger one.</p>
+</div>
+
+<div class="item">
+  <p class="meta">New · section D (The idea) · <code>d_would_use</code> · single select</p>
+  <p class="q">If this existed today, how likely would you be to use it on your next project?</p>
+  <ul class="opts">
+    <li>Very likely · Likely · Not sure · Unlikely · Very unlikely</li>
+  </ul>
+  <p class="why">Section D presents the idea and currently collects one input, so there is no
+  clean measure of reaction to it. A five-point intention item is the minimum needed to
+  compare reactions across the profile questions in section A.</p>
+</div>
+
+<div class="item">
+  <p class="meta">New · section D · <code>d_blocker</code> · single select</p>
+  <p class="q">What would most likely stop you using it?</p>
+  <ul class="opts">
+    <li>My clients wouldn’t agree to it</li>
+    <li>My team wouldn’t keep it up</li>
+    <li>It’s another tool to run</li>
+    <li>I don’t trust AI with anything that matters</li>
+    <li>Cost</li>
+    <li>Nothing — I’d try it</li>
+  </ul>
+  <p class="why">Turns a flat “no” into a reason you can act on. Single-select forces the
+  strongest blocker rather than letting people tick everything.</p>
+</div>
+
+<div class="item">
+  <p class="meta">New · section D · <code>d_blocker_other</code> · free text, optional, 300 chars</p>
+  <p class="q">Anything else that would stop you? (optional)</p>
+  <p class="why">The only free-text item added, and optional, so it costs nothing in
+  completion rate. Catches the blocker your six options missed.</p>
+</div>
+
+<h2>Part 2 — Story beats</h2>
+<p class="note">Three new decision points for <code>assets/js/scenes.js</code>, following the
+existing <code>{ type: "choice", key, log, prompt, options }</code> shape. Each adds roughly
+20–30 seconds.</p>
+
+<div class="item">
+  <p class="meta">New · Act 1, before the alignment meeting · <code>act1_c0</code></p>
+  <p class="q">It’s 4:56 pm. Before you reply to Rowan, who do you tell?</p>
+  <ul class="opts">
+    <li>Nobody yet — reply first, sort the details Monday</li>
+    <li>Priya, so she can look at the plan</li>
+    <li>Sam, because sign-in means a safety check</li>
+    <li>Everyone, in the project channel</li>
+  </ul>
+  <p class="why">Currently Act 1 goes straight from the request to the eight-person meeting.
+  This beat makes the reader <em>commit</em> before they see the cost, so the meeting lands
+  as a consequence of their own choice instead of something that merely happens to them.
+  Every option converges, exactly like <code>act1_c1</code> already does.</p>
+</div>
+
+<div class="item">
+  <p class="meta">New · Act 2, after Prep reports · <code>act2_limit</code></p>
+  <p class="q">Prep has the facts and a draft reply ready. Rowan is waiting. What do you do?</p>
+  <ul class="opts">
+    <li>Send Prep’s draft as it stands</li>
+    <li>Read it, change it, then send it yourself</li>
+    <li>Ask Sam to confirm the safety line first</li>
+  </ul>
+  <p class="why">The first option should be <strong>unavailable</strong> — shown, then
+  refused with Prep’s own limit: <em>“Can’t decide anything.”</em> That is the most
+  persuasive thirty seconds you can give a sceptical reader: they try to over-trust the AI
+  and the design stops them. It also gives you a click-level measure of how many people try.</p>
+</div>
+
+<div class="item">
+  <p class="meta">New · Act 2 close, after the receipt · <code>act2_promise</code></p>
+  <p class="q">Three weeks on, Promise reports what actually happened. It doesn’t match what was agreed.</p>
+  <ul class="opts">
+    <li>Update the record and tell Rowan</li>
+    <li>Update the record, no message</li>
+    <li>Leave it — the work is done</li>
+  </ul>
+  <p class="why">Promise is described as <em>“checks the outcome later”</em> but never
+  actually does so on screen, so the fourth helper is the only one the reader never sees
+  work. This closes that gap and ends on the study’s real claim: the value is the floor
+  under what happens next, not the meeting.</p>
+</div>
+
+<h2>What changes where</h2>
+<div class="wrap">
+<table>
+  <tr><th>File</th><th>Change</th></tr>
+  <tr><td><code>index.html</code></td><td>7 new fieldsets in sections B, C and D, in the existing <code>.ph-field</code> / <code>.ph-check-row</code> markup</td></tr>
+  <tr><td><code>assets/js/survey.js</code></td><td>Nothing structural — no new steps, so <code>orderedSteps</code> is untouched</td></tr>
+  <tr><td><code>assets/js/scenes.js</code></td><td>3 new choice steps, plus a refusal branch for <code>act2_limit</code></td></tr>
+  <tr><td><code>apps-script/</code></td><td>Response columns for the 7 new keys — worth checking before fielding</td></tr>
+</table>
+</div>
+
+<h2 class="done">Already done</h2>
+<p class="note">Shipped in <code>assets/css/story.css</code>, verified at 390 / 768 / 1280 px.</p>
+<div class="item">
+  <p class="q">Alignment</p>
+  <p><code>.story-cast-grid &gt; *</code> set <code>text-align:center</code> and, being later in
+  the bundle at equal specificity, beat <code>.story-role-card{text-align:left}</code>. Every
+  label beside a portrait rendered centred and ragged. Now left-aligned.</p>
+  <p class="q" style="margin-top:.8rem">Layout across devices</p>
+  <p>The grid was a fixed 3 columns, 2 on phones — so two role cards filled two thirds of a
+  row, four helpers broke 3 + 1, and on a phone two cards shared the width and wrapped to
+  two or three words a line. Now <code>auto-fit</code> with a per-grid floor: role cards 2
+  across, roster 3 across, helpers 2 × 2, all collapsing to one column on a phone.</p>
+  <p class="why">Measured, not eyeballed: at a true 390 px viewport the page reports
+  <code>OVER=0</code> with no unclipped element. My first read of a headless screenshot
+  suggested content ran off-screen — that was Chrome cropping a clamped 485 px window, not a
+  layout bug.</p>
+</div>
+
+</main>
