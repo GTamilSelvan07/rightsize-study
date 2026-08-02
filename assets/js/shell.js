@@ -838,7 +838,9 @@
     setRailActive(true);
     const rail = railPane("rail-agents");
     if (rail) rail.replaceChildren();
-    ["rail-limits", "rail-record", "rail-meter"].forEach((id) => {
+    // rail-limits is deliberately preserved: the player's locked limits stay
+    // visible through the call — they are the anchor for the boundary catch.
+    ["rail-record", "rail-meter"].forEach((id) => {
       const pane = document.getElementById(id);
       if (pane) pane.replaceChildren();
     });
