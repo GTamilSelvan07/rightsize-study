@@ -223,9 +223,10 @@
   function avatarFor(person) {
     const wrap = element("span", "story-msg-avatar");
     const initial = (person.name || "?").charAt(0);
-    if (person.img) {
+    const src = person.img || person.portrait;
+    if (src) {
       const img = document.createElement("img");
-      img.src = person.img;
+      img.src = src;
       img.alt = "";
       img.loading = "lazy";
       const fallback = element("span", "story-msg-fallback", initial);
@@ -403,7 +404,7 @@
       // "Press: X" renders as an assistant app action inside the chat window.
       if (/^Press:\s*/i.test(step.text)) {
         const chat = getChat(context);
-        const assistant = { name: "Assistant", kind: "agent", img: story.cast.prep && story.cast.prep.img };
+        const assistant = { name: "Assistant", kind: "agent", img: story.cast.prep && (story.cast.prep.img || story.cast.prep.portrait) };
         const { row, body } = messageRow(assistant, {});
         row.classList.add("is-action");
         body.append(element("p", "", "One button appears, attached to the request."));
