@@ -105,14 +105,16 @@
   };
 
   // A missed question can sit two screens above the Continue button, so the
-  // first one always gets scrolled into view rather than silently flagged.
+  // first one always gets brought into view rather than silently flagged.
+  // Plain focus() does the scrolling natively, which works even where an
+  // animated scroll would not; scrollIntoView only recentres afterwards.
   const revealFirstError = (section) => {
     const field = section.querySelector("[aria-invalid='true']");
     if (!field) {
       return;
     }
-    field.scrollIntoView({ block: "center", behavior: motionIsAllowed() ? "smooth" : "auto" });
-    field.focus({ preventScroll: true });
+    field.focus();
+    field.scrollIntoView({ block: "center", behavior: "auto" });
   };
 
   const validateStep = (section) => {
