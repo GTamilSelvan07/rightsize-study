@@ -34,6 +34,12 @@
     },
   };
 
+  const callQuestions = {
+    A: "Ship 14 August without sign-in — and lock 2 September for it?",
+    B: "Move the launch to 28 August with the review complete?",
+    C: "Fund a small extra team to keep both — who signs off the cost?",
+  };
+
   const cast = {
     alex: { id: "alex", kind: "human", side: "provider", name: "Alex", title: "Delivery lead, Juniper Studio", portrait: "assets/img/cast/alex.jpg" },
     rowan: { id: "rowan", kind: "human", side: "client", name: "Rowan", title: "Project sponsor, Seaside Health", portrait: "assets/img/cast/rowan.jpg" },
@@ -51,6 +57,7 @@
       id: "a1-inbox",
       act: 1,
       tourStep: 1,
+      chapter: "BEFORE THE ROOM",
       instruction: "It's Friday, 4:52 pm. A request just landed — open your inbox.",
       clock: "Friday · 4:52 pm",
       mounts: [
@@ -71,6 +78,7 @@
       id: "a1-spiral",
       act: 1,
       tourStep: 2,
+      chapter: "BEFORE THE ROOM",
       instruction: "No cost, no owner, no plan. What do you do?",
       clock: null,
       mounts: [
@@ -103,6 +111,7 @@
       id: "a1-difference",
       act: 1,
       tourStep: 3,
+      chapter: "BEFORE THE ROOM",
       instruction: "Three days later, the difference surfaces. What now?",
       clock: "Tuesday · 10:00 am",
       mounts: [
@@ -146,6 +155,7 @@
       id: "rewind",
       act: 1.5,
       tourStep: null,
+      chapter: "BEFORE THE ROOM",
       instruction: "⏪ Rewind. Same Friday — this time the assistant is on the project.",
       clock: "Friday · 4:52 pm",
       mounts: [{ kind: "rewind", caption: "Same request. Same people. One new button." }],
@@ -157,6 +167,7 @@
       id: "a2-button",
       act: 2,
       tourStep: 4,
+      chapter: "BEFORE THE ROOM",
       instruction: "The request now carries one button. Press it.",
       clock: "Friday · 4:52 pm",
       mounts: [
@@ -178,6 +189,7 @@
       id: "a2-agents",
       act: 2,
       tourStep: 5,
+      chapter: "BEFORE THE ROOM",
       instruction: "Watch the assistant work. Note what each helper can NOT do.",
       clock: null,
       mounts: [
@@ -201,6 +213,7 @@
       id: "a2-limits",
       act: 2,
       tourStep: 6,
+      chapter: "BEFORE THE ROOM",
       instruction: "Set your side's limits. Only you can see these.",
       clock: null,
       mounts: [
@@ -231,6 +244,7 @@
       id: "a2-options",
       act: 2,
       tourStep: 7,
+      chapter: "BEFORE THE ROOM",
       instruction: "Three options, built from both sides' limits. Pick one.",
       clock: "Monday · 9:04 am",
       mounts: [
@@ -245,18 +259,92 @@
           ],
           followUp: "Notice what's missing: a meeting. If one is still needed, it'll be nine minutes with three people — not an hour with eight.",
         },
+        {
+          kind: "call-bridge",
+          text: "One question still needs people. Three of you, nine minutes booked.",
+          button: "Join the call →",
+          afterGate: true,
+        },
       ],
       target: "#shell-main [data-option]",
       log: { story_option: "selected" },
       gate: "option",
     },
     {
-      id: "a2-approval",
+      id: "a2-call-open",
       act: 2,
       tourStep: 8,
+      chapter: "THE ROOM",
+      instruction: "Join the call →",
+      clock: null,
+      mounts: [
+        {
+          kind: "call-open",
+          afterGate: true,
+          questions: callQuestions,
+          anchors: { open: "09:00", question: "08:47", review: "07:58", shortcut: "06:41", reply: "05:12" },
+          script: {
+            open: "Right — the board wants sign-in in the launch. Where are we, honestly?",
+            build: "The build needs three more days, then the review.",
+            review: "The review can't be rushed. It finishes on the 24th at the earliest.",
+            shortcut: "Can't we just skip the review and ship on the 14th?",
+            fairness: "Sam hasn't spoken yet",
+            move: ["Be honest about the risk", "Promise the 14th anyway", "Put it to Sam"],
+            honest: {
+              alex: "Not safely. If we skip it and it breaks, it's both our names on it.",
+              fact: "The signed agreement: no sign-in goes live without a completed review. · source →",
+              source: "The signed agreement",
+              rowan: "…Fair.",
+            },
+            promise: "This conflicts with your own hard line: no shortcut past the security review. Only you can see this.",
+            sam: {
+              resolved: "✓ Sam has spoken before the decision.",
+              answer: "The review finishes on the 24th. Nothing safe ships on the 14th.",
+              rowan: "Okay. I needed to hear that plainly.",
+            },
+          },
+        },
+      ],
+      target: "#shell-main [data-call-join]",
+      log: null,
+      gate: "click",
+    },
+    {
+      id: "a2-call-decision",
+      act: 2,
+      tourStep: 9,
+      chapter: "THE ROOM",
+      instruction: "YOUR MOVE",
+      clock: null,
+      mounts: [
+        {
+          kind: "call-decision",
+          draftData: optionData,
+          anchors: { draft: "03:40", closing: "01:55" },
+          script: {
+            move: ["Confirm the decision as drafted", "Ask for one more week"],
+            confirm: "Agreed. Send it to me properly.",
+            weekFact: "Every held week costs both sides. Nothing in the plan needs one.",
+            weekSource: "The plan",
+            week: "No — let's not drift. As drafted.",
+            closing: "Talk isn't a deal. I'm sending everyone the same exact words to approve separately.",
+            ended: "Call ended · 6 min 12 s · 2 min 48 s handed back",
+          },
+        },
+      ],
+      target: "#shell-main",
+      log: null,
+      gate: "auto",
+    },
+    {
+      id: "a2-approval",
+      act: 2,
+      tourStep: 10,
+      chapter: "AFTER THE ROOM",
       instruction: "Your card. Only you can press Approve for you.",
       clock: null,
       mounts: [
+        { kind: "note", variant: "card", text: "The same words you heard drafted — now it's your card." },
         { kind: "rail-record", version: "Version 1", approvals: "0 of 3 approved · Version 1" },
         { kind: "receipt", id: "approval-receipt", version: "Version 1", optionRows: true },
         { kind: "note", text: "Your card. Your name. You can only approve for yourself — nobody can press this for you." },
@@ -286,7 +374,8 @@
     {
       id: "a2-preview",
       act: 2,
-      tourStep: 9,
+      tourStep: 11,
+      chapter: "AFTER THE ROOM",
       instruction: "Preview exactly what gets sent. Then jump a week.",
       clock: null,
       mounts: [
@@ -302,6 +391,7 @@
       id: "a2-outcome",
       act: 2,
       tourStep: null,
+      chapter: "AFTER THE ROOM",
       instruction: "Preview exactly what gets sent. Then jump a week.",
       clock: "One week later",
       mounts: [
@@ -325,6 +415,7 @@
       id: "ep-epilogue",
       act: 2,
       tourStep: null,
+      chapter: "AFTER THE ROOM",
       instruction: "That's the idea.",
       clock: null,
       mounts: [

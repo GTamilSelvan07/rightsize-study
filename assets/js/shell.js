@@ -12,6 +12,9 @@
     "story_act1_choice2",
     "story_limits_set",
     "story_option",
+    "story_meeting_reply1",
+    "story_meeting_reply2",
+    "story_meeting_completed",
     "story_edit_loop_seen",
     "story_notmine_seen",
     "story_completed",
@@ -35,6 +38,8 @@
     running: false,
     runId: 0,
     tourStep: 0,
+    chapter: "BEFORE THE ROOM",
+    call: null,
   };
 
   function readSavedId() {
@@ -204,6 +209,61 @@
       window.requestAnimationFrame(frame);
       // rAF never fires in unfocused or occluded windows — guarantee resolution
       // so the story cannot hang for tab-switchers.
+      setTimeout(finish, duration + 400);
+    });
+  }
+
+  function callTimeSeconds(value) {
+    if (typeof value === "string" && /^\d{2}:\d{2}$/.test(value)) {
+      const [minutes, seconds] = value.split(":").map(Number);
+      return (minutes * 60) + seconds;
+    }
+    return Math.max(0, Math.round(Number(value) || 0));
+  }
+
+  function formatCallTime(seconds) {
+    const safeSeconds = callTimeSeconds(seconds);
+    const minutes = Math.floor(safeSeconds / 60);
+    const remainder = safeSeconds % 60;
+    return `${String(minutes).padStart(2, "0")}:${String(remainder).padStart(2, "0")}`;
+  }
+
+  async function animateCallTimer(target, from, to) {
+    if (!target) return;
+    const startValue = callTimeSeconds(from);
+    const endValue = callTimeSeconds(to);
+    if (startValue === endValue) {
+      target.textContent = formatCallTime(endValue);
+      return;
+    }
+    if (prefersReduced()) {
+      target.textContent = formatCallTime(endValue);
+      return;
+    }
+    await new Promise((resolve) => {
+      const start = performance.now();
+      const duration = 700;
+      let done = false;
+      const finish = () => {
+        if (done) return;
+        done = true;
+        target.textContent = formatCallTime(endValue);
+        resolve();
+      };
+      const frame = (now) => {
+        if (done) return;
+        if (prefersReduced() || state.abortBeat) {
+          finish();
+          return;
+        }
+        const progress = Math.min(1, (now - start) / duration);
+        const eased = 1 - ((1 - progress) ** 3);
+        target.textContent = formatCallTime(startValue + ((endValue - startValue) * eased));
+        if (progress < 1) window.requestAnimationFrame(frame);
+        else finish();
+      };
+      window.requestAnimationFrame(frame);
+      // Match animateCounter's guarantee: a hidden tab cannot strand the tour.
       setTimeout(finish, duration + 400);
     });
   }
@@ -511,6 +571,299 @@
     scrollMain();
   }
 
+  function renderCallBridge(mount) {
+    const main = mainPane();
+    if (!main) return;
+    const bridge = element("section", "pane-artifact pane-call-bridge");
+    bridge.append(element("p", "", mount.text));
+    const button = element("button", "is-primary", mount.button);
+    button.type = "button";
+    button.dataset.callJoin = "";
+    bridge.append(button);
+    append(main, bridge);
+    scrollMain();
+  }
+
+  function callPortrait(person) {
+    const portrait = element("span", "call-portrait");
+    const img = document.createElement("img");
+    img.src = person.portrait || "";
+    img.alt = "";
+    img.loading = "eager";
+    const fallback = element("span", "call-portrait-fallback", (person.name || "?").slice(0, 1));
+    fallback.hidden = true;
+    img.addEventListener("error", () => {
+      img.hidden = true;
+      fallback.hidden = false;
+    }, { once: true });
+    portrait.append(img, fallback);
+    return portrait;
+  }
+
+  function copilotHeading(variant, source) {
+    if (variant === "pinned") return "■ THE ONE QUESTION";
+    if (variant === "fact") return `📄 FACT${source ? ` · ${source}` : ""}`;
+    if (variant === "fair") return "⚖ fairness note";
+    if (variant === "draft") return "✍ DRAFTING…";
+    if (variant === "private") return "🔒 PRIVATE";
+    return "TIME";
+  }
+
+  function mountCopilotCard(variant, options = {}) {
+    const rail = railPane("rail-agents");
+    if (!rail) return null;
+    const card = element("article", `copilot-card is-${variant}`);
+    card.dataset.copilotCard = variant;
+    card.append(element("strong", "copilot-card-title", copilotHeading(variant, options.source)));
+    const bodyText = String(options.text || "");
+    const sourceSuffix = " · source →";
+    const hasSourceTag = variant === "fact" && bodyText.endsWith(sourceSuffix);
+    const body = element("p", "copilot-card-body", hasSourceTag ? bodyText.slice(0, -sourceSuffix.length) : bodyText);
+    body.dataset.copilotBody = "";
+    card.append(body);
+    if (variant === "fact" && (hasSourceTag || options.source)) {
+      card.append(element("span", "copilot-source", "source →"));
+    }
+    if (variant === "pinned") {
+      rail.prepend(card);
+      enter(card);
+    } else {
+      append(rail, card);
+    }
+    if (variant === "pinned" || variant === "private" || variant === "draft") setRailOpen(true);
+    return card;
+  }
+
+  async function typeCallDraft(target, text) {
+    if (!target) return;
+    if (prefersReduced() || state.abortBeat) {
+      target.textContent = text;
+      return;
+    }
+    target.textContent = "";
+    for (const character of text) {
+      target.textContent += character;
+      await wait(18);
+      if (state.abortBeat) {
+        target.textContent = text;
+        return;
+      }
+    }
+  }
+
+  function createCallStage() {
+    const main = mainPane();
+    if (!main) return null;
+    main.replaceChildren();
+    const stage = element("section", "call-stage");
+    stage.setAttribute("aria-label", "The 9-minute decision video call");
+
+    const head = element("header", "call-head");
+    const dot = element("span", "call-live-dot", "●");
+    dot.setAttribute("aria-hidden", "true");
+    const timer = element("span", "call-timer", formatCallTime(540));
+    timer.dataset.callTimer = "";
+    head.append(dot, document.createTextNode(" "), timer, document.createTextNode(" · The 9-minute decision"));
+
+    const tiles = element("div", "call-tiles");
+    ["alex", "rowan", "sam"].forEach((id) => {
+      const person = personFor(id);
+      const tile = element("article", "call-tile");
+      tile.dataset.callPerson = id;
+      const name = element("span", "call-name", id === "alex" ? "Alex · you" : person.name);
+      const mic = element("span", "call-mic", "🎙");
+      mic.setAttribute("aria-hidden", "true");
+      tile.append(callPortrait(person), name, mic);
+      tiles.append(tile);
+    });
+
+    const captions = element("div", "call-captions");
+    const cc = element("span", "call-cc", "CC");
+    const caption = element("span", "call-caption-line", "");
+    caption.dataset.callCaption = "";
+    caption.setAttribute("aria-live", "polite");
+    captions.append(cc, caption);
+
+    const controls = element("div", "call-controls", "🎙 mute · 📷 video · 💬 chat · CC captions · ⏻ leave");
+    controls.setAttribute("aria-hidden", "true");
+    stage.append(head, tiles, captions, controls);
+    append(main, stage);
+    state.call = { stage, timer, caption, controls, seconds: 540 };
+    return stage;
+  }
+
+  async function moveCallTimer(seconds) {
+    const call = state.call;
+    if (!call || !call.timer) return;
+    const from = call.seconds;
+    call.seconds = seconds;
+    await animateCallTimer(call.timer, from, seconds);
+  }
+
+  async function speakInCall(personId, text) {
+    const call = state.call;
+    if (!call || !call.stage || !call.caption) return;
+    queryAll(".call-tile", call.stage).forEach((tile) => tile.classList.remove("is-speaking"));
+    const tile = query(`[data-call-person="${personId}"]`, call.stage);
+    if (tile) tile.classList.add("is-speaking");
+    call.caption.textContent = `${personFor(personId).name}: ${text}`;
+    await wait(720);
+    if (tile) tile.classList.remove("is-speaking");
+  }
+
+  function renderCallMove(labels, ids, gate) {
+    const call = state.call;
+    if (!call || !call.stage || !call.controls) return { panel: null, buttons: [] };
+    const existing = query(".call-move", call.stage);
+    if (existing) existing.remove();
+    const panel = element("section", "call-move");
+    const heading = element("h2", "", "YOUR MOVE");
+    panel.append(heading);
+    const buttons = (labels || []).map((label, index) => {
+      const button = element("button", "", label);
+      button.type = "button";
+      button.dataset.callMove = gate;
+      button.dataset.callChoice = ids[index];
+      panel.append(button);
+      return button;
+    });
+    call.stage.insertBefore(panel, call.controls);
+    enter(panel);
+    setRailOpen(false);
+    if (buttons[0]) highlightTarget(buttons[0]);
+    return { panel, buttons };
+  }
+
+  async function playFirstCallResponse(choice, script, fairnessCard) {
+    if (choice === "honest") {
+      await speakInCall("alex", script.honest.alex);
+      mountCopilotCard("fact", { source: script.honest.source, text: script.honest.fact });
+      await speakInCall("rowan", script.honest.rowan);
+      return;
+    }
+    if (fairnessCard) {
+      fairnessCard.classList.add("is-resolved");
+      const body = query("[data-copilot-body]", fairnessCard);
+      if (body) body.textContent = script.sam.resolved;
+    }
+    await speakInCall("sam", script.sam.answer);
+    await speakInCall("rowan", script.sam.rowan);
+  }
+
+  async function waitForFirstCallMove(script, fairnessCard) {
+    const { panel, buttons } = renderCallMove(script.move, ["honest", "promise", "sam"], "one");
+    if (!panel || buttons.length !== 3) {
+      warn("first call move was incomplete; skipped it");
+      return;
+    }
+    let promiseCaught = false;
+    await new Promise((resolve) => {
+      buttons.forEach((button) => button.addEventListener("click", async () => {
+        const choice = button.dataset.callChoice;
+        if (choice === "promise") {
+          promiseCaught = true;
+          mountCopilotCard("private", { text: script.promise });
+          button.disabled = true;
+          button.classList.add("is-blocked");
+          const lock = element("small", "call-blocked-lock", "🔒");
+          lock.setAttribute("aria-hidden", "true");
+          button.append(lock);
+          const next = buttons.find((candidate) => !candidate.disabled);
+          if (next) highlightTarget(next);
+          return;
+        }
+        buttons.forEach((candidate) => { candidate.disabled = true; });
+        clearTargets();
+        panel.remove();
+        await playFirstCallResponse(choice, script, fairnessCard);
+        const reply = promiseCaught ? "promise_caught" : choice;
+        logEvent({ story_meeting_reply1: reply });
+        resolve();
+      }));
+    });
+  }
+
+  async function renderCallOpen(mount) {
+    setRailActive(true);
+    const rail = railPane("rail-agents");
+    if (rail) rail.replaceChildren();
+    ["rail-limits", "rail-record", "rail-meter"].forEach((id) => {
+      const pane = document.getElementById(id);
+      if (pane) pane.replaceChildren();
+    });
+    const stage = createCallStage();
+    if (!stage) return;
+    const anchors = mount.anchors || {};
+    const script = mount.script || {};
+    await moveCallTimer(anchors.open);
+    await speakInCall("rowan", script.open);
+    await moveCallTimer(anchors.question);
+    const question = mount.questions && mount.questions[state.flags.option];
+    mountCopilotCard("pinned", { text: question || "" });
+    await speakInCall("alex", script.build);
+    await moveCallTimer(anchors.review);
+    await speakInCall("sam", script.review);
+    await moveCallTimer(anchors.shortcut);
+    await speakInCall("rowan", script.shortcut);
+    const fairnessCard = mountCopilotCard("fair", { text: script.fairness });
+    await waitForFirstCallMove(script, fairnessCard);
+    await moveCallTimer(anchors.reply);
+  }
+
+  async function waitForSecondCallMove(script) {
+    const { panel, buttons } = renderCallMove(script.move, ["confirm", "week"], "two");
+    if (!panel || buttons.length !== 2) {
+      warn("second call move was incomplete; skipped it");
+      return;
+    }
+    const choice = await new Promise((resolve) => {
+      buttons.forEach((button) => button.addEventListener("click", () => {
+        buttons.forEach((candidate) => { candidate.disabled = true; });
+        clearTargets();
+        panel.remove();
+        resolve(button.dataset.callChoice);
+      }, { once: true }));
+    });
+    if (choice === "confirm") {
+      const tiles = queryAll(".call-tile", state.call && state.call.stage);
+      tiles.forEach((tile) => tile.classList.add("is-speaking"));
+      await wait(420);
+      tiles.forEach((tile) => tile.classList.remove("is-speaking"));
+      await speakInCall("rowan", script.confirm);
+    } else {
+      mountCopilotCard("fact", { source: script.weekSource, text: script.weekFact });
+      await speakInCall("rowan", script.week);
+    }
+    logEvent({ story_meeting_reply2: choice });
+  }
+
+  async function renderCallDecision(mount) {
+    const call = state.call;
+    if (!call || !call.stage || !call.stage.isConnected) {
+      warn("call decision step could not find the active call");
+      return;
+    }
+    const anchors = mount.anchors || {};
+    const script = mount.script || {};
+    await moveCallTimer(anchors.draft);
+    const selected = mount.draftData && mount.draftData[state.flags.option];
+    const draftCard = mountCopilotCard("draft", { text: "" });
+    const draftBody = query("[data-copilot-body]", draftCard);
+    await typeCallDraft(draftBody, selected ? selected.decision : "");
+    await waitForSecondCallMove(script);
+    await moveCallTimer(anchors.closing);
+    mountCopilotCard("time", { text: script.closing });
+    await wait(360);
+    const ended = element("p", "call-ended", script.ended);
+    call.stage.insertBefore(ended, call.controls);
+    enter(ended);
+    logEvent({ story_meeting_completed: true });
+    await wait(520);
+    const main = mainPane();
+    if (main && call.stage.isConnected) main.replaceChildren();
+    state.call = null;
+  }
+
   function renderRailRecord(mount) {
     const rail = railPane("rail-record");
     if (!rail) return;
@@ -621,7 +974,8 @@
   function renderNote(mount) {
     const main = mainPane();
     if (!main) return;
-    append(main, element("p", "pane-note", resolveText(mount.text)));
+    const className = mount.variant === "card" ? "pane-artifact pane-note is-card" : "pane-note";
+    append(main, element("p", className, resolveText(mount.text)));
     scrollMain();
   }
 
@@ -652,6 +1006,9 @@
     } else if (mount.kind === "rail-agents") await renderAgents(mount);
     else if (mount.kind === "rail-limits") renderLimits(mount);
     else if (mount.kind === "options") renderOptions(mount);
+    else if (mount.kind === "call-bridge") renderCallBridge(mount);
+    else if (mount.kind === "call-open") await renderCallOpen(mount);
+    else if (mount.kind === "call-decision") await renderCallDecision(mount);
     else if (mount.kind === "rail-record") renderRailRecord(mount);
     else if (mount.kind === "approval") renderApproval(mount);
     else if (mount.kind === "preview") renderPreview(mount);
@@ -699,6 +1056,17 @@
     if (active) enter(on);
   }
 
+  function setRailInCall(active) {
+    const head = query(".shell-rail-head");
+    if (!head) {
+      warn(".shell-rail-head is missing; skipped in-call header update");
+      return;
+    }
+    const icon = element("span", "", "✦");
+    icon.setAttribute("aria-hidden", "true");
+    head.replaceChildren(icon, document.createTextNode(active ? " Assistant · in call" : " Assistant"));
+  }
+
   function ensureRailToggle() {
     const rail = document.getElementById("shell-rail");
     if (!rail) return null;
@@ -724,9 +1092,16 @@
 
   function prepareShellForStep(step) {
     const clearMain = new Set(["a1-inbox", "rewind", "a2-button", "a2-options", "a2-approval", "a2-preview"]);
+    const inCall = step.tourStep === 8 || step.tourStep === 9;
+    setRailInCall(inCall);
     if (clearMain.has(step.id)) {
       const main = mainPane();
       if (main) main.replaceChildren();
+    }
+    if (step.id === "a2-approval") {
+      const railAgents = document.getElementById("rail-agents");
+      if (railAgents) railAgents.replaceChildren();
+      setRailOpen(false);
     }
     if (step.id === "a1-inbox") setInboxBadge(1);
     if (step.tourStep === 5 || step.tourStep === 6) setRailOpen(true);
@@ -734,10 +1109,11 @@
 
   function updateTourBar(step) {
     if (Number.isInteger(step.tourStep)) state.tourStep = step.tourStep;
+    if (step.chapter) state.chapter = step.chapter;
     const counter = query("[data-tour-step]");
     const text = query("[data-tour-text]");
     if (!counter) warn("[data-tour-step] is missing; skipped step counter update");
-    else counter.textContent = `STEP ${state.tourStep || 1} OF 9`;
+    else counter.textContent = `${state.chapter} · STEP ${state.tourStep || 1} OF 11`;
     if (!text) warn("[data-tour-text] is missing; skipped tour instruction update");
     else text.textContent = resolveText(step.instruction);
   }
@@ -969,7 +1345,7 @@
 
   async function waitForGate(step) {
     if (step.gate === "auto") {
-      await wait(step.id === "rewind" ? 0 : 350);
+      await wait(step.id === "rewind" || step.id === "a2-call-decision" ? 0 : 350);
       return;
     }
     if (step.gate === "choice") await waitForChoice(step);
@@ -1064,6 +1440,8 @@
   function resetShell() {
     clearTargets();
     state.receipts.clear();
+    state.call = null;
+    setRailInCall(false);
     const main = mainPane();
     if (main) main.replaceChildren();
     const railAgents = document.getElementById("rail-agents");
@@ -1087,6 +1465,8 @@
     state.flags = {};
     state.completed = false;
     state.tourStep = 0;
+    state.chapter = "BEFORE THE ROOM";
+    state.call = null;
     state.startedAt = performance.now();
     state.visibleAt = document.visibilityState === "visible" ? state.startedAt : 0;
     state.visibleMs = 0;
@@ -1101,6 +1481,10 @@
   }
 
   function connectControls() {
+    const firstStep = (tour.steps || []).find((step) => Number.isInteger(step.tourStep));
+    const initialCounter = query("[data-tour-step]");
+    if (firstStep && initialCounter) initialCounter.textContent = `${firstStep.chapter} · STEP ${firstStep.tourStep} OF 11`;
+
     const skip = document.getElementById("tour-skip");
     if (skip) skip.addEventListener("click", fastForward);
     else warn("#tour-skip is missing; skip remains unavailable");

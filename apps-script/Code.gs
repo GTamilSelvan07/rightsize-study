@@ -36,6 +36,7 @@ var HEADERS = [
   "story_limits_set", "story_option", "story_edit_loop_seen", "story_notmine_seen",
   "story_completed", "story_replay_clicked", "story_replay_role",
   "story_walkthrough_clicked", "story_seconds",
+  "story_meeting_reply1", "story_meeting_reply2", "story_meeting_completed",
   "t_seconds_total", "t_sections_json"
 ];
 // demo_full_* now refers to the step-by-step walkthrough page; story_* is the
