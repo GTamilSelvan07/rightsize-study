@@ -140,16 +140,22 @@ function handleAiq(p) {
         headers: { "x-goog-api-key": key },
         payload: JSON.stringify({
           contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: { temperature: 0.7, maxOutputTokens: 300 },
+          generationConfig: {
+            temperature: 0.7,
+            maxOutputTokens: 512,
+            // 2.5-flash thinks by default and the thoughts consume the token
+            // budget, truncating the reply. This call needs no thinking.
+            thinkingConfig: { thinkingBudget: 0 },
+          },
         }),
         muteHttpExceptions: true,
       }
     );
     if (res.getResponseCode() !== 200) return out({ ok: false, err: "llm http " + res.getResponseCode() });
     var body = JSON.parse(res.getContentText());
-    var text = ((body.candidates || [])[0] || {}).content;
-    text = ((text || {}).parts || [])[0];
-    text = (text || {}).text || "";
+    var parts = (((body.candidates || [])[0] || {}).content || {}).parts || [];
+    var text = parts.map(function (p) { return p.text || ""; }).join("\n");
+    text = text.replace(/```(?:json)?/g, "");
     var m = text.match(/\[[\s\S]*\]/);
     var questions = m ? JSON.parse(m[0]) : null;
     if (!Array.isArray(questions) || questions.length < 2) return out({ ok: false, err: "bad llm output" });
