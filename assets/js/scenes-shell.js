@@ -236,7 +236,7 @@
           followUp: "The other side is doing the same thing right now. You'll never see theirs either.",
         },
       ],
-      target: "#rail-limits [data-limits-confirm]",
+      target: "#shell-main [data-limits-confirm]",
       log: { story_limits_set: "selected" },
       gate: "limits",
     },

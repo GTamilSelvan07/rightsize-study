@@ -82,3 +82,34 @@
   .call-tile,.call-tile.is-speaking{animation:none;transform:none;transition:none}
   .copilot-card,.call-move,.call-caption-line,.call-ended{animation:none;transition:none}
 }
+
+/* ===== Limits card in the work pane + docked rail summary ===== */
+.pane-limits { max-width: 40rem; display: grid; gap: 0.9rem; }
+.pane-limits-head { display: flex; align-items: center; gap: 0.55rem; }
+.pane-limits-head h3 { margin: 0; font-size: 1.15rem; }
+.pane-limits-lock { font-size: 1.15rem; }
+.pane-limits-prompt { margin: 0; color: var(--ph-neutral-600); }
+.pane-limits-group { border: 0; padding: 0; margin: 0; min-width: 0; }
+.pane-limits-group legend { font-weight: 700; font-size: 0.82rem; margin-bottom: 0.4rem; padding: 0; }
+.pane-limits-row { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.pane-limits-pill { display: inline-flex; align-items: center; gap: 0.45rem; min-height: 2.75rem; padding: 0.5rem 0.9rem; border: 1px solid var(--ph-neutral-300); border-radius: var(--ph-radius-full); cursor: pointer; font-size: 0.86rem; background: #fff; }
+.pane-limits-pill:hover { border-color: var(--ph-color-evidence); }
+.pane-limits-pill:has(input:checked) { border-color: var(--ph-color-signal); box-shadow: inset 0 0 0 1.5px var(--ph-color-signal); background: #fbfde9; }
+.pane-limits-pill input { accent-color: var(--ph-color-signal); margin: 0; }
+.pane-limits-confirm { justify-self: end; border: 0; border-radius: var(--ph-radius-full); background: var(--ph-color-signal); color: var(--ph-neutral-950); font: 700 0.9rem var(--ph-font-family-sans); padding: 0.7rem 1.3rem; min-height: 2.75rem; cursor: pointer; }
+.pane-limits-confirm:disabled { opacity: 0.45; cursor: default; }
+.rail-limits-chips { display: grid; gap: 0.45rem; }
+.rail-chip { margin: 0; padding: 0.5rem 0.7rem; border: 1px solid var(--ph-neutral-200); border-radius: 0.6rem; background: #fff; display: grid; gap: 0.1rem; }
+.rail-chip small { color: var(--ph-neutral-500); font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.rail-chip b { font-size: 0.82rem; }
+@media (prefers-reduced-motion: no-preference) {
+  .pane-limits.is-docking { animation: limits-dock 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) forwards; }
+  @keyframes limits-dock { to { opacity: 0; transform: translateX(3rem) scale(0.92); } }
+  .rail-chip.is-flash { animation: chip-flash 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) 2; }
+  @keyframes chip-flash { 0%, 100% { border-color: var(--ph-neutral-200); box-shadow: none; } 40% { border-color: var(--ph-color-human); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ph-color-human) 30%, transparent); } }
+}
+.rail-chip.is-flash { border-color: var(--ph-color-human); }
+@media (width <= 40rem) {
+  .pane-limits { max-width: none; }
+  .pane-limits-confirm { justify-self: stretch; width: 100%; }
+}

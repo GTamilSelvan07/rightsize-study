@@ -502,20 +502,24 @@
   }
 
   function renderLimits(mount) {
-    const rail = railPane("rail-limits");
-    if (!rail) return;
+    // The form lives front and center in the work pane; on confirm it docks
+    // into the assistant rail as a compact locked summary (so the player is
+    // never hunting for controls below the rail's fold).
+    const main = mainPane();
+    if (!main) return;
     const fields = mount.byRole && mount.byRole[state.role];
     if (!Array.isArray(fields) || fields.length === 0) {
       warn("limits had no fields for the selected role");
       return;
     }
-    const staticHeading = query("h2", rail);
-    rail.replaceChildren();
-    if (staticHeading) rail.append(staticHeading);
-    const form = element("form", "rail-limit-group");
-    form.append(element("p", "", resolveText(mount.prompt)));
+    const card = element("section", "pane-artifact pane-limits");
+    card.dataset.limitsCard = "";
+    const head = element("header", "pane-limits-head");
+    head.append(element("span", "pane-limits-lock", "🔒"), element("h3", "", "Your limits"));
+    card.append(head, element("p", "pane-limits-prompt", resolveText(mount.prompt)));
     const selected = {};
-    const confirm = element("button", "", "See the options →");
+    const selectedLabels = {};
+    const confirm = element("button", "pane-limits-confirm", "Lock these in →");
     confirm.type = "button";
     confirm.dataset.limitsConfirm = "";
     confirm.disabled = true;
@@ -523,11 +527,12 @@
       confirm.disabled = fields.some((field) => !selected[field.id]);
     };
     fields.forEach((field) => {
-      const group = element("fieldset", "");
+      const group = element("fieldset", "pane-limits-group");
       group.append(element("legend", "", field.label));
+      const row = element("div", "pane-limits-row");
       field.options.forEach(([id, label]) => {
         const optionId = `shell-${field.id}-${id}`;
-        const line = element("label", "");
+        const line = element("label", "pane-limits-pill");
         const input = document.createElement("input");
         input.type = "radio";
         input.name = field.id;
@@ -535,21 +540,66 @@
         input.id = optionId;
         input.addEventListener("change", () => {
           selected[field.id] = id;
+          selectedLabels[field.id] = label;
           updateConfirm();
         });
         line.htmlFor = optionId;
         line.append(input, document.createTextNode(label));
-        group.append(line);
+        row.append(line);
       });
-      form.append(group);
+      group.append(row);
+      card.append(group);
     });
     confirm.__tourValues = () => fields.map((field) => selected[field.id]).join("|");
-    form.append(element("p", "rail-lock", mount.lockNote), confirm);
-    rail.append(form);
-    const followUp = element("p", "rail-limit-note", mount.followUp);
-    followUp.hidden = true;
-    followUp.dataset.limitsFollowUp = "";
-    rail.append(followUp);
+    confirm.__tourSummary = () =>
+      fields.map((field) => ({ id: field.id, label: field.label, value: selectedLabels[field.id] || "" }));
+    confirm.__tourFollowUp = mount.followUp || "";
+    card.append(element("p", "rail-lock", mount.lockNote), confirm);
+    append(main, card);
+    main.scrollTop = main.scrollHeight;
+  }
+
+  function dockLimitsSummary(confirm) {
+    const rail = railPane("rail-limits");
+    const card = query("#shell-main [data-limits-card]");
+    const summary = typeof confirm.__tourSummary === "function" ? confirm.__tourSummary() : [];
+    if (rail) {
+      const staticHeading = query("h2", rail);
+      rail.replaceChildren();
+      if (staticHeading) rail.append(staticHeading);
+      const box = element("div", "rail-limits-chips");
+      summary.forEach((item) => {
+        const chip = element("p", "rail-chip");
+        chip.dataset.limitChip = item.id;
+        chip.append(element("small", "", item.label), element("b", "", item.value));
+        box.append(chip);
+      });
+      box.append(element("p", "rail-lock", "🔒 Locked to your side. Only you can see these."));
+      if (confirm.__tourFollowUp) {
+        const followUp = element("p", "rail-limit-note", confirm.__tourFollowUp);
+        followUp.dataset.limitsFollowUp = "";
+        box.append(followUp);
+      }
+      append(rail, box);
+      const railHost = document.getElementById("shell-rail");
+      if (railHost) railHost.scrollTop = 0;
+    }
+    if (card) {
+      if (prefersReduced()) {
+        card.remove();
+      } else {
+        card.classList.add("is-docking");
+        window.setTimeout(() => card.remove(), 420);
+      }
+    }
+  }
+
+  function flashLimitChip(id) {
+    const chip = query(`#rail-limits [data-limit-chip="${id}"]`);
+    if (!chip) return;
+    chip.classList.remove("is-flash");
+    void chip.offsetWidth;
+    chip.classList.add("is-flash");
   }
 
   function renderOptions(mount) {
@@ -763,6 +813,7 @@
         if (choice === "promise") {
           promiseCaught = true;
           mountCopilotCard("private", { text: script.promise });
+          flashLimitChip("hard");
           button.disabled = true;
           button.classList.add("is-blocked");
           const lock = element("small", "call-blocked-lock", "🔒");
@@ -1174,20 +1225,19 @@
   }
 
   async function waitForLimits(step) {
-    const confirm = query("#rail-limits [data-limits-confirm]");
+    const confirm = query("#shell-main [data-limits-confirm]");
     if (!confirm) {
       warn("limits gate had no confirmation button; skipped it");
       return;
     }
     highlightTarget(confirm);
-    const firstRadio = query("#rail-limits input[type=radio]");
+    const firstRadio = query("#shell-main [data-limits-card] input[type=radio]");
     if (confirm.disabled && firstRadio) focusSoon(firstRadio);
     await new Promise((resolve) => confirm.addEventListener("click", () => {
       const value = typeof confirm.__tourValues === "function" ? confirm.__tourValues() : "";
       state.flags.limits = value;
       logStepValue(step, value);
-      const note = query("#rail-limits [data-limits-follow-up]");
-      if (note) note.hidden = false;
+      dockLimitsSummary(confirm);
       resolve();
     }, { once: true }));
   }
