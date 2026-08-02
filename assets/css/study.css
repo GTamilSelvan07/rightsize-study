@@ -278,15 +278,19 @@ h3 {
   font-weight: 700;
 }
 
+/* One question per row. Options pack into columns inside the question
+   instead, which keeps labels readable and pages far shorter. */
 .ph-form-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--ph-space-5);
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: var(--ph-space-6);
 }
 
 .ph-field {
   display: grid;
   min-width: 0;
+  align-content: start;
   gap: var(--ph-space-2);
   border: 0;
   margin: 0;
@@ -295,6 +299,28 @@ h3 {
 
 .ph-field-full {
   grid-column: 1 / -1;
+}
+
+/* Free-text and choose-one controls should not stretch the full measure. */
+.ph-input,
+.ph-select {
+  max-width: 24rem;
+}
+
+.opt-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+  gap: var(--ph-space-2);
+}
+
+/* Short answer sets ("2–10", "Daily") pack tightly, even on a phone. */
+.opt-grid[data-w="narrow"] {
+  grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr));
+}
+
+/* Sentence-length options stay one per row so they never read as a wall. */
+.opt-grid[data-w="wide"] {
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .ph-label {
@@ -361,59 +387,33 @@ h3 {
 .ph-check-row {
   position: relative;
   display: flex;
-  min-height: 2.75rem;
+  min-height: 2.5rem;
   align-items: center;
-  gap: var(--ph-space-3);
-  padding: var(--ph-space-3);
+  gap: var(--ph-space-2);
+  padding: 0.5rem 0.625rem;
   border: 0.0625rem solid var(--ph-color-border-decorative);
   border-radius: var(--ph-radius-md);
   background: var(--ph-color-surface-raised);
   box-shadow: 0 0.0625rem 0.125rem rgba(16, 17, 20, 0.03);
   color: var(--ph-color-text-primary);
   cursor: pointer;
+  font-size: 0.9375rem;
+  line-height: 1.3;
 }
 
 .ph-check-row input {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1.125rem;
+  height: 1.125rem;
   flex: none;
-  margin: 0.16rem 0 0;
+  margin: 0;
   accent-color: var(--ph-color-action-primary);
 }
 
-.ph-check-row::after {
-  display: grid;
-  width: 1.25rem;
-  height: 1.25rem;
-  margin-left: auto;
-  place-items: center;
-  border-radius: 50%;
-  background: var(--ph-color-signal);
-  color: var(--ph-color-signal-text);
-  content: "✓";
-  font-size: 0.75rem;
-  font-weight: 700;
-  opacity: 0;
-}
-
-.ph-check-row.is-checked {
-  border-color: var(--ph-color-signal);
-  background: #f8fbe4;
-  box-shadow: inset 0 0 0 0.0625rem var(--ph-color-signal), var(--ph-shadow-low);
-}
-
+.ph-check-row.is-checked,
 .ph-check-row:has(input:checked) {
   border-color: var(--ph-color-signal);
   background: #f8fbe4;
   box-shadow: inset 0 0 0 0.0625rem var(--ph-color-signal), var(--ph-shadow-low);
-}
-
-.ph-check-row.is-checked::after {
-  opacity: 1;
-}
-
-.ph-check-row:has(input:checked)::after {
-  opacity: 1;
 }
 
 .ph-check-row strong {
@@ -937,14 +937,6 @@ h3 {
 }
 
 @media (max-width: 40rem) {
-  .ph-form-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .ph-field-full {
-    grid-column: auto;
-  }
-
   .survey-step > .step-actions {
     position: sticky;
     z-index: 5;

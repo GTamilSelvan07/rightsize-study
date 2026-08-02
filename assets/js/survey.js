@@ -104,6 +104,17 @@
     return control.value.trim() !== "" && control.validity.valid;
   };
 
+  // A missed question can sit two screens above the Continue button, so the
+  // first one always gets scrolled into view rather than silently flagged.
+  const revealFirstError = (section) => {
+    const field = section.querySelector("[aria-invalid='true']");
+    if (!field) {
+      return;
+    }
+    field.scrollIntoView({ block: "center", behavior: motionIsAllowed() ? "smooth" : "auto" });
+    field.focus({ preventScroll: true });
+  };
+
   const validateStep = (section) => {
     let valid = true;
     let customMessage = "";
@@ -137,6 +148,9 @@
     }
 
     setStatus(section, valid ? "" : (customMessage || "Please answer the highlighted questions"));
+    if (!valid) {
+      revealFirstError(section);
+    }
     return valid;
   };
 
@@ -566,10 +580,24 @@
     }
   };
 
+  // Someone who already finished lands straight back on the thank-you page,
+  // so they need a way out if they want to answer again.
+  const restartStudy = async () => {
+    const status = document.querySelector("[data-thanks-status]");
+    status.textContent = "Sending anything still queued, then starting fresh…";
+    await window.Store.reset();
+    location.replace(location.href.split("#")[0]);
+  };
+
   const pulseSavedIndicator = () => {
     if (!savedIndicator) {
       return;
     }
+    // Only claim something is saved once an answer actually exists.
+    if (Object.keys(answers()).length === 0) {
+      return;
+    }
+    savedIndicator.hidden = false;
     savedIndicator.classList.remove("is-pulsing");
     void savedIndicator.offsetWidth;
     savedIndicator.classList.add("is-pulsing");
@@ -593,6 +621,10 @@
     }
     if (event.target.closest("[data-copy-link]")) {
       void copyStudyLink();
+      return;
+    }
+    if (event.target.closest("[data-restart-study]")) {
+      void restartStudy();
     }
   });
 

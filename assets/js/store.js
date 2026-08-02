@@ -330,6 +330,18 @@
     return aiQuestionRequest;
   };
 
+  /** Send anything still queued, then forget this respondent on this device. */
+  const reset = async () => {
+    await flush();
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(LEGACY_STORAGE_KEY);
+    } catch {
+      // Private browsing can refuse writes; the reload still starts clean.
+    }
+    state = createState();
+  };
+
   const submit = async (section, data) => {
     if (state.seq === 0) {
       addToQueue("meta", metaData());
@@ -349,6 +361,7 @@
     persist,
     requestAiQuestions,
     removeAnswers,
+    reset,
     setAnswers,
     setStep,
     submit,

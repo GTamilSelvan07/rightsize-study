@@ -364,14 +364,14 @@
           role="progressbar"
           aria-label="Survey progress"
           aria-valuemin="1"
-          aria-valuemax="11"
+          aria-valuemax="13"
           aria-valuenow="1"
         >
           <span class="progress-fill"></span>
         </div>
         <div class="progress-meta">
           <span class="progress-label">Welcome · Step 1 of 13</span>
-          <span class="saved-indicator" data-saved-indicator aria-hidden="true">Saved on this device ✓</span>
+          <span class="saved-indicator" data-saved-indicator aria-hidden="true" hidden>Saved on this device ✓</span>
         </div>
       </div>
     </div>
@@ -380,7 +380,7 @@
       <section class="survey-step active" data-step="welcome" aria-labelledby="welcome-heading">
         <h1 id="welcome-heading" tabindex="-1">How do meetings actually go where you work?</h1>
         <p class="ph-lede">
-          A 7-minute anonymous study about meetings, decisions, and follow-through. You'll also try a short interactive demo of an early product idea and tell us, honestly, what it would be worth. Nothing here is for sale.
+          An 8-minute anonymous study about meetings, decisions, and follow-through. You'll also try a short interactive demo of an early product idea and tell us, honestly, what it would be worth. Nothing here is for sale.
         </p>
         <ul class="welcome-chips" aria-label="Study details">
           <li>≈8 minutes</li>
@@ -388,7 +388,7 @@
           <li>Interactive demo inside</li>
         </ul>
         <figure class="img-frame">
-          <img src="assets/img/hero.jpg" loading="lazy" decoding="async" alt="Scattered calendar blocks converging into one small block" />
+          <img width="1600" height="914" src="assets/img/hero.jpg" loading="eager" fetchpriority="high" decoding="async" alt="Scattered calendar blocks converging into one small block" />
         </figure>
         <fieldset class="ph-field" data-required data-key="a_consent">
           <legend class="ph-label">Before you start</legend>
@@ -433,26 +433,30 @@
 
           <fieldset class="ph-field" data-required data-key="a_role">
             <legend class="ph-label">Your role</legend>
-            <label class="ph-check-row"><input type="radio" name="a_role" value="Founder or executive" /><span>Founder or executive</span></label>
-            <label class="ph-check-row"><input type="radio" name="a_role" value="Product" /><span>Product</span></label>
-            <label class="ph-check-row"><input type="radio" name="a_role" value="Engineering" /><span>Engineering</span></label>
-            <label class="ph-check-row"><input type="radio" name="a_role" value="Design" /><span>Design</span></label>
-            <label class="ph-check-row"><input type="radio" name="a_role" value="Project or delivery lead" /><span>Project or delivery lead</span></label>
-            <label class="ph-check-row"><input type="radio" name="a_role" value="Sales or account management" /><span>Sales or account management</span></label>
-            <label class="ph-check-row"><input type="radio" name="a_role" value="Consultant or agency work" /><span>Consultant or agency work</span></label>
-            <label class="ph-check-row"><input type="radio" name="a_role" value="Operations" /><span>Operations</span></label>
-            <label class="ph-check-row"><input type="radio" name="a_role" value="Finance or legal" /><span>Finance or legal</span></label>
-            <label class="ph-check-row"><input type="radio" name="a_role" value="Other" /><span>Other</span></label>
+            <div class="opt-grid">
+              <label class="ph-check-row"><input type="radio" name="a_role" value="Founder or executive" /><span>Founder or executive</span></label>
+              <label class="ph-check-row"><input type="radio" name="a_role" value="Product" /><span>Product</span></label>
+              <label class="ph-check-row"><input type="radio" name="a_role" value="Engineering" /><span>Engineering</span></label>
+              <label class="ph-check-row"><input type="radio" name="a_role" value="Design" /><span>Design</span></label>
+              <label class="ph-check-row"><input type="radio" name="a_role" value="Project or delivery lead" /><span>Project or delivery lead</span></label>
+              <label class="ph-check-row"><input type="radio" name="a_role" value="Sales or account management" /><span>Sales or account management</span></label>
+              <label class="ph-check-row"><input type="radio" name="a_role" value="Consultant or agency work" /><span>Consultant or agency work</span></label>
+              <label class="ph-check-row"><input type="radio" name="a_role" value="Operations" /><span>Operations</span></label>
+              <label class="ph-check-row"><input type="radio" name="a_role" value="Finance or legal" /><span>Finance or legal</span></label>
+              <label class="ph-check-row"><input type="radio" name="a_role" value="Other" /><span>Other</span></label>
+            </div>
           </fieldset>
 
           <fieldset class="ph-field" data-required data-key="a_company_size">
             <legend class="ph-label">Company size</legend>
-            <label class="ph-check-row"><input type="radio" name="a_company_size" value="Just me" /><span>Just me</span></label>
-            <label class="ph-check-row"><input type="radio" name="a_company_size" value="2–10" /><span>2–10</span></label>
-            <label class="ph-check-row"><input type="radio" name="a_company_size" value="11–50" /><span>11–50</span></label>
-            <label class="ph-check-row"><input type="radio" name="a_company_size" value="51–200" /><span>51–200</span></label>
-            <label class="ph-check-row"><input type="radio" name="a_company_size" value="201–1,000" /><span>201–1,000</span></label>
-            <label class="ph-check-row"><input type="radio" name="a_company_size" value="More than 1,000" /><span>More than 1,000</span></label>
+            <div class="opt-grid" data-w="narrow">
+              <label class="ph-check-row"><input type="radio" name="a_company_size" value="Just me" /><span>Just me</span></label>
+              <label class="ph-check-row"><input type="radio" name="a_company_size" value="2–10" /><span>2–10</span></label>
+              <label class="ph-check-row"><input type="radio" name="a_company_size" value="11–50" /><span>11–50</span></label>
+              <label class="ph-check-row"><input type="radio" name="a_company_size" value="51–200" /><span>51–200</span></label>
+              <label class="ph-check-row"><input type="radio" name="a_company_size" value="201–1,000" /><span>201–1,000</span></label>
+              <label class="ph-check-row"><input type="radio" name="a_company_size" value="More than 1,000" /><span>More than 1,000</span></label>
+            </div>
           </fieldset>
 
           <div class="ph-field" data-required data-key="a_industry">
@@ -474,34 +478,42 @@
 
           <fieldset class="ph-field" data-required data-key="a_experience_years">
             <legend class="ph-label">How many years have you been doing this kind of work?</legend>
-            <label class="ph-check-row"><input type="radio" name="a_experience_years" value="Under 2" /><span>Under 2</span></label>
-            <label class="ph-check-row"><input type="radio" name="a_experience_years" value="2–5" /><span>2–5</span></label>
-            <label class="ph-check-row"><input type="radio" name="a_experience_years" value="6–10" /><span>6–10</span></label>
-            <label class="ph-check-row"><input type="radio" name="a_experience_years" value="11–20" /><span>11–20</span></label>
-            <label class="ph-check-row"><input type="radio" name="a_experience_years" value="More than 20" /><span>More than 20</span></label>
+            <div class="opt-grid" data-w="narrow">
+              <label class="ph-check-row"><input type="radio" name="a_experience_years" value="Under 2" /><span>Under 2</span></label>
+              <label class="ph-check-row"><input type="radio" name="a_experience_years" value="2–5" /><span>2–5</span></label>
+              <label class="ph-check-row"><input type="radio" name="a_experience_years" value="6–10" /><span>6–10</span></label>
+              <label class="ph-check-row"><input type="radio" name="a_experience_years" value="11–20" /><span>11–20</span></label>
+              <label class="ph-check-row"><input type="radio" name="a_experience_years" value="More than 20" /><span>More than 20</span></label>
+            </div>
           </fieldset>
 
           <fieldset class="ph-field" data-required data-key="a_work_mode">
             <legend class="ph-label">How does your team mostly work?</legend>
-            <label class="ph-check-row"><input type="radio" name="a_work_mode" value="Mostly remote" /><span>Mostly remote</span></label>
-            <label class="ph-check-row"><input type="radio" name="a_work_mode" value="Hybrid" /><span>Hybrid</span></label>
-            <label class="ph-check-row"><input type="radio" name="a_work_mode" value="Mostly in an office" /><span>Mostly in an office</span></label>
+            <div class="opt-grid">
+              <label class="ph-check-row"><input type="radio" name="a_work_mode" value="Mostly remote" /><span>Mostly remote</span></label>
+              <label class="ph-check-row"><input type="radio" name="a_work_mode" value="Hybrid" /><span>Hybrid</span></label>
+              <label class="ph-check-row"><input type="radio" name="a_work_mode" value="Mostly in an office" /><span>Mostly in an office</span></label>
+            </div>
           </fieldset>
 
           <fieldset class="ph-field ph-field-full" data-required data-key="a_client_facing">
             <legend class="ph-label">Do you work directly with external clients on projects — agency, consultancy, freelance, or professional services?</legend>
-            <label class="ph-check-row"><input type="radio" name="a_client_facing" value="yes_mostly" /><span>Yes, that's most of my work</span></label>
-            <label class="ph-check-row"><input type="radio" name="a_client_facing" value="sometimes" /><span>Sometimes</span></label>
-            <label class="ph-check-row"><input type="radio" name="a_client_facing" value="no" /><span>No</span></label>
+            <div class="opt-grid">
+              <label class="ph-check-row"><input type="radio" name="a_client_facing" value="yes_mostly" /><span>Yes, that's most of my work</span></label>
+              <label class="ph-check-row"><input type="radio" name="a_client_facing" value="sometimes" /><span>Sometimes</span></label>
+              <label class="ph-check-row"><input type="radio" name="a_client_facing" value="no" /><span>No</span></label>
+            </div>
           </fieldset>
 
           <fieldset class="ph-field" data-required data-key="a_meetings_week">
             <legend class="ph-label">Meetings you attend in a typical week</legend>
-            <label class="ph-check-row"><input type="radio" name="a_meetings_week" value="0–2" /><span>0–2</span></label>
-            <label class="ph-check-row"><input type="radio" name="a_meetings_week" value="3–5" /><span>3–5</span></label>
-            <label class="ph-check-row"><input type="radio" name="a_meetings_week" value="6–10" /><span>6–10</span></label>
-            <label class="ph-check-row"><input type="radio" name="a_meetings_week" value="11–20" /><span>11–20</span></label>
-            <label class="ph-check-row"><input type="radio" name="a_meetings_week" value="More than 20" /><span>More than 20</span></label>
+            <div class="opt-grid" data-w="narrow">
+              <label class="ph-check-row"><input type="radio" name="a_meetings_week" value="0–2" /><span>0–2</span></label>
+              <label class="ph-check-row"><input type="radio" name="a_meetings_week" value="3–5" /><span>3–5</span></label>
+              <label class="ph-check-row"><input type="radio" name="a_meetings_week" value="6–10" /><span>6–10</span></label>
+              <label class="ph-check-row"><input type="radio" name="a_meetings_week" value="11–20" /><span>11–20</span></label>
+              <label class="ph-check-row"><input type="radio" name="a_meetings_week" value="More than 20" /><span>More than 20</span></label>
+            </div>
           </fieldset>
         </div>
         <p class="status-line" data-status aria-live="polite"></p>
@@ -514,50 +526,60 @@
         <div class="ph-form-grid">
           <fieldset class="ph-field" data-required data-key="a_team_size">
             <legend class="ph-label">How big is your immediate team?</legend>
-            <label class="ph-check-row"><input type="radio" name="a_team_size" value="Just me" /><span>Just me</span></label>
-            <label class="ph-check-row"><input type="radio" name="a_team_size" value="2–5" /><span>2–5</span></label>
-            <label class="ph-check-row"><input type="radio" name="a_team_size" value="6–15" /><span>6–15</span></label>
-            <label class="ph-check-row"><input type="radio" name="a_team_size" value="16–50" /><span>16–50</span></label>
-            <label class="ph-check-row"><input type="radio" name="a_team_size" value="More than 50" /><span>More than 50</span></label>
+            <div class="opt-grid" data-w="narrow">
+              <label class="ph-check-row"><input type="radio" name="a_team_size" value="Just me" /><span>Just me</span></label>
+              <label class="ph-check-row"><input type="radio" name="a_team_size" value="2–5" /><span>2–5</span></label>
+              <label class="ph-check-row"><input type="radio" name="a_team_size" value="6–15" /><span>6–15</span></label>
+              <label class="ph-check-row"><input type="radio" name="a_team_size" value="16–50" /><span>16–50</span></label>
+              <label class="ph-check-row"><input type="radio" name="a_team_size" value="More than 50" /><span>More than 50</span></label>
+            </div>
           </fieldset>
 
           <fieldset class="ph-field" data-required data-key="a_decision_authority">
             <legend class="ph-label">When it comes to buying tools for your team, you…</legend>
-            <label class="ph-check-row"><input type="radio" name="a_decision_authority" value="own" /><span>Own the budget</span></label>
-            <label class="ph-check-row"><input type="radio" name="a_decision_authority" value="influence" /><span>Recommend and influence the choice</span></label>
-            <label class="ph-check-row"><input type="radio" name="a_decision_authority" value="provided" /><span>Use what's provided</span></label>
+            <div class="opt-grid" data-w="wide">
+              <label class="ph-check-row"><input type="radio" name="a_decision_authority" value="own" /><span>Own the budget</span></label>
+              <label class="ph-check-row"><input type="radio" name="a_decision_authority" value="influence" /><span>Recommend and influence the choice</span></label>
+              <label class="ph-check-row"><input type="radio" name="a_decision_authority" value="provided" /><span>Use what's provided</span></label>
+            </div>
           </fieldset>
 
           <fieldset class="ph-field ph-field-full" data-required data-key="a2_pm_tools">
             <legend class="ph-label">Where does your team's work actually live? (all that apply)</legend>
-            <label class="ph-check-row"><input type="checkbox" name="a2_pm_tools" value="Jira" /><span>Jira</span></label>
-            <label class="ph-check-row"><input type="checkbox" name="a2_pm_tools" value="Linear" /><span>Linear</span></label>
-            <label class="ph-check-row"><input type="checkbox" name="a2_pm_tools" value="Asana" /><span>Asana</span></label>
-            <label class="ph-check-row"><input type="checkbox" name="a2_pm_tools" value="ClickUp" /><span>ClickUp</span></label>
-            <label class="ph-check-row"><input type="checkbox" name="a2_pm_tools" value="Trello" /><span>Trello</span></label>
-            <label class="ph-check-row"><input type="checkbox" name="a2_pm_tools" value="Monday" /><span>Monday</span></label>
-            <label class="ph-check-row"><input type="checkbox" name="a2_pm_tools" value="Notion" /><span>Notion</span></label>
-            <label class="ph-check-row"><input type="checkbox" name="a2_pm_tools" value="Spreadsheets" /><span>Spreadsheets</span></label>
-            <label class="ph-check-row"><input type="checkbox" name="a2_pm_tools" value="Other" /><span>Other</span></label>
-            <label class="ph-check-row"><input type="checkbox" name="a2_pm_tools" value="none" /><span>No shared tracker</span></label>
+            <div class="opt-grid">
+              <label class="ph-check-row"><input type="checkbox" name="a2_pm_tools" value="Jira" /><span>Jira</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="a2_pm_tools" value="Linear" /><span>Linear</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="a2_pm_tools" value="Asana" /><span>Asana</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="a2_pm_tools" value="ClickUp" /><span>ClickUp</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="a2_pm_tools" value="Trello" /><span>Trello</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="a2_pm_tools" value="Monday" /><span>Monday</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="a2_pm_tools" value="Notion" /><span>Notion</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="a2_pm_tools" value="Spreadsheets" /><span>Spreadsheets</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="a2_pm_tools" value="Other" /><span>Other</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="a2_pm_tools" value="none" /><span>No shared tracker</span></label>
+            </div>
           </fieldset>
 
           <fieldset class="ph-field ph-field-full" data-required data-key="a2_meeting_platform">
             <legend class="ph-label">Which meeting tools do you use most? (all that apply)</legend>
-            <label class="ph-check-row"><input type="checkbox" name="a2_meeting_platform" value="Zoom" /><span>Zoom</span></label>
-            <label class="ph-check-row"><input type="checkbox" name="a2_meeting_platform" value="Google Meet" /><span>Google Meet</span></label>
-            <label class="ph-check-row"><input type="checkbox" name="a2_meeting_platform" value="Microsoft Teams" /><span>Microsoft Teams</span></label>
-            <label class="ph-check-row"><input type="checkbox" name="a2_meeting_platform" value="Slack huddles" /><span>Slack huddles</span></label>
-            <label class="ph-check-row"><input type="checkbox" name="a2_meeting_platform" value="Mostly in person" /><span>Mostly in person</span></label>
-            <label class="ph-check-row"><input type="checkbox" name="a2_meeting_platform" value="Other" /><span>Other</span></label>
+            <div class="opt-grid" data-w="narrow">
+              <label class="ph-check-row"><input type="checkbox" name="a2_meeting_platform" value="Zoom" /><span>Zoom</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="a2_meeting_platform" value="Google Meet" /><span>Google Meet</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="a2_meeting_platform" value="Microsoft Teams" /><span>Microsoft Teams</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="a2_meeting_platform" value="Slack huddles" /><span>Slack huddles</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="a2_meeting_platform" value="Mostly in person" /><span>Mostly in person</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="a2_meeting_platform" value="Other" /><span>Other</span></label>
+            </div>
           </fieldset>
 
           <fieldset class="ph-field" data-required data-key="a2_who_runs_meetings">
             <legend class="ph-label">Who usually runs the meetings you attend?</legend>
-            <label class="ph-check-row"><input type="radio" name="a2_who_runs_meetings" value="I run most of them" /><span>I run most of them</span></label>
-            <label class="ph-check-row"><input type="radio" name="a2_who_runs_meetings" value="A teammate or manager" /><span>A teammate or manager</span></label>
-            <label class="ph-check-row"><input type="radio" name="a2_who_runs_meetings" value="Rotates — no one really owns it" /><span>Rotates — no one really owns it</span></label>
-            <label class="ph-check-row"><input type="radio" name="a2_who_runs_meetings" value="Depends entirely" /><span>Depends entirely</span></label>
+            <div class="opt-grid">
+              <label class="ph-check-row"><input type="radio" name="a2_who_runs_meetings" value="I run most of them" /><span>I run most of them</span></label>
+              <label class="ph-check-row"><input type="radio" name="a2_who_runs_meetings" value="A teammate or manager" /><span>A teammate or manager</span></label>
+              <label class="ph-check-row"><input type="radio" name="a2_who_runs_meetings" value="Rotates — no one really owns it" /><span>Rotates — no one really owns it</span></label>
+              <label class="ph-check-row"><input type="radio" name="a2_who_runs_meetings" value="Depends entirely" /><span>Depends entirely</span></label>
+            </div>
           </fieldset>
         </div>
         <p class="status-line" data-status aria-live="polite"></p>
@@ -570,43 +592,51 @@
         <div class="ph-form-grid">
           <fieldset class="ph-field" data-required data-key="b_tools">
             <legend class="ph-label">Which AI tools do you use?</legend>
-            <label class="ph-check-row"><input type="checkbox" name="b_tools" value="ChatGPT" /><span>ChatGPT</span></label>
-            <label class="ph-check-row"><input type="checkbox" name="b_tools" value="Claude" /><span>Claude</span></label>
-            <label class="ph-check-row"><input type="checkbox" name="b_tools" value="Microsoft Copilot" /><span>Microsoft Copilot</span></label>
-            <label class="ph-check-row"><input type="checkbox" name="b_tools" value="Google Gemini" /><span>Google Gemini</span></label>
-            <label class="ph-check-row"><input type="checkbox" name="b_tools" value="notetaker" /><span>Meeting note-takers (Otter, Fireflies, Fathom, Zoom AI…)</span></label>
-            <label class="ph-check-row"><input type="checkbox" name="b_tools" value="Other" /><span>Other</span></label>
-            <label class="ph-check-row"><input type="checkbox" name="b_tools" value="none" /><span>I don't use AI tools</span></label>
+            <div class="opt-grid" data-w="wide">
+              <label class="ph-check-row"><input type="checkbox" name="b_tools" value="ChatGPT" /><span>ChatGPT</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="b_tools" value="Claude" /><span>Claude</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="b_tools" value="Microsoft Copilot" /><span>Microsoft Copilot</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="b_tools" value="Google Gemini" /><span>Google Gemini</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="b_tools" value="notetaker" /><span>Meeting note-takers (Otter, Fireflies, Fathom, Zoom AI…)</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="b_tools" value="Other" /><span>Other</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="b_tools" value="none" /><span>I don't use AI tools</span></label>
+            </div>
           </fieldset>
 
           <fieldset class="ph-field" data-required data-key="b_freq">
             <legend class="ph-label">How often do you use AI at work?</legend>
-            <label class="ph-check-row"><input type="radio" name="b_freq" value="Daily" /><span>Daily</span></label>
-            <label class="ph-check-row"><input type="radio" name="b_freq" value="A few times a week" /><span>A few times a week</span></label>
-            <label class="ph-check-row"><input type="radio" name="b_freq" value="A few times a month" /><span>A few times a month</span></label>
-            <label class="ph-check-row"><input type="radio" name="b_freq" value="Rarely" /><span>Rarely</span></label>
-            <label class="ph-check-row"><input type="radio" name="b_freq" value="Never" /><span>Never</span></label>
+            <div class="opt-grid">
+              <label class="ph-check-row"><input type="radio" name="b_freq" value="Daily" /><span>Daily</span></label>
+              <label class="ph-check-row"><input type="radio" name="b_freq" value="A few times a week" /><span>A few times a week</span></label>
+              <label class="ph-check-row"><input type="radio" name="b_freq" value="A few times a month" /><span>A few times a month</span></label>
+              <label class="ph-check-row"><input type="radio" name="b_freq" value="Rarely" /><span>Rarely</span></label>
+              <label class="ph-check-row"><input type="radio" name="b_freq" value="Never" /><span>Never</span></label>
+            </div>
           </fieldset>
 
           <fieldset class="ph-field" data-required data-optional-when-tools-none data-key="b_uses">
             <legend class="ph-label">What do you use it for?</legend>
-            <label class="ph-check-row"><input type="checkbox" name="b_uses" value="Writing" /><span>Writing</span></label>
-            <label class="ph-check-row"><input type="checkbox" name="b_uses" value="Research" /><span>Research</span></label>
-            <label class="ph-check-row"><input type="checkbox" name="b_uses" value="Coding" /><span>Coding</span></label>
-            <label class="ph-check-row"><input type="checkbox" name="b_uses" value="Meeting summaries" /><span>Meeting summaries</span></label>
-            <label class="ph-check-row"><input type="checkbox" name="b_uses" value="Planning" /><span>Planning</span></label>
-            <label class="ph-check-row"><input type="checkbox" name="b_uses" value="Working with data" /><span>Working with data</span></label>
-            <label class="ph-check-row"><input type="checkbox" name="b_uses" value="Customer messages" /><span>Customer messages</span></label>
-            <label class="ph-check-row"><input type="checkbox" name="b_uses" value="Other" /><span>Other</span></label>
+            <div class="opt-grid">
+              <label class="ph-check-row"><input type="checkbox" name="b_uses" value="Writing" /><span>Writing</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="b_uses" value="Research" /><span>Research</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="b_uses" value="Coding" /><span>Coding</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="b_uses" value="Meeting summaries" /><span>Meeting summaries</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="b_uses" value="Planning" /><span>Planning</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="b_uses" value="Working with data" /><span>Working with data</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="b_uses" value="Customer messages" /><span>Customer messages</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="b_uses" value="Other" /><span>Other</span></label>
+            </div>
           </fieldset>
 
           <fieldset class="ph-field" data-required data-key="b_notes_followup">
             <legend class="ph-label">When AI writes your meeting notes, what actually happens afterwards?</legend>
-            <label class="ph-check-row"><input type="radio" name="b_notes_followup" value="I rarely read them" /><span>I rarely read them</span></label>
-            <label class="ph-check-row"><input type="radio" name="b_notes_followup" value="I read them, but follow-up doesn't change" /><span>I read them, but follow-up doesn't change</span></label>
-            <label class="ph-check-row"><input type="radio" name="b_notes_followup" value="They sometimes help follow-up" /><span>They sometimes help follow-up</span></label>
-            <label class="ph-check-row"><input type="radio" name="b_notes_followup" value="They reliably change what happens next" /><span>They reliably change what happens next</span></label>
-            <label class="ph-check-row"><input type="radio" name="b_notes_followup" value="I don't use AI notes" /><span>I don't use AI notes</span></label>
+            <div class="opt-grid" data-w="wide">
+              <label class="ph-check-row"><input type="radio" name="b_notes_followup" value="I rarely read them" /><span>I rarely read them</span></label>
+              <label class="ph-check-row"><input type="radio" name="b_notes_followup" value="I read them, but follow-up doesn't change" /><span>I read them, but follow-up doesn't change</span></label>
+              <label class="ph-check-row"><input type="radio" name="b_notes_followup" value="They sometimes help follow-up" /><span>They sometimes help follow-up</span></label>
+              <label class="ph-check-row"><input type="radio" name="b_notes_followup" value="They reliably change what happens next" /><span>They reliably change what happens next</span></label>
+              <label class="ph-check-row"><input type="radio" name="b_notes_followup" value="I don't use AI notes" /><span>I don't use AI notes</span></label>
+            </div>
           </fieldset>
         </div>
         <p class="status-line" data-status aria-live="polite"></p>
@@ -619,28 +649,34 @@
         <div class="ph-form-grid">
           <fieldset class="ph-field" data-required data-key="c_email_meetings">
             <legend class="ph-label">In a normal week, how many of your meetings could have been an email or a short message?</legend>
-            <label class="ph-check-row"><input type="radio" name="c_email_meetings" value="None" /><span>None</span></label>
-            <label class="ph-check-row"><input type="radio" name="c_email_meetings" value="1" /><span>1</span></label>
-            <label class="ph-check-row"><input type="radio" name="c_email_meetings" value="2–3" /><span>2–3</span></label>
-            <label class="ph-check-row"><input type="radio" name="c_email_meetings" value="4–6" /><span>4–6</span></label>
-            <label class="ph-check-row"><input type="radio" name="c_email_meetings" value="7 or more" /><span>7 or more</span></label>
+            <div class="opt-grid" data-w="narrow">
+              <label class="ph-check-row"><input type="radio" name="c_email_meetings" value="None" /><span>None</span></label>
+              <label class="ph-check-row"><input type="radio" name="c_email_meetings" value="1" /><span>1</span></label>
+              <label class="ph-check-row"><input type="radio" name="c_email_meetings" value="2–3" /><span>2–3</span></label>
+              <label class="ph-check-row"><input type="radio" name="c_email_meetings" value="4–6" /><span>4–6</span></label>
+              <label class="ph-check-row"><input type="radio" name="c_email_meetings" value="7 or more" /><span>7 or more</span></label>
+            </div>
           </fieldset>
 
           <fieldset class="ph-field" data-required data-key="c_decision_misremember">
             <legend class="ph-label">When did you last discover that people remembered a decision differently after a meeting?</legend>
-            <label class="ph-check-row"><input type="radio" name="c_decision_misremember" value="This week" /><span>This week</span></label>
-            <label class="ph-check-row"><input type="radio" name="c_decision_misremember" value="This month" /><span>This month</span></label>
-            <label class="ph-check-row"><input type="radio" name="c_decision_misremember" value="In the past few months" /><span>In the past few months</span></label>
-            <label class="ph-check-row"><input type="radio" name="c_decision_misremember" value="Can't remember a case" /><span>Can't remember a case</span></label>
+            <div class="opt-grid">
+              <label class="ph-check-row"><input type="radio" name="c_decision_misremember" value="This week" /><span>This week</span></label>
+              <label class="ph-check-row"><input type="radio" name="c_decision_misremember" value="This month" /><span>This month</span></label>
+              <label class="ph-check-row"><input type="radio" name="c_decision_misremember" value="In the past few months" /><span>In the past few months</span></label>
+              <label class="ph-check-row"><input type="radio" name="c_decision_misremember" value="Can't remember a case" /><span>Can't remember a case</span></label>
+            </div>
           </fieldset>
 
           <fieldset class="ph-field" data-required data-key="c_lost_actions">
             <legend class="ph-label">How often do action items get lost after meetings — done by nobody, or ownership unclear?</legend>
-            <label class="ph-check-row"><input type="radio" name="c_lost_actions" value="Almost never" /><span>Almost never</span></label>
-            <label class="ph-check-row"><input type="radio" name="c_lost_actions" value="Occasionally" /><span>Occasionally</span></label>
-            <label class="ph-check-row"><input type="radio" name="c_lost_actions" value="Monthly" /><span>Monthly</span></label>
-            <label class="ph-check-row"><input type="radio" name="c_lost_actions" value="Weekly" /><span>Weekly</span></label>
-            <label class="ph-check-row"><input type="radio" name="c_lost_actions" value="Most meetings" /><span>Most meetings</span></label>
+            <div class="opt-grid" data-w="narrow">
+              <label class="ph-check-row"><input type="radio" name="c_lost_actions" value="Almost never" /><span>Almost never</span></label>
+              <label class="ph-check-row"><input type="radio" name="c_lost_actions" value="Occasionally" /><span>Occasionally</span></label>
+              <label class="ph-check-row"><input type="radio" name="c_lost_actions" value="Monthly" /><span>Monthly</span></label>
+              <label class="ph-check-row"><input type="radio" name="c_lost_actions" value="Weekly" /><span>Weekly</span></label>
+              <label class="ph-check-row"><input type="radio" name="c_lost_actions" value="Most meetings" /><span>Most meetings</span></label>
+            </div>
           </fieldset>
 
           <div class="ph-field ph-field-full" data-key="c_worst_meeting">
@@ -658,53 +694,63 @@
         <div class="ph-form-grid">
           <fieldset class="ph-field ph-field-full" data-required data-key="c2_incident_when">
             <legend class="ph-label">When did this happen?</legend>
-            <label class="ph-check-row"><input type="radio" name="c2_incident_when" value="This week" /><span>This week</span></label>
-            <label class="ph-check-row"><input type="radio" name="c2_incident_when" value="This month" /><span>This month</span></label>
-            <label class="ph-check-row"><input type="radio" name="c2_incident_when" value="In the past 3 months" /><span>In the past 3 months</span></label>
-            <label class="ph-check-row"><input type="radio" name="c2_incident_when" value="Longer ago" /><span>Longer ago</span></label>
-            <label class="ph-check-row"><input type="radio" name="c2_incident_when" value="never" /><span>This doesn't really happen to me</span></label>
+            <div class="opt-grid">
+              <label class="ph-check-row"><input type="radio" name="c2_incident_when" value="This week" /><span>This week</span></label>
+              <label class="ph-check-row"><input type="radio" name="c2_incident_when" value="This month" /><span>This month</span></label>
+              <label class="ph-check-row"><input type="radio" name="c2_incident_when" value="In the past 3 months" /><span>In the past 3 months</span></label>
+              <label class="ph-check-row"><input type="radio" name="c2_incident_when" value="Longer ago" /><span>Longer ago</span></label>
+              <label class="ph-check-row"><input type="radio" name="c2_incident_when" value="never" /><span>This doesn't really happen to me</span></label>
+            </div>
           </fieldset>
 
           <div class="conditional ph-form-grid ph-field-full" data-c2-follow-up>
             <fieldset class="ph-field" data-required data-key="c2_arrived_where">
               <legend class="ph-label">Where did the request arrive?</legend>
-              <label class="ph-check-row"><input type="radio" name="c2_arrived_where" value="In a meeting or call" /><span>In a meeting or call</span></label>
-              <label class="ph-check-row"><input type="radio" name="c2_arrived_where" value="Email" /><span>Email</span></label>
-              <label class="ph-check-row"><input type="radio" name="c2_arrived_where" value="Slack or Teams" /><span>Slack or Teams</span></label>
-              <label class="ph-check-row"><input type="radio" name="c2_arrived_where" value="A ticket or task tool" /><span>A ticket or task tool</span></label>
-              <label class="ph-check-row"><input type="radio" name="c2_arrived_where" value="A comment in a document" /><span>A comment in a document</span></label>
-              <label class="ph-check-row"><input type="radio" name="c2_arrived_where" value="In person" /><span>In person</span></label>
-              <label class="ph-check-row"><input type="radio" name="c2_arrived_where" value="Other" /><span>Other</span></label>
+              <div class="opt-grid">
+                <label class="ph-check-row"><input type="radio" name="c2_arrived_where" value="In a meeting or call" /><span>In a meeting or call</span></label>
+                <label class="ph-check-row"><input type="radio" name="c2_arrived_where" value="Email" /><span>Email</span></label>
+                <label class="ph-check-row"><input type="radio" name="c2_arrived_where" value="Slack or Teams" /><span>Slack or Teams</span></label>
+                <label class="ph-check-row"><input type="radio" name="c2_arrived_where" value="A ticket or task tool" /><span>A ticket or task tool</span></label>
+                <label class="ph-check-row"><input type="radio" name="c2_arrived_where" value="A comment in a document" /><span>A comment in a document</span></label>
+                <label class="ph-check-row"><input type="radio" name="c2_arrived_where" value="In person" /><span>In person</span></label>
+                <label class="ph-check-row"><input type="radio" name="c2_arrived_where" value="Other" /><span>Other</span></label>
+              </div>
             </fieldset>
 
             <fieldset class="ph-field" data-required data-key="c2_resolve_time">
               <legend class="ph-label">How long until it was properly settled — everyone agreed what would be done, by when, for what price?</legend>
-              <label class="ph-check-row"><input type="radio" name="c2_resolve_time" value="Same day" /><span>Same day</span></label>
-              <label class="ph-check-row"><input type="radio" name="c2_resolve_time" value="2–3 days" /><span>2–3 days</span></label>
-              <label class="ph-check-row"><input type="radio" name="c2_resolve_time" value="About a week" /><span>About a week</span></label>
-              <label class="ph-check-row"><input type="radio" name="c2_resolve_time" value="Two weeks or more" /><span>Two weeks or more</span></label>
-              <label class="ph-check-row"><input type="radio" name="c2_resolve_time" value="It still isn't settled" /><span>It still isn't settled</span></label>
+              <div class="opt-grid">
+                <label class="ph-check-row"><input type="radio" name="c2_resolve_time" value="Same day" /><span>Same day</span></label>
+                <label class="ph-check-row"><input type="radio" name="c2_resolve_time" value="2–3 days" /><span>2–3 days</span></label>
+                <label class="ph-check-row"><input type="radio" name="c2_resolve_time" value="About a week" /><span>About a week</span></label>
+                <label class="ph-check-row"><input type="radio" name="c2_resolve_time" value="Two weeks or more" /><span>Two weeks or more</span></label>
+                <label class="ph-check-row"><input type="radio" name="c2_resolve_time" value="It still isn't settled" /><span>It still isn't settled</span></label>
+              </div>
             </fieldset>
 
             <fieldset class="ph-field" data-required data-key="c2_costs">
               <legend class="ph-label">What did it cost you? (pick all that apply)</legend>
-              <label class="ph-check-row"><input type="checkbox" name="c2_costs" value="Extra work we couldn't bill" /><span>Extra work we couldn't bill</span></label>
-              <label class="ph-check-row"><input type="checkbox" name="c2_costs" value="A missed deadline" /><span>A missed deadline</span></label>
-              <label class="ph-check-row"><input type="checkbox" name="c2_costs" value="A discount or price cut" /><span>A discount or price cut</span></label>
-              <label class="ph-check-row"><input type="checkbox" name="c2_costs" value="Team overtime or stress" /><span>Team overtime or stress</span></label>
-              <label class="ph-check-row"><input type="checkbox" name="c2_costs" value="A strained relationship" /><span>A strained relationship</span></label>
-              <label class="ph-check-row"><input type="checkbox" name="c2_costs" value="An argument about who agreed to what" /><span>An argument about who agreed to what</span></label>
-              <label class="ph-check-row"><input type="checkbox" name="c2_costs" value="Nothing much" /><span>Nothing much</span></label>
+              <div class="opt-grid" data-w="wide">
+                <label class="ph-check-row"><input type="checkbox" name="c2_costs" value="Extra work we couldn't bill" /><span>Extra work we couldn't bill</span></label>
+                <label class="ph-check-row"><input type="checkbox" name="c2_costs" value="A missed deadline" /><span>A missed deadline</span></label>
+                <label class="ph-check-row"><input type="checkbox" name="c2_costs" value="A discount or price cut" /><span>A discount or price cut</span></label>
+                <label class="ph-check-row"><input type="checkbox" name="c2_costs" value="Team overtime or stress" /><span>Team overtime or stress</span></label>
+                <label class="ph-check-row"><input type="checkbox" name="c2_costs" value="A strained relationship" /><span>A strained relationship</span></label>
+                <label class="ph-check-row"><input type="checkbox" name="c2_costs" value="An argument about who agreed to what" /><span>An argument about who agreed to what</span></label>
+                <label class="ph-check-row"><input type="checkbox" name="c2_costs" value="Nothing much" /><span>Nothing much</span></label>
+              </div>
             </fieldset>
 
             <fieldset class="ph-field" data-required data-key="c2_cost_money">
               <legend class="ph-label">Rough money impact of that one incident?</legend>
-              <label class="ph-check-row"><input type="radio" name="c2_cost_money" value="Nothing" /><span>Nothing</span></label>
-              <label class="ph-check-row"><input type="radio" name="c2_cost_money" value="Under $500" /><span>Under $500</span></label>
-              <label class="ph-check-row"><input type="radio" name="c2_cost_money" value="$500–2,000" /><span>$500–2,000</span></label>
-              <label class="ph-check-row"><input type="radio" name="c2_cost_money" value="$2,000–10,000" /><span>$2,000–10,000</span></label>
-              <label class="ph-check-row"><input type="radio" name="c2_cost_money" value="Over $10,000" /><span>Over $10,000</span></label>
-              <label class="ph-check-row"><input type="radio" name="c2_cost_money" value="Can't estimate" /><span>Can't estimate</span></label>
+              <div class="opt-grid" data-w="narrow">
+                <label class="ph-check-row"><input type="radio" name="c2_cost_money" value="Nothing" /><span>Nothing</span></label>
+                <label class="ph-check-row"><input type="radio" name="c2_cost_money" value="Under $500" /><span>Under $500</span></label>
+                <label class="ph-check-row"><input type="radio" name="c2_cost_money" value="$500–2,000" /><span>$500–2,000</span></label>
+                <label class="ph-check-row"><input type="radio" name="c2_cost_money" value="$2,000–10,000" /><span>$2,000–10,000</span></label>
+                <label class="ph-check-row"><input type="radio" name="c2_cost_money" value="Over $10,000" /><span>Over $10,000</span></label>
+                <label class="ph-check-row"><input type="radio" name="c2_cost_money" value="Can't estimate" /><span>Can't estimate</span></label>
+              </div>
             </fieldset>
 
             <div class="ph-field ph-field-full" data-key="c2_workaround">
@@ -714,11 +760,13 @@
 
             <fieldset class="ph-field" data-required data-key="c2_freq">
               <legend class="ph-label">How often does something like this happen?</legend>
-              <label class="ph-check-row"><input type="radio" name="c2_freq" value="Weekly" /><span>Weekly</span></label>
-              <label class="ph-check-row"><input type="radio" name="c2_freq" value="2–3 times a month" /><span>2–3 times a month</span></label>
-              <label class="ph-check-row"><input type="radio" name="c2_freq" value="Monthly" /><span>Monthly</span></label>
-              <label class="ph-check-row"><input type="radio" name="c2_freq" value="Quarterly" /><span>Quarterly</span></label>
-              <label class="ph-check-row"><input type="radio" name="c2_freq" value="Rarely" /><span>Rarely</span></label>
+              <div class="opt-grid">
+                <label class="ph-check-row"><input type="radio" name="c2_freq" value="Weekly" /><span>Weekly</span></label>
+                <label class="ph-check-row"><input type="radio" name="c2_freq" value="2–3 times a month" /><span>2–3 times a month</span></label>
+                <label class="ph-check-row"><input type="radio" name="c2_freq" value="Monthly" /><span>Monthly</span></label>
+                <label class="ph-check-row"><input type="radio" name="c2_freq" value="Quarterly" /><span>Quarterly</span></label>
+                <label class="ph-check-row"><input type="radio" name="c2_freq" value="Rarely" /><span>Rarely</span></label>
+              </div>
             </fieldset>
           </div>
         </div>
@@ -748,7 +796,7 @@
           </div>
         </div>
         <p class="callout">This is an illustration of the idea, not a measured result.</p>
-        <figure class="img-frame"><img src="assets/img/before-after.jpg" loading="lazy" decoding="async" alt="A crowded meeting on the left and a short focused discussion on the right" /></figure>
+        <figure class="img-frame"><img width="1600" height="914" src="assets/img/before-after.jpg" loading="lazy" decoding="async" alt="A crowded meeting on the left and a short focused discussion on the right" /></figure>
         <fieldset class="ph-field" data-required data-key="d_looks_like_you">
           <legend class="ph-label">Does the 'before' picture look like meetings where you work?</legend>
           <div class="likert">
@@ -775,25 +823,31 @@
 
           <fieldset class="ph-field" data-required data-key="calc_attendees">
             <legend class="ph-label">How many people are usually in them?</legend>
-            <label class="ph-check-row"><input type="radio" name="calc_attendees" value="2" /><span>2</span></label>
-            <label class="ph-check-row"><input type="radio" name="calc_attendees" value="3.5" /><span>3–4</span></label>
-            <label class="ph-check-row"><input type="radio" name="calc_attendees" value="6.5" /><span>5–8</span></label>
-            <label class="ph-check-row"><input type="radio" name="calc_attendees" value="10" /><span>9+</span></label>
+            <div class="opt-grid" data-w="narrow">
+              <label class="ph-check-row"><input type="radio" name="calc_attendees" value="2" /><span>2</span></label>
+              <label class="ph-check-row"><input type="radio" name="calc_attendees" value="3.5" /><span>3–4</span></label>
+              <label class="ph-check-row"><input type="radio" name="calc_attendees" value="6.5" /><span>5–8</span></label>
+              <label class="ph-check-row"><input type="radio" name="calc_attendees" value="10" /><span>9+</span></label>
+            </div>
           </fieldset>
 
           <fieldset class="ph-field" data-required data-key="calc_length">
             <legend class="ph-label">How long do they usually run?</legend>
-            <label class="ph-check-row"><input type="radio" name="calc_length" value="30" /><span>30 minutes</span></label>
-            <label class="ph-check-row"><input type="radio" name="calc_length" value="45" /><span>45 minutes</span></label>
-            <label class="ph-check-row"><input type="radio" name="calc_length" value="60" /><span>60 minutes</span></label>
+            <div class="opt-grid" data-w="narrow">
+              <label class="ph-check-row"><input type="radio" name="calc_length" value="30" /><span>30 minutes</span></label>
+              <label class="ph-check-row"><input type="radio" name="calc_length" value="45" /><span>45 minutes</span></label>
+              <label class="ph-check-row"><input type="radio" name="calc_length" value="60" /><span>60 minutes</span></label>
+            </div>
           </fieldset>
 
           <fieldset class="ph-field" data-required data-key="calc_cost_band">
             <legend class="ph-label">Roughly what an hour of one person's time costs where you work — just pick the closest.</legend>
-            <label class="ph-check-row"><input type="radio" name="calc_cost_band" value="30" /><span>$30</span></label>
-            <label class="ph-check-row"><input type="radio" name="calc_cost_band" value="60" /><span>$60</span></label>
-            <label class="ph-check-row"><input type="radio" name="calc_cost_band" value="100" /><span>$100</span></label>
-            <label class="ph-check-row"><input type="radio" name="calc_cost_band" value="150" /><span>$150</span></label>
+            <div class="opt-grid" data-w="narrow">
+              <label class="ph-check-row"><input type="radio" name="calc_cost_band" value="30" /><span>$30</span></label>
+              <label class="ph-check-row"><input type="radio" name="calc_cost_band" value="60" /><span>$60</span></label>
+              <label class="ph-check-row"><input type="radio" name="calc_cost_band" value="100" /><span>$100</span></label>
+              <label class="ph-check-row"><input type="radio" name="calc_cost_band" value="150" /><span>$150</span></label>
+            </div>
           </fieldset>
 
           <div class="ph-field ph-field-full" data-required data-key="calc_share">
@@ -835,7 +889,7 @@
               <li>Found the one question only people can answer.</li>
             </ul>
             <p>It collected the facts and shows where each one came from. It can't promise anything to anyone.</p>
-            <figure class="img-frame"><img src="assets/img/ai-prepares.jpg" loading="lazy" decoding="async" alt="A checklist showing an agreement, a project plan, and current status being reviewed" /></figure>
+            <figure class="img-frame"><img width="1600" height="1066" src="assets/img/ai-prepares.jpg" loading="lazy" decoding="async" alt="A checklist showing an agreement, a project plan, and current status being reviewed" /></figure>
             <div class="step-actions"><button class="ph-button ph-button-ghost" type="button" data-demo-back>Back</button><button class="ph-button ph-button-primary" type="button" data-demo-next disabled>See the options →</button></div>
           </section>
 
@@ -853,7 +907,7 @@
           <section class="demo-screen" data-demo-screen="4" aria-labelledby="demo-four-heading">
             <h3 id="demo-four-heading">Both sides approve.</h3>
             <p>Talk isn't a deal. Both sides press approve on the exact same words.</p>
-            <figure class="img-frame"><img src="assets/img/both-approve.jpg" loading="lazy" decoding="async" alt="Two people looking at the same agreement before approving it" /></figure>
+            <figure class="img-frame"><img width="1600" height="1066" src="assets/img/both-approve.jpg" loading="lazy" decoding="async" alt="Two people looking at the same agreement before approving it" /></figure>
             <div class="demo-approval-actions">
               <button class="ph-button ph-button-ghost" type="button" data-demo-approval="provider" aria-pressed="false">You — the provider</button>
               <button class="ph-button ph-button-ghost" type="button" data-demo-approval="client" aria-pressed="false">The client</button>
@@ -874,7 +928,7 @@
               </dl>
             </div>
             <p>One week later — ✓ the promise was kept, checked automatically against what was agreed.</p>
-            <figure class="img-frame"><img src="assets/img/promise-kept.jpg" loading="lazy" decoding="async" alt="A shared record showing a completed promise" /></figure>
+            <figure class="img-frame"><img width="1600" height="1066" src="assets/img/promise-kept.jpg" loading="lazy" decoding="async" alt="A shared record showing a completed promise" /></figure>
             <p class="callout">Fictional example — an idea we're researching, not a finished product.</p>
             <div class="demo-link-row">
               <button class="ph-button ph-button-primary" type="button" data-demo-complete>Continue →</button>
@@ -887,9 +941,11 @@
 
         <fieldset class="ph-field" data-required data-key="e_clarity">
           <legend class="ph-label">Was it clear what the assistant did on its own, and what stayed under human control?</legend>
-          <label class="ph-check-row"><input type="radio" name="e_clarity" value="Very clear" /><span>Very clear</span></label>
-          <label class="ph-check-row"><input type="radio" name="e_clarity" value="Mostly clear" /><span>Mostly clear</span></label>
-          <label class="ph-check-row"><input type="radio" name="e_clarity" value="Confusing" /><span>Confusing</span></label>
+          <div class="opt-grid" data-w="narrow">
+            <label class="ph-check-row"><input type="radio" name="e_clarity" value="Very clear" /><span>Very clear</span></label>
+            <label class="ph-check-row"><input type="radio" name="e_clarity" value="Mostly clear" /><span>Mostly clear</span></label>
+            <label class="ph-check-row"><input type="radio" name="e_clarity" value="Confusing" /><span>Confusing</span></label>
+          </div>
         </fieldset>
         <p class="status-line" data-status aria-live="polite"></p>
         <div class="step-actions"><button class="ph-button ph-button-ghost" type="button" data-back>Back</button><button class="ph-button ph-button-primary" type="button" data-next>Continue →</button></div>
@@ -936,40 +992,48 @@
 
           <fieldset class="ph-field" data-required data-key="f_most_valuable">
             <legend class="ph-label">Which part would be most valuable?</legend>
-            <label class="ph-check-row"><input type="radio" name="f_most_valuable" value="Fewer or shorter meetings" /><span>Fewer or shorter meetings</span></label>
-            <label class="ph-check-row"><input type="radio" name="f_most_valuable" value="The assistant prepares facts and options before we talk" /><span>The assistant prepares facts and options before we talk</span></label>
-            <label class="ph-check-row"><input type="radio" name="f_most_valuable" value="Both sides approve one exact record" /><span>Both sides approve one exact record</span></label>
-            <label class="ph-check-row"><input type="radio" name="f_most_valuable" value="Promises get checked afterwards" /><span>Promises get checked afterwards</span></label>
-            <label class="ph-check-row"><input type="radio" name="f_most_valuable" value="My private limits stay private" /><span>My private limits stay private</span></label>
-            <label class="ph-check-row"><input type="radio" name="f_most_valuable" value="Honestly, none of it" /><span>Honestly, none of it</span></label>
+            <div class="opt-grid" data-w="wide">
+              <label class="ph-check-row"><input type="radio" name="f_most_valuable" value="Fewer or shorter meetings" /><span>Fewer or shorter meetings</span></label>
+              <label class="ph-check-row"><input type="radio" name="f_most_valuable" value="The assistant prepares facts and options before we talk" /><span>The assistant prepares facts and options before we talk</span></label>
+              <label class="ph-check-row"><input type="radio" name="f_most_valuable" value="Both sides approve one exact record" /><span>Both sides approve one exact record</span></label>
+              <label class="ph-check-row"><input type="radio" name="f_most_valuable" value="Promises get checked afterwards" /><span>Promises get checked afterwards</span></label>
+              <label class="ph-check-row"><input type="radio" name="f_most_valuable" value="My private limits stay private" /><span>My private limits stay private</span></label>
+              <label class="ph-check-row"><input type="radio" name="f_most_valuable" value="Honestly, none of it" /><span>Honestly, none of it</span></label>
+            </div>
           </fieldset>
 
           <fieldset class="ph-field" data-required data-key="f_least_valuable">
             <legend class="ph-label">…and which part would you skip?</legend>
-            <label class="ph-check-row"><input type="radio" name="f_least_valuable" value="Fewer or shorter meetings" /><span>Fewer or shorter meetings</span></label>
-            <label class="ph-check-row"><input type="radio" name="f_least_valuable" value="The assistant prepares facts and options before we talk" /><span>The assistant prepares facts and options before we talk</span></label>
-            <label class="ph-check-row"><input type="radio" name="f_least_valuable" value="Both sides approve one exact record" /><span>Both sides approve one exact record</span></label>
-            <label class="ph-check-row"><input type="radio" name="f_least_valuable" value="Promises get checked afterwards" /><span>Promises get checked afterwards</span></label>
-            <label class="ph-check-row"><input type="radio" name="f_least_valuable" value="My private limits stay private" /><span>My private limits stay private</span></label>
-            <label class="ph-check-row"><input type="radio" name="f_least_valuable" value="Honestly, none of it" /><span>Honestly, none of it</span></label>
+            <div class="opt-grid" data-w="wide">
+              <label class="ph-check-row"><input type="radio" name="f_least_valuable" value="Fewer or shorter meetings" /><span>Fewer or shorter meetings</span></label>
+              <label class="ph-check-row"><input type="radio" name="f_least_valuable" value="The assistant prepares facts and options before we talk" /><span>The assistant prepares facts and options before we talk</span></label>
+              <label class="ph-check-row"><input type="radio" name="f_least_valuable" value="Both sides approve one exact record" /><span>Both sides approve one exact record</span></label>
+              <label class="ph-check-row"><input type="radio" name="f_least_valuable" value="Promises get checked afterwards" /><span>Promises get checked afterwards</span></label>
+              <label class="ph-check-row"><input type="radio" name="f_least_valuable" value="My private limits stay private" /><span>My private limits stay private</span></label>
+              <label class="ph-check-row"><input type="radio" name="f_least_valuable" value="Honestly, none of it" /><span>Honestly, none of it</span></label>
+            </div>
           </fieldset>
 
           <fieldset class="ph-field" data-required data-key="f_concern">
             <legend class="ph-label">What concerns you most?</legend>
-            <label class="ph-check-row"><input type="radio" name="f_concern" value="Privacy of my data" /><span>Privacy of my data</span></label>
-            <label class="ph-check-row"><input type="radio" name="f_concern" value="Trusting the AI to get the facts right" /><span>Trusting the AI to get the facts right</span></label>
-            <label class="ph-check-row"><input type="radio" name="f_concern" value="The other side won't use it" /><span>The other side won't use it</span></label>
-            <label class="ph-check-row"><input type="radio" name="f_concern" value="Too formal for how we actually work" /><span>Too formal for how we actually work</span></label>
-            <label class="ph-check-row"><input type="radio" name="f_concern" value="Security and confidentiality" /><span>Security and confidentiality</span></label>
-            <label class="ph-check-row"><input type="radio" name="f_concern" value="Nothing major" /><span>Nothing major</span></label>
+            <div class="opt-grid" data-w="wide">
+              <label class="ph-check-row"><input type="radio" name="f_concern" value="Privacy of my data" /><span>Privacy of my data</span></label>
+              <label class="ph-check-row"><input type="radio" name="f_concern" value="Trusting the AI to get the facts right" /><span>Trusting the AI to get the facts right</span></label>
+              <label class="ph-check-row"><input type="radio" name="f_concern" value="The other side won't use it" /><span>The other side won't use it</span></label>
+              <label class="ph-check-row"><input type="radio" name="f_concern" value="Too formal for how we actually work" /><span>Too formal for how we actually work</span></label>
+              <label class="ph-check-row"><input type="radio" name="f_concern" value="Security and confidentiality" /><span>Security and confidentiality</span></label>
+              <label class="ph-check-row"><input type="radio" name="f_concern" value="Nothing major" /><span>Nothing major</span></label>
+            </div>
           </fieldset>
 
           <fieldset class="ph-field" data-required data-key="f_solves_problem">
             <legend class="ph-label">Does this solve a problem you actually have right now?</legend>
-            <label class="ph-check-row"><input type="radio" name="f_solves_problem" value="Yes — a painful one" /><span>Yes — a painful one</span></label>
-            <label class="ph-check-row"><input type="radio" name="f_solves_problem" value="Yes — a minor annoyance" /><span>Yes — a minor annoyance</span></label>
-            <label class="ph-check-row"><input type="radio" name="f_solves_problem" value="Not really" /><span>Not really</span></label>
-            <label class="ph-check-row"><input type="radio" name="f_solves_problem" value="No" /><span>No</span></label>
+            <div class="opt-grid">
+              <label class="ph-check-row"><input type="radio" name="f_solves_problem" value="Yes — a painful one" /><span>Yes — a painful one</span></label>
+              <label class="ph-check-row"><input type="radio" name="f_solves_problem" value="Yes — a minor annoyance" /><span>Yes — a minor annoyance</span></label>
+              <label class="ph-check-row"><input type="radio" name="f_solves_problem" value="Not really" /><span>Not really</span></label>
+              <label class="ph-check-row"><input type="radio" name="f_solves_problem" value="No" /><span>No</span></label>
+            </div>
           </fieldset>
 
           <div class="ph-field ph-field-full" data-key="f_blocker">
@@ -1005,10 +1069,12 @@
         <p class="warning-line" data-vw-warning aria-live="polite"></p>
         <fieldset class="ph-field" data-required data-key="g_pilot_500">
           <legend class="ph-label">A 4-week trial on one real project costs $500. Your honest reaction?</legend>
-          <label class="ph-check-row"><input type="radio" name="g_pilot_500" value="I'd seriously consider it" /><span>I'd seriously consider it</span></label>
-          <label class="ph-check-row"><input type="radio" name="g_pilot_500" value="Maybe — I'd need someone's approval" /><span>Maybe — I'd need someone's approval</span></label>
-          <label class="ph-check-row"><input type="radio" name="g_pilot_500" value="Only if it were free" /><span>Only if it were free</span></label>
-          <label class="ph-check-row"><input type="radio" name="g_pilot_500" value="I wouldn't trial it at all" /><span>I wouldn't trial it at all</span></label>
+          <div class="opt-grid" data-w="wide">
+            <label class="ph-check-row"><input type="radio" name="g_pilot_500" value="I'd seriously consider it" /><span>I'd seriously consider it</span></label>
+            <label class="ph-check-row"><input type="radio" name="g_pilot_500" value="Maybe — I'd need someone's approval" /><span>Maybe — I'd need someone's approval</span></label>
+            <label class="ph-check-row"><input type="radio" name="g_pilot_500" value="Only if it were free" /><span>Only if it were free</span></label>
+            <label class="ph-check-row"><input type="radio" name="g_pilot_500" value="I wouldn't trial it at all" /><span>I wouldn't trial it at all</span></label>
+          </div>
         </fieldset>
         <div class="ph-field conditional" data-pilot-approver hidden data-required data-key="g_pilot_approver">
           <label class="ph-label" for="g-pilot-approver">Whose approval? (role, not name)</label>
@@ -1028,14 +1094,18 @@
           </div>
           <fieldset class="ph-field" data-required data-key="h_interview">
             <legend class="ph-label">Would you join a 30-minute call about how your team handles this today? We're studying the problem, not selling.</legend>
-            <label class="ph-check-row"><input type="radio" name="h_interview" value="Yes" /><span>Yes</span></label>
-            <label class="ph-check-row"><input type="radio" name="h_interview" value="No" /><span>No</span></label>
+            <div class="opt-grid" data-w="narrow">
+              <label class="ph-check-row"><input type="radio" name="h_interview" value="Yes" /><span>Yes</span></label>
+              <label class="ph-check-row"><input type="radio" name="h_interview" value="No" /><span>No</span></label>
+            </div>
           </fieldset>
           <fieldset class="ph-field" data-required data-key="h_pilot">
             <legend class="ph-label">Would your team try a 4-week trial on one real project?</legend>
-            <label class="ph-check-row"><input type="radio" name="h_pilot" value="Yes" /><span>Yes</span></label>
-            <label class="ph-check-row"><input type="radio" name="h_pilot" value="Maybe" /><span>Maybe</span></label>
-            <label class="ph-check-row"><input type="radio" name="h_pilot" value="No" /><span>No</span></label>
+            <div class="opt-grid" data-w="narrow">
+              <label class="ph-check-row"><input type="radio" name="h_pilot" value="Yes" /><span>Yes</span></label>
+              <label class="ph-check-row"><input type="radio" name="h_pilot" value="Maybe" /><span>Maybe</span></label>
+              <label class="ph-check-row"><input type="radio" name="h_pilot" value="No" /><span>No</span></label>
+            </div>
           </fieldset>
           <div class="ph-field ph-field-full" data-key="h_referral">
             <label class="ph-label" for="h-referral">Know someone who runs client projects and feels this pain? Tell us what kind of company they run (no names needed) — or just forward them this page.</label>
@@ -1051,11 +1121,12 @@
         <h2 id="thanks-heading" tabindex="-1">Thank you — that genuinely helps.</h2>
         <p class="section-intro">Your answers are safely on their way.</p>
         <p class="ph-lede">You spent about <strong data-thanks-minutes>0</strong> minutes answering.</p>
-        <figure class="img-frame"><img src="assets/img/thanks.jpg" loading="lazy" decoding="async" alt="A desk with a small thank-you note beside a calendar" /></figure>
+        <figure class="img-frame"><img width="1600" height="1600" src="assets/img/thanks.jpg" loading="lazy" decoding="async" alt="A desk with a small thank-you note beside a calendar" /></figure>
         <div class="thanks-links">
           <a class="thanks-link-card" data-thanks-demo-link>Explore the full story demo</a>
           <a class="thanks-link-card" data-thanks-walkthrough-link>See the walkthrough</a>
           <button class="ph-button ph-button-ghost thanks-copy-link" type="button" data-copy-link>Copy this study link</button>
+          <button class="ph-button ph-button-ghost thanks-copy-link" type="button" data-restart-study>Start a fresh response</button>
         </div>
         <p class="status-line" data-thanks-status aria-live="polite"></p>
         <p class="callout">We read every answer. If you left an email, you'll hear from us only about this study.</p>
