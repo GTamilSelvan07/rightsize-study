@@ -60,8 +60,17 @@ function doGet() {
 function doPost(e) {
   try {
     var p = JSON.parse(e.postData.contents);
-    // Honeypot: bots fill the hidden "website" field. Answer ok so they move on.
-    if (p.data && p.data.website) return out({ ok: true });
+    // Honeypot: bots fill the hidden "website" field. Answer ok so they move on,
+    // but log the drop to the events tab so real losses would be visible.
+    if (p.data && p.data.website) {
+      try {
+        SpreadsheetApp.getActive().getSheetByName("events").appendRow([
+          new Date(), String(p.rid || "").slice(0, 40), "honeypot-drop", p.seq || 0,
+          JSON.stringify(p.data).slice(0, 2000), String(p.ua || "").slice(0, 300)
+        ]);
+      } catch (ignored) {}
+      return out({ ok: true });
+    }
     if (p.token !== TOKEN) return out({ ok: false, err: "bad token" });
     if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(String(p.rid || ""))) {
       return out({ ok: false, err: "bad rid" });

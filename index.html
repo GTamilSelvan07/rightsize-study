@@ -8,6 +8,30 @@
       content="A short research study on meetings, decisions, and follow-through at work."
     />
     <title>The Right-Size Meetings Study</title>
+    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://gtamilselvan07.github.io/rightsize-study/" />
+    <meta property="og:title" content="How do meetings actually go where you work?" />
+    <meta
+      property="og:description"
+      content="An 8-minute anonymous study about meetings, decisions, and follow-through — with a short interactive demo inside."
+    />
+    <meta
+      property="og:image"
+      content="https://gtamilselvan07.github.io/rightsize-study/assets/img/og/og-study.jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="How do meetings actually go where you work?" />
+    <meta
+      name="twitter:description"
+      content="An 8-minute anonymous study about meetings, decisions, and follow-through — with a short interactive demo inside."
+    />
+    <meta
+      name="twitter:image"
+      content="https://gtamilselvan07.github.io/rightsize-study/assets/img/og/og-study.jpg"
+    />
     <link rel="stylesheet" href="assets/css/study.css" />
     <style>
       .offscreen-field {
@@ -377,6 +401,9 @@
     </div>
 
     <main class="study-shell" id="app">
+      <noscript>
+        <p class="callout">This study needs JavaScript to run. Please enable it and reload the page.</p>
+      </noscript>
       <section class="survey-step active" data-step="welcome" aria-labelledby="welcome-heading">
         <h1 id="welcome-heading" tabindex="-1">How do meetings actually go where you work?</h1>
         <p class="ph-lede">
@@ -398,8 +425,8 @@
           </label>
         </fieldset>
         <div class="offscreen-field" aria-hidden="true">
-          <label for="website">Leave this field empty</label>
-          <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+          <label for="fld-7x">Leave this field empty</label>
+          <input type="text" id="fld-7x" name="fld_7x" tabindex="-1" autocomplete="off" />
         </div>
         <p class="status-line" data-status aria-live="polite"></p>
         <div class="step-actions">
@@ -426,7 +453,7 @@
               <option value="Other">Other</option>
             </select>
             <div class="field-reveal" data-country-other hidden>
-              <label class="ph-label" for="a-country-other">Country (optional)</label>
+              <label class="ph-label" for="a-country-other">Type your country</label>
               <input class="ph-input" id="a-country-other" type="text" data-other-for="a_country" />
             </div>
           </div>
@@ -578,7 +605,7 @@
               <label class="ph-check-row"><input type="radio" name="a2_who_runs_meetings" value="I run most of them" /><span>I run most of them</span></label>
               <label class="ph-check-row"><input type="radio" name="a2_who_runs_meetings" value="A teammate or manager" /><span>A teammate or manager</span></label>
               <label class="ph-check-row"><input type="radio" name="a2_who_runs_meetings" value="Rotates — no one really owns it" /><span>Rotates — no one really owns it</span></label>
-              <label class="ph-check-row"><input type="radio" name="a2_who_runs_meetings" value="Depends entirely" /><span>Depends entirely</span></label>
+              <label class="ph-check-row"><input type="radio" name="a2_who_runs_meetings" value="It varies meeting to meeting" /><span>It varies meeting to meeting</span></label>
             </div>
           </fieldset>
         </div>
@@ -672,7 +699,7 @@
             <legend class="ph-label">How often do action items get lost after meetings — done by nobody, or ownership unclear?</legend>
             <div class="opt-grid" data-w="narrow">
               <label class="ph-check-row"><input type="radio" name="c_lost_actions" value="Almost never" /><span>Almost never</span></label>
-              <label class="ph-check-row"><input type="radio" name="c_lost_actions" value="Occasionally" /><span>Occasionally</span></label>
+              <label class="ph-check-row"><input type="radio" name="c_lost_actions" value="A few times a year" /><span>A few times a year</span></label>
               <label class="ph-check-row"><input type="radio" name="c_lost_actions" value="Monthly" /><span>Monthly</span></label>
               <label class="ph-check-row"><input type="radio" name="c_lost_actions" value="Weekly" /><span>Weekly</span></label>
               <label class="ph-check-row"><input type="radio" name="c_lost_actions" value="Most meetings" /><span>Most meetings</span></label>
@@ -742,7 +769,7 @@
             </fieldset>
 
             <fieldset class="ph-field" data-required data-key="c2_cost_money">
-              <legend class="ph-label">Rough money impact of that one incident?</legend>
+              <legend class="ph-label">Rough money impact of that one incident? (US$ or your local currency)</legend>
               <div class="opt-grid" data-w="narrow">
                 <label class="ph-check-row"><input type="radio" name="c2_cost_money" value="Nothing" /><span>Nothing</span></label>
                 <label class="ph-check-row"><input type="radio" name="c2_cost_money" value="Under $500" /><span>Under $500</span></label>
@@ -778,8 +805,9 @@
         <h2 id="d-heading" tabindex="-1">An idea we're testing</h2>
         <p class="section-intro">Here is the idea in plain English.</p>
         <div class="story-block">
-          <p>Most meetings exist to move work along: agree on a change, unblock a decision, check a promise was kept. Imagine your calendar had one extra button: <strong>'Sort this out.'</strong></p>
+          <p>Most meetings exist to move work along: agree on a change, unblock a decision, check a promise was kept. Imagine your calendar had one extra button: <strong>“Sort this out.”</strong></p>
           <p>Before anyone books an hour, an assistant reads what's allowed to be read — the plan, the agreement, the current status — prepares the facts, and works out the one thing that still genuinely needs people. Then it books only that: sometimes a message, sometimes two people for nine minutes, sometimes a proper meeting. Afterwards, everyone sees the same record of what was agreed — and the promise gets checked.</p>
+          <p>You can also set private limits beforehand — a lowest price, a date you can't move. The assistant keeps them to itself and simply warns you before you'd cross one of your own.</p>
         </div>
         <div class="attention-comparison" data-comparison>
           <div class="attention-row before">
@@ -798,7 +826,7 @@
         <p class="callout">This is an illustration of the idea, not a measured result.</p>
         <figure class="img-frame"><img width="1600" height="914" src="assets/img/before-after.jpg" loading="lazy" decoding="async" alt="A crowded meeting on the left and a short focused discussion on the right" /></figure>
         <fieldset class="ph-field" data-required data-key="d_looks_like_you">
-          <legend class="ph-label">Does the 'before' picture look like meetings where you work?</legend>
+          <legend class="ph-label">Does the “before” picture look like meetings where you work?</legend>
           <div class="likert">
             <label aria-label="1 — Not at all"><input type="radio" name="d_looks_like_you" value="1" /><span>1</span></label>
             <label><input type="radio" name="d_looks_like_you" value="2" /><span>2</span></label>
@@ -819,6 +847,7 @@
           <div class="ph-field ph-field-full" data-required data-key="calc_meetings">
             <label class="ph-label" for="calc-meetings">Meetings you attend in a typical week</label>
             <input class="ph-input" id="calc-meetings" type="number" name="calc_meetings" min="0" max="40" inputmode="numeric" />
+            <p class="ph-hint">You picked a range earlier — an exact number here makes the math yours.</p>
           </div>
 
           <fieldset class="ph-field" data-required data-key="calc_attendees">
@@ -841,7 +870,7 @@
           </fieldset>
 
           <fieldset class="ph-field" data-required data-key="calc_cost_band">
-            <legend class="ph-label">Roughly what an hour of one person's time costs where you work — just pick the closest.</legend>
+            <legend class="ph-label">Roughly what an hour of one person's time costs where you work — just pick the closest (US$ or your local equivalent).</legend>
             <div class="opt-grid" data-w="narrow">
               <label class="ph-check-row"><input type="radio" name="calc_cost_band" value="30" /><span>$30</span></label>
               <label class="ph-check-row"><input type="radio" name="calc_cost_band" value="60" /><span>$60</span></label>
@@ -853,14 +882,14 @@
           <div class="ph-field ph-field-full" data-required data-key="calc_share">
             <label class="ph-label" for="calc-share">Honestly, what share of that meeting time could be shorter or skipped if the preparation happened automatically?</label>
             <div class="calc-range-row">
-              <input id="calc-share" type="range" name="calc_share" min="10" max="70" step="5" value="30" />
+              <input id="calc-share" type="range" name="calc_share" min="0" max="70" step="5" value="30" />
               <output class="calc-range-value" for="calc-share" data-calc-share-output>30%</output>
             </div>
           </div>
         </div>
         <div class="calc-output" aria-live="polite" aria-atomic="true">
           <p>That's roughly <strong data-calc-hours>0 hours</strong> of people's time — about <strong data-calc-money>$0</strong> — every month, by your own estimates.</p>
-          <p class="ph-hint">This is your arithmetic, not our promise.</p>
+          <p class="ph-hint">Your numbers × about 4.3 weeks a month. This is your arithmetic, not our promise.</p>
         </div>
         <p class="status-line" data-status aria-live="polite"></p>
         <div class="step-actions"><button class="ph-button ph-button-ghost" type="button" data-back>Back</button><button class="ph-button ph-button-primary" type="button" data-next>Continue →</button></div>
@@ -886,9 +915,9 @@
               <li>Read the signed agreement ✓</li>
               <li>Checked the project plan ✓</li>
               <li>Checked progress so far ✓</li>
-              <li>Found the one question only people can answer.</li>
+              <li>Found the one question only people can answer ✓</li>
             </ul>
-            <p>It collected the facts and shows where each one came from. It can't promise anything to anyone.</p>
+            <p>It has collected the facts and shows where each one came from. It can't promise anything to anyone.</p>
             <figure class="img-frame"><img width="1600" height="1066" src="assets/img/ai-prepares.jpg" loading="lazy" decoding="async" alt="A checklist showing an agreement, a project plan, and current status being reviewed" /></figure>
             <div class="step-actions"><button class="ph-button ph-button-ghost" type="button" data-demo-back>Back</button><button class="ph-button ph-button-primary" type="button" data-demo-next disabled>See the options →</button></div>
           </section>
@@ -927,12 +956,12 @@
                 <dt>Who owns it</dt><dd data-receipt-owner>—</dd>
               </dl>
             </div>
-            <p>One week later — ✓ the promise was kept, checked automatically against what was agreed.</p>
+            <p>One week later: the promise was kept ✓ — checked automatically against what was agreed.</p>
             <figure class="img-frame"><img width="1600" height="1066" src="assets/img/promise-kept.jpg" loading="lazy" decoding="async" alt="A shared record showing a completed promise" /></figure>
             <p class="callout">Fictional example — an idea we're researching, not a finished product.</p>
             <div class="demo-link-row">
               <button class="ph-button ph-button-primary" type="button" data-demo-complete>Continue →</button>
-              <a class="ph-button ph-button-ghost" data-full-demo-link target="_blank" rel="noopener">See the full walkthrough (new tab)</a>
+              <a class="ph-button ph-button-ghost" href="demo.html" data-full-demo-link target="_blank" rel="noopener">Try the full story demo (new tab)</a>
               <button class="ph-button ph-button-ghost" type="button" data-demo-restart>Restart example</button>
             </div>
           </section>
@@ -944,7 +973,8 @@
           <div class="opt-grid" data-w="narrow">
             <label class="ph-check-row"><input type="radio" name="e_clarity" value="Very clear" /><span>Very clear</span></label>
             <label class="ph-check-row"><input type="radio" name="e_clarity" value="Mostly clear" /><span>Mostly clear</span></label>
-            <label class="ph-check-row"><input type="radio" name="e_clarity" value="Confusing" /><span>Confusing</span></label>
+            <label class="ph-check-row"><input type="radio" name="e_clarity" value="Somewhat confusing" /><span>Somewhat confusing</span></label>
+            <label class="ph-check-row"><input type="radio" name="e_clarity" value="Very confusing" /><span>Very confusing</span></label>
           </div>
         </fieldset>
         <p class="status-line" data-status aria-live="polite"></p>
@@ -1089,7 +1119,7 @@
         <p class="section-intro">A few final questions and an optional way to stay in touch.</p>
         <div class="ph-form-grid">
           <div class="ph-field ph-field-full" data-key="h_email">
-            <label class="ph-label" for="h-email">Leave an email if you'd like early access or the study results. (Optional — everything else stays anonymous.)</label>
+            <label class="ph-label" for="h-email">Leave an email if you'd like early access or the study results. (Optional. If you leave one, your answers are linked to it so we can follow up — leave it blank to stay fully anonymous.)</label>
             <input class="ph-input" id="h-email" type="email" name="h_email" autocomplete="email" />
           </div>
           <fieldset class="ph-field" data-required data-key="h_interview">
@@ -1123,8 +1153,8 @@
         <p class="ph-lede">You spent about <strong data-thanks-minutes>0</strong> minutes answering.</p>
         <figure class="img-frame"><img width="1600" height="1600" src="assets/img/thanks.jpg" loading="lazy" decoding="async" alt="A desk with a small thank-you note beside a calendar" /></figure>
         <div class="thanks-links">
-          <a class="thanks-link-card" data-thanks-demo-link>Explore the full story demo</a>
-          <a class="thanks-link-card" data-thanks-walkthrough-link>See the walkthrough</a>
+          <a class="thanks-link-card" href="demo.html" data-thanks-demo-link>Explore the full story demo</a>
+          <a class="thanks-link-card" href="walkthrough.html" data-thanks-walkthrough-link>See the walkthrough</a>
           <button class="ph-button ph-button-ghost thanks-copy-link" type="button" data-copy-link>Copy this study link</button>
           <button class="ph-button ph-button-ghost thanks-copy-link" type="button" data-restart-study>Start a fresh response</button>
         </div>

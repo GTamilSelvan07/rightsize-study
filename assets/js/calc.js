@@ -46,7 +46,7 @@
     });
 
     const savedShare = Number(answers.calc_share);
-    if (Number.isFinite(savedShare) && savedShare >= 10 && savedShare <= 70) {
+    if (Number.isFinite(savedShare) && savedShare >= 0 && savedShare <= 70) {
       shareInput.value = String(savedShare);
     }
   };
@@ -57,7 +57,7 @@
     const length = numberValue("calc_length");
     const costBand = numberValue("calc_cost_band");
     const share = numberValue("calc_share");
-    const hours = meetings * 4.3 * attendees * (length / 60) * (share / 100) * 0.85;
+    const hours = meetings * 4.3 * attendees * (length / 60) * (share / 100);
     const money = hours * costBand;
 
     return {

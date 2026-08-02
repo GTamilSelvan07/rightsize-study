@@ -14,7 +14,7 @@
     B: "AI at work",
     C: "The annoying parts",
     C2: "When the client changes the plan",
-    D: "The idea",
+    D: "An idea we're testing",
     D2: "Your numbers",
     E: "Try it",
     E2: "About your world",
@@ -76,16 +76,25 @@
   };
 
   const clearFieldError = (field) => {
-    field.querySelectorAll("[aria-invalid='true']").forEach((control) => control.removeAttribute("aria-invalid"));
+    field.querySelectorAll("[aria-invalid='true']").forEach((control) => {
+      control.removeAttribute("aria-invalid");
+      control.removeAttribute("aria-describedby");
+    });
     field.querySelectorAll(".ph-error-text[data-field-error]").forEach((message) => message.remove());
   };
 
+  let fieldErrorId = 0;
+
   const markFieldError = (field, message = "This answer is required.") => {
-    field.querySelectorAll("input, select, textarea").forEach((control) => control.setAttribute("aria-invalid", "true"));
     const error = document.createElement("p");
     error.className = "ph-error-text";
     error.dataset.fieldError = "true";
+    error.id = `field-error-${++fieldErrorId}`;
     error.textContent = message;
+    field.querySelectorAll("input, select, textarea").forEach((control) => {
+      control.setAttribute("aria-invalid", "true");
+      control.setAttribute("aria-describedby", error.id);
+    });
     field.append(error);
   };
 
@@ -149,7 +158,7 @@
       }
     }
 
-    setStatus(section, valid ? "" : (customMessage || "Please answer the highlighted questions"));
+    setStatus(section, valid ? "" : (customMessage || "Please answer the highlighted questions."));
     if (!valid) {
       revealFirstError(section);
     }
@@ -167,7 +176,7 @@
     const data = {};
     const grouped = new Map();
     section.querySelectorAll("[name]").forEach((control) => {
-      if (control.name === "website") {
+      if (control.name === "fld_7x") {
         return;
       }
       if (!grouped.has(control.name)) {
@@ -193,8 +202,21 @@
       data.a_country = other.value.trim() || "Other";
     }
 
+    if (section.dataset.step === "A" && data.a_client_facing === "no") {
+      // The C2 step is skipped for this branch; blank out anything a previous
+      // pass through C2 may already have written to the sheet.
+      data.c2_incident_when = "";
+      c2FollowUpKeys.forEach((key) => {
+        data[key] = "";
+      });
+    }
+
     if (section.dataset.step === "C2" && selectedValue("c2_incident_when") === "never") {
-      c2FollowUpKeys.forEach((key) => delete data[key]);
+      // Send empty strings, not deletions — the backend upsert only writes
+      // keys present in the payload, so deletions leave stale answers behind.
+      c2FollowUpKeys.forEach((key) => {
+        data[key] = "";
+      });
     }
 
     if (section.dataset.step === "D2" && window.Calculator) {
@@ -221,7 +243,9 @@
     }
 
     if (section.dataset.step === "H") {
-      data.website = document.querySelector("#website").value;
+      // Payload key stays "website" (the deployed backend's honeypot check);
+      // the field itself is named fld_7x so browser autofill never matches it.
+      data.website = document.querySelector("#fld-7x").value;
     }
 
     return data;
@@ -261,6 +285,30 @@
       clearC2FollowUp();
     }
     syncSelectedCardStates(followUp);
+  };
+
+  const updateBUsesVisibility = () => {
+    const usesField = document.querySelector('[data-key="b_uses"]');
+    const none = document.querySelector('[name="b_tools"][value="none"]');
+    if (usesField && none) {
+      usesField.hidden = none.checked;
+    }
+  };
+
+  const updateC2CostsExclusivity = (event) => {
+    const nothing = document.querySelector('[name="c2_costs"][value="Nothing much"]');
+    if (!nothing || !event.target.checked) {
+      return;
+    }
+    if (event.target.value === "Nothing much") {
+      document.querySelectorAll('[name="c2_costs"]').forEach((control) => {
+        if (control !== nothing) {
+          control.checked = false;
+        }
+      });
+    } else {
+      nothing.checked = false;
+    }
   };
 
   const updateToolkitTools = (event) => {
@@ -370,6 +418,7 @@
       label.textContent = aiq.questions[index] || "";
     });
     section.querySelector("[data-aiq-tailored]").hidden = !aiq.gen;
+    section.querySelector("[data-next]").disabled = false;
     return true;
   };
 
@@ -382,6 +431,9 @@
       return;
     }
 
+    // Nobody should be able to continue past questions that have not been
+    // shown yet; the fallback timer below guarantees this resolves within 6s.
+    section.querySelector("[data-next]").disabled = true;
     section.querySelector("[data-aiq-loading]").hidden = false;
     section.querySelector("[data-aiq-form]").hidden = true;
     const request = window.Store.requestAiQuestions();
@@ -522,6 +574,7 @@
     }
     showCountryOther();
     updateC2Visibility();
+    updateBUsesVisibility();
     updatePilotApprover();
     updateVanWestendorp();
     syncSelectedCardStates();
@@ -650,9 +703,13 @@
       } else if (event.target.value !== "none" && event.target.checked) {
         none.checked = false;
       }
+      updateBUsesVisibility();
     }
     if (name === "a2_pm_tools") {
       updateToolkitTools(event);
+    }
+    if (name === "c2_costs") {
+      updateC2CostsExclusivity(event);
     }
     if (name === "c2_incident_when") {
       updateC2Visibility();
