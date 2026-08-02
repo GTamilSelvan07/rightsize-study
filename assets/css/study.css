@@ -318,9 +318,10 @@ h3 {
   grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr));
 }
 
-/* Sentence-length options stay one per row so they never read as a wall. */
+/* Sentence-length options get room to wrap, but still pair up on a desktop
+   measure rather than running one per row down the page. */
 .opt-grid[data-w="wide"] {
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
 }
 
 .ph-label {
