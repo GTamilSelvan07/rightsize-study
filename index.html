@@ -52,12 +52,117 @@
       .story-block {
         margin: var(--ph-space-6) 0;
         padding: var(--ph-space-5);
-        border: 0.0625rem solid var(--ph-color-border-decorative);
-        border-radius: var(--ph-radius-lg);
-        background: var(--ph-color-surface-raised);
-        box-shadow: var(--ph-shadow-low);
+        border-left: 0.25rem solid var(--ph-color-signal);
+        border-radius: var(--ph-radius-md);
+        background: var(--ph-color-evidence-surface);
         color: var(--ph-color-text-high);
         font-size: var(--ph-font-size-md);
+      }
+
+      .story-block p:last-child {
+        margin-bottom: 0;
+      }
+
+      .scenario-status {
+        min-height: 1.25rem;
+        margin: calc(var(--ph-space-2) * -1) 0 var(--ph-space-5);
+        color: var(--ph-color-text-secondary);
+        font-size: var(--ph-font-size-xs);
+      }
+
+      .storyboard-figure {
+        margin: var(--ph-space-6) 0 var(--ph-space-4);
+        overflow-x: auto;
+        border: 0.0625rem solid var(--ph-color-border-decorative);
+        border-radius: var(--ph-radius-lg);
+        background: #f5eddd;
+        box-shadow: var(--ph-shadow-low);
+        scrollbar-color: var(--ph-neutral-300) transparent;
+      }
+
+      .storyboard-figure img {
+        display: block;
+        width: 100%;
+        min-width: 54rem;
+        height: auto;
+      }
+
+      .storyboard-caption {
+        margin: 0 0 var(--ph-space-5);
+        color: var(--ph-color-text-secondary);
+        font-size: var(--ph-font-size-xs);
+      }
+
+      .storyboard-steps {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: var(--ph-space-3);
+        margin: 0 0 var(--ph-space-6);
+        padding: 0;
+        list-style: none;
+      }
+
+      .storyboard-step {
+        padding: var(--ph-space-4);
+        border: 0.0625rem solid var(--ph-color-border-decorative);
+        border-radius: var(--ph-radius-md);
+        background: var(--ph-color-surface-raised);
+      }
+
+      .storyboard-step-number {
+        display: grid;
+        width: 1.75rem;
+        height: 1.75rem;
+        margin-bottom: var(--ph-space-3);
+        place-items: center;
+        border-radius: 50%;
+        background: var(--ph-neutral-950);
+        color: var(--ph-color-text-inverse);
+        font-size: var(--ph-font-size-2xs);
+        font-weight: 800;
+      }
+
+      .storyboard-step strong {
+        display: block;
+        margin-bottom: var(--ph-space-2);
+        font-size: var(--ph-font-size-xs);
+      }
+
+      .storyboard-step p {
+        margin: 0;
+        color: var(--ph-color-text-secondary);
+        font-size: var(--ph-font-size-xs);
+      }
+
+      .control-boundary {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--ph-space-3);
+        margin: var(--ph-space-5) 0;
+      }
+
+      .control-boundary > div {
+        padding: var(--ph-space-4);
+        border-radius: var(--ph-radius-md);
+      }
+
+      .control-boundary .assistant-side {
+        background: var(--ph-color-evidence-surface);
+      }
+
+      .control-boundary .people-side {
+        background: var(--ph-color-human-surface);
+      }
+
+      .control-boundary strong {
+        display: block;
+        margin-bottom: var(--ph-space-2);
+      }
+
+      .control-boundary p {
+        margin: 0;
+        color: var(--ph-color-text-secondary);
+        font-size: var(--ph-font-size-xs);
       }
 
       .attention-comparison {
@@ -105,7 +210,7 @@
       }
 
       .attention-comparison.is-visible .attention-row.after .attention-fill {
-        width: 5.625%;
+        width: var(--attention-after-width, 5.625%);
       }
 
       .attention-math {
@@ -222,7 +327,51 @@
         border: 0.0625rem solid var(--ph-color-border-decorative);
         border-radius: var(--ph-radius-sm);
         color: var(--ph-color-text-secondary);
-        opacity: 0.4;
+        background: var(--ph-color-surface-raised);
+      }
+
+      .demo-route-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: var(--ph-space-3);
+        margin: var(--ph-space-5) 0;
+      }
+
+      .demo-route {
+        padding: var(--ph-space-4);
+        border: 0.0625rem solid var(--ph-color-border-decorative);
+        border-radius: var(--ph-radius-md);
+        background: var(--ph-color-surface-raised);
+      }
+
+      .demo-route.is-recommended {
+        border: 0.125rem solid var(--ph-color-action-primary);
+        background: var(--ph-color-human-surface);
+      }
+
+      .demo-route-tag {
+        display: inline-block;
+        margin-bottom: var(--ph-space-2);
+        color: var(--ph-color-text-secondary);
+        font-size: var(--ph-font-size-2xs);
+        font-weight: 800;
+        letter-spacing: var(--ph-tracking-label);
+        text-transform: uppercase;
+      }
+
+      .demo-route.is-recommended .demo-route-tag {
+        color: var(--ph-color-action-primary);
+      }
+
+      .demo-route strong {
+        display: block;
+        margin-bottom: var(--ph-space-2);
+      }
+
+      .demo-route p {
+        margin: 0;
+        color: var(--ph-color-text-secondary);
+        font-size: var(--ph-font-size-xs);
       }
 
       .demo-options {
@@ -259,6 +408,12 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: var(--ph-space-3);
         margin-top: var(--ph-space-5);
+      }
+
+      .demo-approval-note {
+        margin: var(--ph-space-3) 0 0;
+        color: var(--ph-color-text-secondary);
+        font-size: var(--ph-font-size-xs);
       }
 
       .demo-approval-actions .ph-button[aria-pressed="true"] {
@@ -326,37 +481,22 @@
         .attention-fill {
           transition: width 900ms var(--ph-ease-emphasized);
         }
-
-        .demo-screen.is-preparing .demo-checklist li {
-          animation: checklist-item 420ms var(--ph-ease-enter) forwards;
-        }
-
-        .demo-screen.is-preparing .demo-checklist li:nth-child(2) {
-          animation-delay: 850ms;
-        }
-
-        .demo-screen.is-preparing .demo-checklist li:nth-child(3) {
-          animation-delay: 1700ms;
-        }
-
-        .demo-screen.is-preparing .demo-checklist li:nth-child(4) {
-          animation-delay: 2550ms;
-        }
-
-        @keyframes checklist-item {
-          to {
-            border-color: var(--ph-color-success);
-            background: var(--ph-color-success-surface);
-            color: var(--ph-color-text-primary);
-            opacity: 1;
-          }
-        }
       }
 
       @media (max-width: 40rem) {
         .demo-options,
-        .demo-approval-actions {
+        .demo-approval-actions,
+        .demo-route-grid,
+        .control-boundary {
           grid-template-columns: 1fr;
+        }
+
+        .storyboard-steps {
+          grid-template-columns: 1fr;
+        }
+
+        .storyboard-figure img {
+          min-width: 46rem;
         }
       }
 
@@ -365,13 +505,6 @@
           transition: none;
         }
 
-        .demo-screen.is-preparing .demo-checklist li {
-          animation: none;
-          border-color: var(--ph-color-success);
-          background: var(--ph-color-success-surface);
-          color: var(--ph-color-text-primary);
-          opacity: 1;
-        }
       }
     </style>
   </head>
@@ -806,31 +939,48 @@
       </section>
 
       <section class="survey-step" data-step="D" aria-labelledby="d-heading">
-        <h2 id="d-heading" tabindex="-1">An idea we're testing</h2>
-        <p class="section-intro">Here is the idea in plain English.</p>
+        <h2 id="d-heading" tabindex="-1">Before anyone books the meeting</h2>
+        <p class="section-intro">Follow one fictional request from confusion to a commitment people control.</p>
         <div class="story-block">
-          <p>Most meetings exist to move work along: agree on a change, unblock a decision, check a promise was kept. Imagine your calendar had one extra button: <strong>“Sort this out.”</strong></p>
-          <p>Before anyone books an hour, an assistant reads what's allowed to be read — the plan, the agreement, the current status — prepares the facts, and works out the one thing that still genuinely needs people. Then it books only that: sometimes a message, sometimes two people for nine minutes, sometimes a proper meeting. Afterwards, everyone sees the same record of what was agreed — and the promise gets checked.</p>
-          <p>You can also set private limits beforehand — a lowest price, a date you can't move. The assistant keeps them to itself and simply warns you before you'd cross one of your own.</p>
+          <p data-scenario-summary>A client asks to add secure sign-in before launch. Instead of automatically booking an hour with eight people, the assistant prepares the evidence, identifies what only people must decide, and recommends the lightest safe way to settle it. People decide and approve. The system records the commitment and checks what happens next.</p>
         </div>
+        <p class="scenario-status" data-scenario-status aria-live="polite">Preparing a fictional example from your earlier multiple-choice answers…</p>
+
+        <figure class="storyboard-figure">
+          <img width="1859" height="846" src="assets/img/storyboard-v4.jpg" loading="lazy" decoding="async" alt="Five illustrated panels show a delivery lead receiving an unclear request, reviewing evidence, choosing the smallest safe conversation, getting separate approvals, and checking the result." />
+        </figure>
+        <p class="storyboard-caption">Illustrated concept sequence. On a small screen, swipe the picture sideways; the five steps are also written below.</p>
+
+        <ol class="storyboard-steps" aria-label="How the fictional example works">
+          <li class="storyboard-step"><span class="storyboard-step-number">1</span><strong>The request is unclear</strong><p data-scenario-request>A client asks to add secure sign-in before a 14 August launch, without an agreed owner, price, or delivery plan.</p></li>
+          <li class="storyboard-step"><span class="storyboard-step-number">2</span><strong>Evidence comes first</strong><p data-scenario-evidence>The assistant checks only permitted sources and shows where each fact came from.</p></li>
+          <li class="storyboard-step"><span class="storyboard-step-number">3</span><strong>The route is right-sized</strong><p data-scenario-route>The change needs three decision-makers for nine minutes—not an hour with everyone.</p></li>
+          <li class="storyboard-step"><span class="storyboard-step-number">4</span><strong>People decide</strong><p data-scenario-decision>People choose which constraint can move, then each side approves the exact words separately.</p></li>
+          <li class="storyboard-step"><span class="storyboard-step-number">5</span><strong>The commitment is checked</strong><p data-scenario-outcome>Everyone sees one shared record, and the agreed follow-up is checked one week later.</p></li>
+        </ol>
+
+        <div class="control-boundary" aria-label="What the assistant and people each control">
+          <div class="assistant-side"><strong>The assistant can</strong><p>Prepare permitted evidence, expose the unresolved question, suggest options, and recommend how to settle it.</p></div>
+          <div class="people-side"><strong>Only people can</strong><p>Choose the trade-off, approve a commitment for their own side, or decide that a larger meeting is necessary.</p></div>
+        </div>
+
         <div class="attention-comparison" data-comparison>
           <div class="attention-row before">
-            <span class="attention-kicker">BEFORE</span>
+            <span class="attention-kicker">DEFAULT RESPONSE</span>
             <div class="attention-track" aria-hidden="true"><span class="attention-fill"></span></div>
-            <p class="attention-math">8 people × 60 minutes = 480 minutes of attention</p>
-            <p class="attention-detail">Notes typed up later. Two people remember it differently.</p>
+            <p class="attention-math" data-scenario-before-math>8 people × 60 minutes = 480 minutes of attention</p>
+            <p class="attention-detail">A broad meeting before the unresolved decision is clear.</p>
           </div>
           <div class="attention-row after">
-            <span class="attention-kicker">AFTER</span>
+            <span class="attention-kicker">ILLUSTRATED ROUTE</span>
             <div class="attention-track" aria-hidden="true"><span class="attention-fill"></span></div>
-            <p class="attention-math">3 people × 9 minutes = 27 minutes</p>
-            <p class="attention-detail">One shared record. Follow-up checked automatically.</p>
+            <p class="attention-math" data-scenario-after-math>3 people × 9 minutes = 27 minutes of attention</p>
+            <p class="attention-detail">Prepared evidence, the necessary decision-makers, and one shared record.</p>
           </div>
         </div>
-        <p class="callout">This is an illustration of the idea, not a measured result.</p>
-        <figure class="img-frame"><img width="1600" height="914" src="assets/img/before-after.jpg" loading="lazy" decoding="async" alt="A crowded meeting on the left and a short focused discussion on the right" /></figure>
+        <p class="callout">This scenario and time comparison are fictional illustrations for research—not a product claim or measured result.</p>
         <fieldset class="ph-field" data-required data-key="d_looks_like_you">
-          <legend class="ph-label">Does the “before” picture look like meetings where you work?</legend>
+          <legend class="ph-label">How similar is this kind of unclear request to work you see?</legend>
           <div class="likert">
             <label aria-label="1 — Not at all"><input type="radio" name="d_looks_like_you" value="1" /><span>1</span></label>
             <label><input type="radio" name="d_looks_like_you" value="2" /><span>2</span></label>
@@ -900,57 +1050,57 @@
       </section>
 
       <section class="survey-step" data-step="E" aria-labelledby="e-heading">
-        <h2 id="e-heading" tabindex="-1">Try it — 90 seconds</h2>
-        <p class="section-intro">Try the short example, then tell us what you think.</p>
+        <h2 id="e-heading" tabindex="-1">Try the same request — about 60 seconds</h2>
+        <p class="section-intro">Make the human decision yourself. The assistant never approves on anyone's behalf.</p>
         <div class="demo-shell" id="compact-demo" aria-label="Interactive example">
           <div class="demo-dots" aria-label="Example progress">
-            <span class="demo-dot is-current" data-demo-dot="1"></span><span class="demo-dot" data-demo-dot="2"></span><span class="demo-dot" data-demo-dot="3"></span><span class="demo-dot" data-demo-dot="4"></span><span class="demo-dot" data-demo-dot="5"></span>
+            <span class="demo-dot is-current" data-demo-dot="1"></span><span class="demo-dot" data-demo-dot="2"></span><span class="demo-dot" data-demo-dot="3"></span><span class="demo-dot" data-demo-dot="4"></span>
           </div>
 
           <section class="demo-screen active" data-demo-screen="1" aria-labelledby="demo-one-heading">
-            <h3 id="demo-one-heading">The request lands.</h3>
-            <div class="demo-message"><time>Tuesday, 9:14 am</time><p>A client writes: “Can we get secure sign-in into the 14 August launch?” No price, no owner, no plan. Normally this becomes a meeting with eight people.</p></div>
-            <div class="step-actions"><button class="ph-button ph-button-primary" type="button" data-demo-next>Sort this out →</button></div>
+            <h3 id="demo-one-heading">1. The request lands</h3>
+            <div class="demo-message"><time>Tuesday, 9:14 am · fictional</time><p data-demo-request>A client asks to add secure sign-in before a 14 August launch. The request has no agreed owner, price, or delivery plan. The default response would be an hour with eight people.</p></div>
+            <p class="demo-approval-note">Your task: settle the one trade-off that cannot be inferred from project evidence.</p>
+            <div class="step-actions"><button class="ph-button ph-button-primary" type="button" data-demo-next>Prepare the request →</button></div>
           </section>
 
           <section class="demo-screen" data-demo-screen="2" aria-labelledby="demo-two-heading">
-            <h3 id="demo-two-heading">The assistant prepares. Nothing is decided.</h3>
+            <h3 id="demo-two-heading">2. Evidence first, then the lightest safe route</h3>
             <ul class="demo-checklist">
-              <li>Read the signed agreement ✓</li>
-              <li>Checked the project plan ✓</li>
-              <li>Checked progress so far ✓</li>
-              <li>Found the one question only people can answer ✓</li>
+              <li data-demo-fact="0">The signed scope does not include secure sign-in.</li>
+              <li data-demo-fact="1">The launch plan has no spare capacity.</li>
+              <li data-demo-fact="2">Current work is still on schedule.</li>
             </ul>
-            <p>It has collected the facts and shows where each one came from. It can't promise anything to anyone.</p>
-            <figure class="img-frame"><img width="1600" height="1066" src="assets/img/ai-prepares.jpg" loading="lazy" decoding="async" alt="A checklist showing an agreement, a project plan, and current status being reviewed" /></figure>
-            <div class="step-actions"><button class="ph-button ph-button-ghost" type="button" data-demo-back>Back</button><button class="ph-button ph-button-primary" type="button" data-demo-next disabled>See the options →</button></div>
+            <p><strong>Only people can answer:</strong> <span data-demo-human-question>Which constraint should move: scope, date, or budget?</span></p>
+            <div class="demo-route-grid" aria-label="Possible routes">
+              <div class="demo-route"><span class="demo-route-tag">No meeting</span><strong>Not safe yet</strong><p data-demo-route-none>The request changes scope and delivery risk.</p></div>
+              <div class="demo-route"><span class="demo-route-tag">Written approval</span><strong>Useful afterwards</strong><p data-demo-route-async>A written approval works after people choose the trade-off.</p></div>
+              <div class="demo-route is-recommended"><span class="demo-route-tag">Recommended</span><strong>Smallest conversation</strong><p data-demo-route-small>Three decision-makers for nine minutes.</p></div>
+            </div>
+            <p class="callout"><strong>Why:</strong> <span data-demo-recommendation-reason>The evidence is ready, but the scope–date–budget trade-off requires authority from both sides.</span></p>
+            <div class="step-actions"><button class="ph-button ph-button-ghost" type="button" data-demo-back>Back</button><button class="ph-button ph-button-primary" type="button" data-demo-next>Join the small conversation →</button></div>
           </section>
 
           <section class="demo-screen" data-demo-screen="3" aria-labelledby="demo-three-heading">
-            <h3 id="demo-three-heading">You choose.</h3>
+            <h3 id="demo-three-heading">3. People choose and approve</h3>
+            <p>Choose the trade-off you would take back to your team.</p>
             <div class="demo-options">
-              <button class="demo-option" type="button" data-demo-option="A" aria-pressed="false"><strong>A</strong>Keep the 14 August launch — secure sign-in arrives 2 September. Price unchanged.</button>
-              <button class="demo-option" type="button" data-demo-option="B" aria-pressed="false"><strong>B</strong>Keep secure sign-in — the launch moves to 28 August. Price unchanged.</button>
-              <button class="demo-option" type="button" data-demo-option="C" aria-pressed="false"><strong>C</strong>Keep both — a small extra team joins. Costs more, needs a budget sign-off from both sides.</button>
+              <button class="demo-option" type="button" data-demo-option="A" aria-pressed="false"><strong><span>A</span> · <span data-demo-option-title>Move the feature</span></strong><span data-demo-option-summary>Keep the 14 August launch; secure sign-in arrives 2 September. Price unchanged.</span></button>
+              <button class="demo-option" type="button" data-demo-option="B" aria-pressed="false"><strong><span>B</span> · <span data-demo-option-title>Move the launch</span></strong><span data-demo-option-summary>Keep secure sign-in in scope; launch moves to 28 August. Price unchanged.</span></button>
+              <button class="demo-option" type="button" data-demo-option="C" aria-pressed="false"><strong><span>C</span> · <span data-demo-option-title>Add capacity</span></strong><span data-demo-option-summary>Keep both dates; add a small team and get budget approval from both sides.</span></button>
             </div>
             <p class="status-line" data-demo-status aria-live="polite"></p>
-            <div class="step-actions"><button class="ph-button ph-button-ghost" type="button" data-demo-back>Back</button><button class="ph-button ph-button-primary" type="button" data-demo-next disabled>Continue →</button></div>
+            <div class="demo-approval-actions">
+              <button class="ph-button ph-button-primary" type="button" data-demo-approval="provider" aria-pressed="false" disabled>Approve my side</button>
+              <button class="ph-button ph-button-ghost" type="button" data-demo-other-party disabled>Reveal the client's separate response</button>
+            </div>
+            <p class="demo-approval-note">You approve only for your side. The fictional client responds separately on their own device.</p>
+            <p class="status-line" data-demo-approval-status aria-live="polite">Choose an option first.</p>
+            <div class="step-actions"><button class="ph-button ph-button-ghost" type="button" data-demo-back>Back</button><button class="ph-button ph-button-primary" type="button" data-demo-next disabled>See the shared record →</button></div>
           </section>
 
           <section class="demo-screen" data-demo-screen="4" aria-labelledby="demo-four-heading">
-            <h3 id="demo-four-heading">Both sides approve.</h3>
-            <p>Talk isn't a deal. Both sides press approve on the exact same words.</p>
-            <figure class="img-frame"><img width="1600" height="1066" src="assets/img/both-approve.jpg" loading="lazy" decoding="async" alt="Two people looking at the same agreement before approving it" /></figure>
-            <div class="demo-approval-actions">
-              <button class="ph-button ph-button-ghost" type="button" data-demo-approval="provider" aria-pressed="false">You — the provider</button>
-              <button class="ph-button ph-button-ghost" type="button" data-demo-approval="client" aria-pressed="false">The client</button>
-            </div>
-            <p class="status-line" data-demo-status aria-live="polite">0 of 2 approved…</p>
-            <div class="step-actions"><button class="ph-button ph-button-ghost" type="button" data-demo-back>Back</button><button class="ph-button ph-button-primary" type="button" data-demo-next disabled>Continue →</button></div>
-          </section>
-
-          <section class="demo-screen" data-demo-screen="5" aria-labelledby="demo-five-heading">
-            <h3 id="demo-five-heading">A record you can both trust.</h3>
+            <h3 id="demo-four-heading">4. One shared record, then follow-through</h3>
             <div class="demo-receipt">
               <p><strong>Shared record</strong></p>
               <dl>
@@ -960,9 +1110,12 @@
                 <dt>Who owns it</dt><dd data-receipt-owner>—</dd>
               </dl>
             </div>
-            <p>One week later: the promise was kept ✓ — checked automatically against what was agreed.</p>
-            <figure class="img-frame"><img width="1600" height="1066" src="assets/img/promise-kept.jpg" loading="lazy" decoding="async" alt="A shared record showing a completed promise" /></figure>
-            <p class="callout">Fictional example — an idea we're researching, not a finished product.</p>
+            <p><strong>One week later:</strong> <span data-demo-outcome>The agreed follow-up is checked against the shared record.</span></p>
+            <div class="attention-comparison is-visible">
+              <div class="attention-row before"><span class="attention-kicker">ILLUSTRATED DEFAULT</span><p class="attention-math" data-demo-before-math>8 × 60 = 480 attention-minutes</p></div>
+              <div class="attention-row after"><span class="attention-kicker">ILLUSTRATED ROUTE</span><p class="attention-math" data-demo-after-math>3 × 9 = 27 attention-minutes</p></div>
+            </div>
+            <p class="callout">Fictional example for research—not a finished product, measured saving, or automated decision.</p>
             <div class="demo-link-row">
               <button class="ph-button ph-button-primary" type="button" data-demo-complete>Continue →</button>
               <a class="ph-button ph-button-ghost" href="demo.html" data-full-demo-link target="_blank" rel="noopener">Try the full story demo (new tab)</a>
@@ -979,6 +1132,15 @@
             <label class="ph-check-row"><input type="radio" name="e_clarity" value="Mostly clear" /><span>Mostly clear</span></label>
             <label class="ph-check-row"><input type="radio" name="e_clarity" value="Somewhat confusing" /><span>Somewhat confusing</span></label>
             <label class="ph-check-row"><input type="radio" name="e_clarity" value="Very confusing" /><span>Very confusing</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="ph-field" data-required data-key="e_understanding">
+          <legend class="ph-label">In this example, what did the assistant actually do?</legend>
+          <div class="opt-grid" data-w="wide">
+            <label class="ph-check-row"><input type="radio" name="e_understanding" value="Prepared evidence and recommendations; people decided and approved" /><span>Prepared evidence and recommendations; people decided and approved</span></label>
+            <label class="ph-check-row"><input type="radio" name="e_understanding" value="Made and approved the final decision automatically" /><span>Made and approved the final decision automatically</span></label>
+            <label class="ph-check-row"><input type="radio" name="e_understanding" value="Only summarized a meeting after it happened" /><span>Only summarized a meeting after it happened</span></label>
+            <label class="ph-check-row"><input type="radio" name="e_understanding" value="Not sure" /><span>Not sure</span></label>
           </div>
         </fieldset>
         <p class="status-line" data-status aria-live="polite"></p>
@@ -1173,9 +1335,9 @@
     </footer>
 
     <script defer src="assets/js/config.js"></script>
-    <script defer src="assets/js/store.js?v=3"></script>
-    <script defer src="assets/js/survey.js?v=3"></script>
+    <script defer src="assets/js/store.js?v=4"></script>
+    <script defer src="assets/js/survey.js?v=4"></script>
     <script defer src="assets/js/calc.js"></script>
-    <script defer src="assets/js/demo-compact.js"></script>
+    <script defer src="assets/js/demo-compact.js?v=4"></script>
   </body>
 </html>

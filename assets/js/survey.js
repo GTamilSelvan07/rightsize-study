@@ -6,7 +6,7 @@
     return;
   }
 
-  const orderedSteps = ["welcome", "A", "A2", "B", "C", "C2", "D", "D2", "E", "E2", "F", "G", "H", "thanks"];
+  const orderedSteps = ["welcome", "A", "A2", "B", "C", "C2", "D", "E", "D2", "E2", "F", "G", "H", "thanks"];
   const stepDisplayNames = {
     welcome: "Welcome",
     A: "About you",
@@ -14,9 +14,9 @@
     B: "AI at work",
     C: "The annoying parts",
     C2: "When the client changes the plan",
-    D: "An idea we're testing",
+    D: "See the idea",
+    E: "Try the decision",
     D2: "Your numbers",
-    E: "Try it",
     E2: "About your world",
     F: "Straight answers",
     G: "What it's worth",
@@ -140,6 +140,9 @@
   const validateStep = (section) => {
     let valid = true;
     let customMessage = "";
+    const demoIncomplete = section.dataset.step === "E"
+      && window.CompactDemo
+      && window.CompactDemo.getData().e_demo_completed !== true;
     section.querySelectorAll("[data-required]").forEach((field) => {
       clearFieldError(field);
       if (isHidden(field)) {
@@ -153,6 +156,11 @@
         markFieldError(field);
       }
     });
+
+    if (demoIncomplete) {
+      valid = false;
+      customMessage = "Please finish the four-step example before continuing.";
+    }
 
     if (section.dataset.step === "H") {
       const email = section.querySelector('[name="h_email"]');
@@ -171,7 +179,14 @@
 
     setStatus(section, valid ? "" : (customMessage || "Please answer the highlighted questions."));
     if (!valid) {
-      revealFirstError(section);
+      if (demoIncomplete) {
+        const demo = section.querySelector("#compact-demo");
+        demo.setAttribute("tabindex", "-1");
+        demo.focus();
+        demo.scrollIntoView({ block: "start", behavior: "auto" });
+      } else {
+        revealFirstError(section);
+      }
     }
     return valid;
   };
@@ -469,6 +484,12 @@
     }
   };
 
+  const prefetchScenario = (step) => {
+    if (step === "B") {
+      void window.Store.requestDemoScenario();
+    }
+  };
+
   const activateStep = (nextIndex, shouldFocus) => {
     currentIndex = nextIndex;
     sections.forEach((section) => section.classList.remove("active"));
@@ -541,6 +562,7 @@
     window.Store.setAnswers(data);
     void window.Store.submit(section.dataset.step, data);
     prefetchAiQuestions(section.dataset.step);
+    prefetchScenario(section.dataset.step);
     showStep(currentIndex + 1);
   };
 
@@ -589,6 +611,13 @@
     const completedC2 = Object.prototype.hasOwnProperty.call(saved, "c2_incident_when");
     if (completedC && (saved.a_client_facing === "no" || completedC2)) {
       void window.Store.requestAiQuestions();
+    }
+  };
+
+  const resumeScenarioPrefetch = () => {
+    const saved = answers();
+    if (Object.prototype.hasOwnProperty.call(saved, "b_notes_followup")) {
+      void window.Store.requestDemoScenario();
     }
   };
 
@@ -755,6 +784,7 @@
   }
   showStep(currentIndex, false);
   resumeAiQuestionPrefetch();
+  resumeScenarioPrefetch();
   setupComparison();
   window.addEventListener("study:persisted", pulseSavedIndicator);
 
