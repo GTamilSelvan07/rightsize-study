@@ -78,7 +78,14 @@
   const clearFieldError = (field) => {
     field.querySelectorAll("[aria-invalid='true']").forEach((control) => {
       control.removeAttribute("aria-invalid");
-      control.removeAttribute("aria-describedby");
+      const describedBy = (control.getAttribute("aria-describedby") || "")
+        .split(/\s+/)
+        .filter((id) => id && !id.startsWith("field-error-"));
+      if (describedBy.length > 0) {
+        control.setAttribute("aria-describedby", describedBy.join(" "));
+      } else {
+        control.removeAttribute("aria-describedby");
+      }
     });
     field.querySelectorAll(".ph-error-text[data-field-error]").forEach((message) => message.remove());
   };
@@ -92,8 +99,12 @@
     error.id = `field-error-${++fieldErrorId}`;
     error.textContent = message;
     field.querySelectorAll("input, select, textarea").forEach((control) => {
+      const describedBy = new Set(
+        (control.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean),
+      );
+      describedBy.add(error.id);
       control.setAttribute("aria-invalid", "true");
-      control.setAttribute("aria-describedby", error.id);
+      control.setAttribute("aria-describedby", [...describedBy].join(" "));
     });
     field.append(error);
   };
@@ -172,6 +183,16 @@
     return control.value;
   };
 
+  const selectedValues = (value) => {
+    if (Array.isArray(value)) {
+      return value.map(String);
+    }
+    if (value === "" || value === null || value === undefined) {
+      return [];
+    }
+    return [String(value)];
+  };
+
   const collectStepData = (section) => {
     const data = {};
     const grouped = new Map();
@@ -196,11 +217,6 @@
         data[name] = valueForControl(first);
       }
     });
-
-    if (section.dataset.step === "A" && data.a_country === "Other") {
-      const other = section.querySelector("[data-other-for='a_country']");
-      data.a_country = other.value.trim() || "Other";
-    }
 
     if (section.dataset.step === "A" && data.a_client_facing === "no") {
       // The C2 step is skipped for this branch; blank out anything a previous
@@ -255,13 +271,6 @@
     const section = currentSection();
     if (section) {
       window.Store.setAnswers(collectStepData(section));
-    }
-  };
-
-  const showCountryOther = () => {
-    const field = document.querySelector("[data-country-other]");
-    if (field) {
-      field.hidden = document.querySelector('[name="a_country"]').value !== "Other";
     }
   };
 
@@ -554,7 +563,7 @@
         return;
       }
       if (controls[0].type === "checkbox") {
-        const selected = Array.isArray(value) ? value.map(String) : [];
+        const selected = selectedValues(value);
         controls.forEach((control) => {
           control.checked = selected.includes(control.value);
         });
@@ -567,12 +576,6 @@
       }
     });
 
-    const country = document.querySelector('[name="a_country"]');
-    if (saved.a_country && ![...country.options].some((option) => option.value === saved.a_country)) {
-      country.value = "Other";
-      document.querySelector("[data-other-for='a_country']").value = saved.a_country;
-    }
-    showCountryOther();
     updateC2Visibility();
     updateBUsesVisibility();
     updatePilotApprover();
@@ -685,9 +688,6 @@
 
   app.addEventListener("change", (event) => {
     const { name } = event.target;
-    if (name === "a_country") {
-      showCountryOther();
-    }
     if (name === "b_tools") {
       const none = document.querySelector('[name="b_tools"][value="none"]');
       if (event.target.value === "none" && event.target.checked) {

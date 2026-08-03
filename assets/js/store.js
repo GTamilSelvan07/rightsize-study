@@ -227,9 +227,12 @@
   const aiQuestionContext = () => {
     const savedAnswers = state.answers;
     const hasIncident = savedAnswers.c2_incident_when && savedAnswers.c2_incident_when !== "never";
+    const role = Array.isArray(savedAnswers.a_role)
+      ? savedAnswers.a_role.filter(Boolean).join(", ")
+      : savedAnswers.a_role || "";
 
     return {
-      role: savedAnswers.a_role || "",
+      role,
       industry: savedAnswers.a_industry || "",
       company_size: savedAnswers.a_company_size || "",
       client_facing: savedAnswers.a_client_facing || "",

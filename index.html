@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="A short research study on meetings, decisions, and follow-through at work."
+      content="A New Zealand-based, 8-minute study about meetings, decisions, and follow-through at work. Anonymous by default and open worldwide."
     />
     <title>The Right-Size Meetings Study</title>
     <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
@@ -14,7 +14,7 @@
     <meta property="og:title" content="How do meetings actually go where you work?" />
     <meta
       property="og:description"
-      content="An 8-minute anonymous study about meetings, decisions, and follow-through — with a short interactive demo inside."
+      content="A New Zealand-based, 8-minute study about meetings and decisions. Anonymous by default, open worldwide, with a short interactive demo."
     />
     <meta
       property="og:image"
@@ -26,7 +26,7 @@
     <meta name="twitter:title" content="How do meetings actually go where you work?" />
     <meta
       name="twitter:description"
-      content="An 8-minute anonymous study about meetings, decisions, and follow-through — with a short interactive demo inside."
+      content="A New Zealand-based, 8-minute study about meetings and decisions. Anonymous by default, open worldwide, with a short interactive demo."
     />
     <meta
       name="twitter:image"
@@ -407,12 +407,13 @@
       <section class="survey-step active" data-step="welcome" aria-labelledby="welcome-heading">
         <h1 id="welcome-heading" tabindex="-1">How do meetings actually go where you work?</h1>
         <p class="ph-lede">
-          An 8-minute anonymous study about meetings, decisions, and follow-through. You'll also try a short interactive demo of an early product idea and tell us, honestly, what it would be worth. Nothing here is for sale.
+          Kia ora — we're based in New Zealand and exploring how teams handle meetings, decisions, and follow-through. This 8-minute study is anonymous by default and open to people anywhere. You'll also try a short interactive demo of an early product idea. Nothing here is for sale.
         </p>
         <ul class="welcome-chips" aria-label="Study details">
+          <li>New Zealand-based</li>
           <li>≈8 minutes</li>
           <li>Anonymous by default</li>
-          <li>Interactive demo inside</li>
+          <li>Open worldwide</li>
         </ul>
         <figure class="img-frame">
           <img width="1600" height="914" src="assets/img/hero.jpg" loading="eager" fetchpriority="high" decoding="async" alt="Scattered calendar blocks converging into one small block" />
@@ -439,38 +440,41 @@
         <p class="section-intro">A few quick details help us understand your working week.</p>
         <div class="ph-form-grid">
           <div class="ph-field" data-required data-key="a_country">
-            <label class="ph-label" for="a-country">Country</label>
-            <select class="ph-select" id="a-country" name="a_country">
-              <option value="" selected disabled>Choose one</option>
-              <option value="New Zealand">New Zealand</option>
-              <option value="Australia">Australia</option>
-              <option value="United States">United States</option>
-              <option value="United Kingdom">United Kingdom</option>
-              <option value="India">India</option>
-              <option value="Germany">Germany</option>
-              <option value="Canada">Canada</option>
-              <option value="Singapore">Singapore</option>
-              <option value="Other">Other</option>
-            </select>
-            <div class="field-reveal" data-country-other hidden>
-              <label class="ph-label" for="a-country-other">Type your country</label>
-              <input class="ph-input" id="a-country-other" type="text" data-other-for="a_country" />
-            </div>
+            <label class="ph-label" for="a-country">Country or territory</label>
+            <input
+              class="ph-input"
+              id="a-country"
+              name="a_country"
+              type="text"
+              list="country-suggestions"
+              autocomplete="country-name"
+              maxlength="80"
+              placeholder="Start typing your country or territory"
+              aria-describedby="a-country-hint"
+            />
+            <p class="ph-hint" id="a-country-hint">
+              Enter any country or territory. We're based in New Zealand and welcome responses from anywhere.
+            </p>
+            <datalist id="country-suggestions">
+              <option value="New Zealand"></option>
+              <option value="Australia"></option>
+            </datalist>
           </div>
 
-          <fieldset class="ph-field" data-required data-key="a_role">
-            <legend class="ph-label">Your role</legend>
+          <fieldset class="ph-field" data-required data-key="a_role" aria-describedby="a-role-hint">
+            <legend class="ph-label">Which roles describe your work?</legend>
+            <p class="ph-hint" id="a-role-hint">Select all that apply.</p>
             <div class="opt-grid">
-              <label class="ph-check-row"><input type="radio" name="a_role" value="Founder or executive" /><span>Founder or executive</span></label>
-              <label class="ph-check-row"><input type="radio" name="a_role" value="Product" /><span>Product</span></label>
-              <label class="ph-check-row"><input type="radio" name="a_role" value="Engineering" /><span>Engineering</span></label>
-              <label class="ph-check-row"><input type="radio" name="a_role" value="Design" /><span>Design</span></label>
-              <label class="ph-check-row"><input type="radio" name="a_role" value="Project or delivery lead" /><span>Project or delivery lead</span></label>
-              <label class="ph-check-row"><input type="radio" name="a_role" value="Sales or account management" /><span>Sales or account management</span></label>
-              <label class="ph-check-row"><input type="radio" name="a_role" value="Consultant or agency work" /><span>Consultant or agency work</span></label>
-              <label class="ph-check-row"><input type="radio" name="a_role" value="Operations" /><span>Operations</span></label>
-              <label class="ph-check-row"><input type="radio" name="a_role" value="Finance or legal" /><span>Finance or legal</span></label>
-              <label class="ph-check-row"><input type="radio" name="a_role" value="Other" /><span>Other</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="a_role" value="Founder or executive" /><span>Founder or executive</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="a_role" value="Product" /><span>Product</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="a_role" value="Engineering" /><span>Engineering</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="a_role" value="Design" /><span>Design</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="a_role" value="Project or delivery lead" /><span>Project or delivery lead</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="a_role" value="Sales or account management" /><span>Sales or account management</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="a_role" value="Consultant or agency work" /><span>Consultant or agency work</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="a_role" value="Operations" /><span>Operations</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="a_role" value="Finance or legal" /><span>Finance or legal</span></label>
+              <label class="ph-check-row"><input type="checkbox" name="a_role" value="Other" /><span>Other role</span></label>
             </div>
           </fieldset>
 
@@ -1169,8 +1173,8 @@
     </footer>
 
     <script defer src="assets/js/config.js"></script>
-    <script defer src="assets/js/store.js"></script>
-    <script defer src="assets/js/survey.js"></script>
+    <script defer src="assets/js/store.js?v=3"></script>
+    <script defer src="assets/js/survey.js?v=3"></script>
     <script defer src="assets/js/calc.js"></script>
     <script defer src="assets/js/demo-compact.js"></script>
   </body>
