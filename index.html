@@ -70,7 +70,7 @@
         font-size: var(--ph-font-size-xs);
       }
 
-      .storyboard-figure {
+      .product-ui-gallery {
         margin: var(--ph-space-6) 0 var(--ph-space-4);
         overflow-x: auto;
         border: 0.0625rem solid var(--ph-color-border-decorative);
@@ -78,16 +78,71 @@
         background: #f5eddd;
         box-shadow: var(--ph-shadow-low);
         scrollbar-color: var(--ph-neutral-300) transparent;
+        scroll-snap-type: x mandatory;
       }
 
-      .storyboard-figure img {
+      .product-ui-track {
+        display: grid;
+        grid-auto-columns: 72%;
+        grid-auto-flow: column;
+        gap: var(--ph-space-3);
+        margin: 0;
+        padding: var(--ph-space-3);
+        list-style: none;
+      }
+
+      .product-ui-frame {
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        border: 0.0625rem solid var(--ph-color-border-decorative);
+        border-radius: var(--ph-radius-md);
+        background: var(--ph-color-surface-raised);
+        box-shadow: var(--ph-shadow-low);
+        scroll-snap-align: start;
+      }
+
+      .product-ui-frame img {
         display: block;
         width: 100%;
-        min-width: 54rem;
         height: auto;
+        aspect-ratio: 16 / 9;
+        border-bottom: 0.0625rem solid var(--ph-color-border-decorative);
+        object-fit: cover;
       }
 
-      .storyboard-caption {
+      .product-ui-frame figcaption {
+        display: grid;
+        grid-template-columns: 1.75rem minmax(0, 1fr);
+        gap: var(--ph-space-3);
+        padding: var(--ph-space-4);
+      }
+
+      .product-ui-step-number {
+        display: grid;
+        width: 1.75rem;
+        height: 1.75rem;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--ph-neutral-950);
+        color: var(--ph-color-text-inverse);
+        font-size: var(--ph-font-size-2xs);
+        font-weight: 800;
+      }
+
+      .product-ui-frame strong {
+        display: block;
+        margin-bottom: var(--ph-space-1);
+        font-size: var(--ph-font-size-xs);
+      }
+
+      .product-ui-frame p {
+        margin: 0;
+        color: var(--ph-color-text-secondary);
+        font-size: var(--ph-font-size-2xs);
+      }
+
+      .product-ui-caption {
         margin: 0 0 var(--ph-space-5);
         color: var(--ph-color-text-secondary);
         font-size: var(--ph-font-size-xs);
@@ -604,8 +659,8 @@
           grid-template-columns: 1fr;
         }
 
-        .storyboard-figure img {
-          min-width: 46rem;
+        .product-ui-track {
+          grid-auto-columns: 88%;
         }
       }
 
@@ -1055,10 +1110,65 @@
         </div>
         <p class="scenario-status" data-scenario-status aria-live="polite">Preparing a fictional example from your earlier multiple-choice answers…</p>
 
-        <figure class="storyboard-figure">
-          <img width="1859" height="846" src="assets/img/storyboard-v4.jpg" loading="lazy" decoding="async" alt="Five illustrated panels show a delivery lead receiving an unclear request, reviewing evidence, choosing the smallest safe conversation, getting separate approvals, and checking the result." />
-        </figure>
-        <p class="storyboard-caption">Illustrated concept sequence. On a small screen, swipe the picture sideways; the five steps are also written below.</p>
+        <div class="product-ui-gallery" role="region" aria-label="Nine product interface concept screens" tabindex="0">
+          <ol class="product-ui-track">
+            <li>
+              <figure class="product-ui-frame">
+                <img width="1200" height="675" src="assets/img/product-ui/work-context.jpg" loading="lazy" decoding="async" alt="Concept interface showing current project outcomes, team capacity, dependencies, and a secure sign-in scope change that needs attention." />
+                <figcaption><span class="product-ui-step-number" aria-hidden="true">1</span><div><strong>Understand the work</strong><p>See current outcomes, capacity, dependencies, and the request needing attention—without monitoring productivity.</p></div></figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure class="product-ui-frame">
+                <img width="1600" height="893" src="assets/img/product-ui/request.jpg" loading="lazy" decoding="async" alt="Concept interface showing a weekly work view with one request marked as a scope risk and a Sort this out button." />
+                <figcaption><span class="product-ui-step-number" aria-hidden="true">2</span><div><strong>Detect the decision boundary</strong><p>The client asks for secure sign-in before launch, but scope, date, price, and ownership are not agreed.</p></div></figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure class="product-ui-frame">
+                <img width="1200" height="675" src="assets/img/product-ui/people-authority.jpg" loading="lazy" decoding="async" alt="Concept interface showing agency and client participants, their software-project roles, authority states, and private boundaries." />
+                <figcaption><span class="product-ui-step-number" aria-hidden="true">3</span><div><strong>Include the right people</strong><p>Show who is affected, what each person can decide, and which boundaries stay private.</p></div></figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure class="product-ui-frame">
+                <img width="1600" height="893" src="assets/img/product-ui/evidence.jpg" loading="lazy" decoding="async" alt="Concept interface collecting permitted source cards and highlighting the one open question people must decide." />
+                <figcaption><span class="product-ui-step-number" aria-hidden="true">4</span><div><strong>Prepare permitted evidence</strong><p>Project sources are brought together while the unresolved human question stays visible.</p></div></figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure class="product-ui-frame">
+                <img width="1200" height="675" src="assets/img/product-ui/compiled-route.jpg" loading="lazy" decoding="async" alt="Concept interface comparing no meeting, written approval, a three-person nine-minute conversation, and a full meeting." />
+                <figcaption><span class="product-ui-step-number" aria-hidden="true">5</span><div><strong>Compile the minimum safe route</strong><p>Compare no meeting, written approval, a short conversation, or a full room—and preserve human presence when it matters.</p></div></figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure class="product-ui-frame">
+                <img width="1600" height="893" src="assets/img/product-ui/options.jpg" loading="lazy" decoding="async" alt="Concept interface comparing three feasible options: keep the date, keep the price, or add capacity." />
+                <figcaption><span class="product-ui-step-number" aria-hidden="true">6</span><div><strong>Make the trade-off concrete</strong><p>People compare feasible scope–date–price options instead of debating from memory.</p></div></figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure class="product-ui-frame">
+                <img width="1200" height="675" src="assets/img/product-ui/human-moment.jpg" loading="lazy" decoding="async" alt="Concept interface showing three people in a focused nine-minute conversation with one question, sources, a draft option, and visible ways to disagree." />
+                <figcaption><span class="product-ui-step-number" aria-hidden="true">7</span><div><strong>Use human time for human work</strong><p>Three people discuss one unresolved choice; context, dissent, and the relationship remain visible.</p></div></figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure class="product-ui-frame">
+                <img width="1600" height="893" src="assets/img/product-ui/approval.jpg" loading="lazy" decoding="async" alt="Concept interface showing the exact proposed words with separate approved and pending participant states." />
+                <figcaption><span class="product-ui-step-number" aria-hidden="true">8</span><div><strong>Let each person approve</strong><p>No assistant accepts for anyone. An edit creates a new version and clears prior approvals.</p></div></figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure class="product-ui-frame">
+                <img width="1200" height="675" src="assets/img/product-ui/outcome-value.jpg" loading="lazy" decoding="async" alt="Concept interface connecting agreed, delivered, and verified states to intended attention, delivery, client-clarity, and two-sided relationship outcomes." />
+                <figcaption><span class="product-ui-step-number" aria-hidden="true">9</span><div><strong>Connect outcome, value, and trust</strong><p>Link the agreement to delivery and separate confirmation from both sides—without inventing savings or a relationship score.</p></div></figcaption>
+              </figure>
+            </li>
+          </ol>
+        </div>
+        <p class="product-ui-caption">Nine product-interface concepts show the intended end-to-end workflow. They are design hypotheses—not screenshots of implemented features or measured results. Swipe or scroll sideways; the essential flow is also written below in five steps.</p>
 
         <ol class="storyboard-steps" aria-label="How the fictional example works">
           <li class="storyboard-step"><span class="storyboard-step-number">1</span><strong>The request is unclear</strong><p data-scenario-request>A client asks to add secure sign-in before a 14 August launch, without an agreed owner, price, or delivery plan.</p></li>
