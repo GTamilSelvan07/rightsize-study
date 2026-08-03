@@ -453,6 +453,111 @@
         gap: var(--ph-space-3);
       }
 
+      .pricing-value-card {
+        margin: var(--ph-space-6) 0;
+        overflow: hidden;
+        border: 0.0625rem solid var(--ph-color-border-decorative);
+        border-radius: var(--ph-radius-lg);
+        background: var(--ph-color-surface-raised);
+        box-shadow: var(--ph-shadow-low);
+      }
+
+      .pricing-journey {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .pricing-stage {
+        display: grid;
+        grid-template-columns: 2rem minmax(0, 1fr);
+        gap: var(--ph-space-4);
+        padding: var(--ph-space-5);
+        border-bottom: 0.0625rem solid var(--ph-color-border-decorative);
+      }
+
+      .pricing-stage:nth-child(2) {
+        background: var(--ph-color-evidence-surface);
+      }
+
+      .pricing-stage:last-child {
+        border-bottom: 0;
+      }
+
+      .pricing-stage-mark {
+        display: grid;
+        width: 2rem;
+        height: 2rem;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--ph-color-action-primary);
+        color: var(--ph-color-text-inverse);
+        font-size: var(--ph-font-size-xs);
+        font-weight: 800;
+      }
+
+      .pricing-stage-label {
+        display: block;
+        margin-bottom: var(--ph-space-2);
+        color: var(--ph-color-text-secondary);
+        font-size: var(--ph-font-size-2xs);
+        font-weight: 800;
+        letter-spacing: var(--ph-tracking-label);
+        text-transform: uppercase;
+      }
+
+      .pricing-stage h3 {
+        margin: 0 0 var(--ph-space-2);
+        font-size: var(--ph-font-size-md);
+        line-height: 1.2;
+      }
+
+      .pricing-stage p {
+        margin: 0;
+        color: var(--ph-color-text-secondary);
+        font-size: var(--ph-font-size-sm);
+      }
+
+      .pricing-benefits {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--ph-space-3);
+        margin: var(--ph-space-4) 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .pricing-benefits li {
+        padding: var(--ph-space-4);
+        border: 0.0625rem solid var(--ph-color-border-decorative);
+        border-radius: var(--ph-radius-md);
+        background: var(--ph-color-surface-raised);
+        color: var(--ph-color-text-secondary);
+        font-size: var(--ph-font-size-xs);
+      }
+
+      .pricing-benefits strong {
+        display: block;
+        margin-bottom: var(--ph-space-2);
+        color: var(--ph-color-text-primary);
+      }
+
+      .pricing-evidence-note {
+        margin: 0;
+        padding: var(--ph-space-4) var(--ph-space-5);
+        border-top: 0.0625rem solid var(--ph-color-border-decorative);
+        background: var(--ph-color-warning-surface);
+        color: var(--ph-color-text-secondary);
+        font-size: var(--ph-font-size-xs);
+      }
+
+      .pricing-instruction {
+        margin: 0 0 var(--ph-space-6);
+        color: var(--ph-color-text-high);
+        font-size: var(--ph-font-size-sm);
+        font-weight: 600;
+      }
+
       .warning-line {
         min-height: 1.25rem;
         margin: var(--ph-space-2) 0 0;
@@ -488,6 +593,10 @@
         .demo-approval-actions,
         .demo-route-grid,
         .control-boundary {
+          grid-template-columns: 1fr;
+        }
+
+        .pricing-benefits {
           grid-template-columns: 1fr;
         }
 
@@ -1242,29 +1351,64 @@
       </section>
 
       <section class="survey-step" data-step="G" aria-labelledby="g-heading">
-        <h2 id="g-heading" tabindex="-1">What it's worth</h2>
-        <p class="section-intro">Imagine this for one team of about 10 people, priced per month in US dollars. There are no right answers — gut feel is fine.</p>
+        <h2 id="g-heading" tabindex="-1">What would this be worth?</h2>
+        <p class="section-intro">Price the actual product and value package below — not a meeting recorder or summary tool.</p>
+        <article class="pricing-value-card" aria-labelledby="pricing-product-heading">
+          <ol class="pricing-journey">
+            <li class="pricing-stage">
+              <span class="pricing-stage-mark" aria-hidden="true">1</span>
+              <div>
+                <span class="pricing-stage-label">Product</span>
+                <h3 id="pricing-product-heading">An AI-assisted decision workspace for software agencies and consultancies</h3>
+                <p>When a client asks to change scope, a delivery date, or price, it brings together the permitted project evidence, shows the one trade-off only people can decide, and recommends no meeting, written approval, or the smallest necessary conversation.</p>
+              </div>
+            </li>
+            <li class="pricing-stage">
+              <span class="pricing-stage-mark" aria-hidden="true">2</span>
+              <div>
+                <span class="pricing-stage-label">Value</span>
+                <h3>Reach a clear, accountable decision with less coordination</h3>
+                <ul class="pricing-benefits">
+                  <li><strong>Recover attention</strong>Avoid a broad status meeting when written approval or a short conversation is enough.</li>
+                  <li><strong>Protect delivery and margin</strong>Make the scope–date–price trade-off clear before anyone makes an accidental promise.</li>
+                  <li><strong>Give both sides control</strong>Keep private limits private while the agency and client approve exactly the same terms.</li>
+                  <li><strong>Carry the decision through</strong>Record owners and dates, then show whether the agreed outcome happened.</li>
+                </ul>
+              </div>
+            </li>
+            <li class="pricing-stage">
+              <span class="pricing-stage-mark" aria-hidden="true">3</span>
+              <div>
+                <span class="pricing-stage-label">Your price</span>
+                <h3>What would your organisation pay each month?</h3>
+                <p>Assume one workspace for the agency or consultancy and a team of about 10 people. For this pricing exercise, invited client participants use the decision flow free.</p>
+              </div>
+            </li>
+          </ol>
+          <p class="pricing-evidence-note"><strong>Early-concept note:</strong> these are the benefits the product is designed to create, not measured results.</p>
+        </article>
+        <p class="pricing-instruction">Enter monthly amounts in US dollars from your organisation's point of view. Give your honest first reaction; there are no right answers.</p>
         <div class="ph-form-grid">
           <div class="ph-field" data-required data-key="g_vw_too_cheap">
-            <label class="ph-label" for="g-vw-too-cheap">At what monthly price would it feel so cheap you'd doubt it works?</label>
+            <label class="ph-label" for="g-vw-too-cheap">At what monthly price would this workspace feel so cheap you'd doubt it works?</label>
             <div class="currency-input"><span aria-hidden="true">$</span><input class="ph-input" id="g-vw-too-cheap" type="number" name="g_vw_too_cheap" min="0" inputmode="numeric" /></div>
           </div>
           <div class="ph-field" data-required data-key="g_vw_bargain">
-            <label class="ph-label" for="g-vw-bargain">At what price would it feel like a great deal?</label>
+            <label class="ph-label" for="g-vw-bargain">At what monthly price would it feel like a great deal?</label>
             <div class="currency-input"><span aria-hidden="true">$</span><input class="ph-input" id="g-vw-bargain" type="number" name="g_vw_bargain" min="0" inputmode="numeric" /></div>
           </div>
           <div class="ph-field" data-required data-key="g_vw_expensive">
-            <label class="ph-label" for="g-vw-expensive">At what price does it start feeling expensive — but you'd still consider it?</label>
+            <label class="ph-label" for="g-vw-expensive">At what monthly price does it start feeling expensive — but you'd still consider it?</label>
             <div class="currency-input"><span aria-hidden="true">$</span><input class="ph-input" id="g-vw-expensive" type="number" name="g_vw_expensive" min="0" inputmode="numeric" /></div>
           </div>
           <div class="ph-field" data-required data-key="g_vw_too_expensive">
-            <label class="ph-label" for="g-vw-too-expensive">At what price would it be too expensive to consider at all?</label>
+            <label class="ph-label" for="g-vw-too-expensive">At what monthly price would it be too expensive to consider at all?</label>
             <div class="currency-input"><span aria-hidden="true">$</span><input class="ph-input" id="g-vw-too-expensive" type="number" name="g_vw_too_expensive" min="0" inputmode="numeric" /></div>
           </div>
         </div>
         <p class="warning-line" data-vw-warning aria-live="polite"></p>
         <fieldset class="ph-field" data-required data-key="g_pilot_500">
-          <legend class="ph-label">A 4-week trial on one real project costs $500. Your honest reaction?</legend>
+          <legend class="ph-label">A guided 4-week trial would test this workflow on one real client project for US$500 total. Your honest reaction?</legend>
           <div class="opt-grid" data-w="wide">
             <label class="ph-check-row"><input type="radio" name="g_pilot_500" value="I'd seriously consider it" /><span>I'd seriously consider it</span></label>
             <label class="ph-check-row"><input type="radio" name="g_pilot_500" value="Maybe — I'd need someone's approval" /><span>Maybe — I'd need someone's approval</span></label>
