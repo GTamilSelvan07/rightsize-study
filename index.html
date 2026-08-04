@@ -621,22 +621,6 @@
         font-weight: 600;
       }
 
-      .currency-input {
-        position: relative;
-      }
-
-      .currency-input span {
-        position: absolute;
-        top: 50%;
-        left: 0.875rem;
-        color: var(--ph-color-text-secondary);
-        transform: translateY(-50%);
-      }
-
-      .currency-input .ph-input {
-        padding-left: 1.75rem;
-      }
-
       @media (prefers-reduced-motion: no-preference) {
         .attention-fill {
           transition: width 900ms var(--ph-ease-emphasized);
@@ -1253,7 +1237,7 @@
           </fieldset>
 
           <div class="ph-field ph-field-full" data-required data-key="calc_share">
-            <label class="ph-label" for="calc-share">Honestly, what share of that meeting time could be shorter or skipped if the preparation happened automatically?</label>
+            <label class="ph-label" for="calc-share">Honestly, what share of that meeting time could be made more focused, handled in writing, or avoided if the preparation happened automatically?</label>
             <div class="calc-range-row">
               <input id="calc-share" type="range" name="calc_share" min="0" max="70" step="5" value="30" />
               <output class="calc-range-value" for="calc-share" data-calc-share-output>30%</output>
@@ -1408,26 +1392,20 @@
           <fieldset class="ph-field" data-required data-key="f_most_valuable">
             <legend class="ph-label">Which part would be most valuable?</legend>
             <div class="opt-grid" data-w="wide">
-              <label class="ph-check-row"><input type="radio" name="f_most_valuable" value="Fewer or shorter meetings" /><span>Fewer or shorter meetings</span></label>
+              <label class="ph-check-row"><input type="radio" name="f_most_valuable" value="The right meeting, with the right people" /><span>The right meeting, with the right people</span></label>
               <label class="ph-check-row"><input type="radio" name="f_most_valuable" value="The assistant prepares facts and options before we talk" /><span>The assistant prepares facts and options before we talk</span></label>
               <label class="ph-check-row"><input type="radio" name="f_most_valuable" value="Both sides approve one exact record" /><span>Both sides approve one exact record</span></label>
               <label class="ph-check-row"><input type="radio" name="f_most_valuable" value="Promises get checked afterwards" /><span>Promises get checked afterwards</span></label>
               <label class="ph-check-row"><input type="radio" name="f_most_valuable" value="My private limits stay private" /><span>My private limits stay private</span></label>
+              <label class="ph-check-row"><input type="radio" name="f_most_valuable" value="Other — tell us" /><span>Other — tell us</span></label>
               <label class="ph-check-row"><input type="radio" name="f_most_valuable" value="Honestly, none of it" /><span>Honestly, none of it</span></label>
             </div>
           </fieldset>
 
-          <fieldset class="ph-field" data-required data-key="f_least_valuable">
-            <legend class="ph-label">…and which part would you skip?</legend>
-            <div class="opt-grid" data-w="wide">
-              <label class="ph-check-row"><input type="radio" name="f_least_valuable" value="Fewer or shorter meetings" /><span>Fewer or shorter meetings</span></label>
-              <label class="ph-check-row"><input type="radio" name="f_least_valuable" value="The assistant prepares facts and options before we talk" /><span>The assistant prepares facts and options before we talk</span></label>
-              <label class="ph-check-row"><input type="radio" name="f_least_valuable" value="Both sides approve one exact record" /><span>Both sides approve one exact record</span></label>
-              <label class="ph-check-row"><input type="radio" name="f_least_valuable" value="Promises get checked afterwards" /><span>Promises get checked afterwards</span></label>
-              <label class="ph-check-row"><input type="radio" name="f_least_valuable" value="My private limits stay private" /><span>My private limits stay private</span></label>
-              <label class="ph-check-row"><input type="radio" name="f_least_valuable" value="Honestly, none of it" /><span>Honestly, none of it</span></label>
-            </div>
-          </fieldset>
+          <div class="ph-field ph-field-full conditional" data-most-valuable-other hidden data-required data-key="f_most_valuable_other">
+            <label class="ph-label" for="f-most-valuable-other">What would be most valuable instead?</label>
+            <textarea class="ph-textarea" id="f-most-valuable-other" name="f_most_valuable_other" rows="3" maxlength="600"></textarea>
+          </div>
 
           <fieldset class="ph-field" data-required data-key="f_concern">
             <legend class="ph-label">What concerns you most?</legend>
@@ -1470,16 +1448,16 @@
               <div>
                 <span class="pricing-stage-label">Product</span>
                 <h3 id="pricing-product-heading">An AI-assisted decision workspace for software agencies and consultancies</h3>
-                <p>When a client asks to change scope, a delivery date, or price, it brings together the permitted project evidence, shows the one trade-off only people can decide, and recommends no meeting, written approval, or the smallest necessary conversation.</p>
+                <p>When a client asks to change scope, a delivery date, or price, it brings together the permitted project evidence, shows the one trade-off only people can decide, and recommends written approval, a focused conversation, or a wider meeting when that is the safer choice.</p>
               </div>
             </li>
             <li class="pricing-stage">
               <span class="pricing-stage-mark" aria-hidden="true">2</span>
               <div>
                 <span class="pricing-stage-label">Value</span>
-                <h3>Reach a clear, accountable decision with less coordination</h3>
+                <h3>Reach a clear, accountable decision with the right amount of coordination</h3>
                 <ul class="pricing-benefits">
-                  <li><strong>Recover attention</strong>Avoid a broad status meeting when written approval or a short conversation is enough.</li>
+                  <li><strong>Keep the right people together</strong>Make room for a focused or wider conversation when it adds value; use written approval when that is enough.</li>
                   <li><strong>Protect delivery and margin</strong>Make the scope–date–price trade-off clear before anyone makes an accidental promise.</li>
                   <li><strong>Give both sides control</strong>Keep private limits private while the agency and client approve exactly the same terms.</li>
                   <li><strong>Carry the decision through</strong>Record owners and dates, then show whether the agreed outcome happened.</li>
@@ -1497,33 +1475,51 @@
           </ol>
           <p class="pricing-evidence-note"><strong>Early-concept note:</strong> these are the benefits the product is designed to create, not measured results.</p>
         </article>
-        <p class="pricing-instruction">Enter monthly amounts in US dollars from your organisation's point of view. Give your honest first reaction; there are no right answers.</p>
+        <p class="pricing-instruction">Use the currency your organisation would expect to use for this purchase. Give your honest first reaction; there are no right answers.</p>
         <div class="ph-form-grid">
+          <div class="ph-field ph-field-full" data-required data-key="g_currency">
+            <label class="ph-label" for="g-currency">Currency for every price on this page</label>
+            <input class="ph-input" id="g-currency" name="g_currency" type="text" list="currency-suggestions" maxlength="40" placeholder="For example, NZD, AUD, USD, or EUR" aria-describedby="g-currency-hint" />
+            <p class="ph-hint" id="g-currency-hint">Enter any currency. The suggestions are only shortcuts, not a limit.</p>
+            <datalist id="currency-suggestions">
+              <option value="NZD"></option>
+              <option value="AUD"></option>
+              <option value="USD"></option>
+              <option value="CAD"></option>
+              <option value="EUR"></option>
+              <option value="GBP"></option>
+              <option value="INR"></option>
+              <option value="JPY"></option>
+              <option value="SGD"></option>
+              <option value="ZAR"></option>
+            </datalist>
+          </div>
           <div class="ph-field" data-required data-key="g_vw_too_cheap">
             <label class="ph-label" for="g-vw-too-cheap">At what monthly price would this workspace feel so cheap you'd doubt it works?</label>
-            <div class="currency-input"><span aria-hidden="true">$</span><input class="ph-input" id="g-vw-too-cheap" type="number" name="g_vw_too_cheap" min="0" inputmode="numeric" /></div>
+            <input class="ph-input" id="g-vw-too-cheap" type="number" name="g_vw_too_cheap" min="0" step="any" inputmode="decimal" aria-describedby="g-currency-hint" />
           </div>
           <div class="ph-field" data-required data-key="g_vw_bargain">
             <label class="ph-label" for="g-vw-bargain">At what monthly price would it feel like a great deal?</label>
-            <div class="currency-input"><span aria-hidden="true">$</span><input class="ph-input" id="g-vw-bargain" type="number" name="g_vw_bargain" min="0" inputmode="numeric" /></div>
+            <input class="ph-input" id="g-vw-bargain" type="number" name="g_vw_bargain" min="0" step="any" inputmode="decimal" aria-describedby="g-currency-hint" />
           </div>
           <div class="ph-field" data-required data-key="g_vw_expensive">
             <label class="ph-label" for="g-vw-expensive">At what monthly price does it start feeling expensive — but you'd still consider it?</label>
-            <div class="currency-input"><span aria-hidden="true">$</span><input class="ph-input" id="g-vw-expensive" type="number" name="g_vw_expensive" min="0" inputmode="numeric" /></div>
+            <input class="ph-input" id="g-vw-expensive" type="number" name="g_vw_expensive" min="0" step="any" inputmode="decimal" aria-describedby="g-currency-hint" />
           </div>
           <div class="ph-field" data-required data-key="g_vw_too_expensive">
             <label class="ph-label" for="g-vw-too-expensive">At what monthly price would it be too expensive to consider at all?</label>
-            <div class="currency-input"><span aria-hidden="true">$</span><input class="ph-input" id="g-vw-too-expensive" type="number" name="g_vw_too_expensive" min="0" inputmode="numeric" /></div>
+            <input class="ph-input" id="g-vw-too-expensive" type="number" name="g_vw_too_expensive" min="0" step="any" inputmode="decimal" aria-describedby="g-currency-hint" />
           </div>
         </div>
+        <p class="ph-hint">The four amounts describe different boundaries: too cheap, a great deal, still worth considering when expensive, and too expensive. They help us understand a price range rather than one exact price.</p>
         <p class="warning-line" data-vw-warning aria-live="polite"></p>
-        <fieldset class="ph-field" data-required data-key="g_pilot_500">
-          <legend class="ph-label">A guided 4-week trial would test this workflow on one real client project for US$500 total. Your honest reaction?</legend>
+        <fieldset class="ph-field" data-required data-key="g_paid_trial_interest">
+          <legend class="ph-label">A guided, paid 4-week trial would test this workflow on one real client project. Would your organisation consider it?</legend>
           <div class="opt-grid" data-w="wide">
-            <label class="ph-check-row"><input type="radio" name="g_pilot_500" value="I'd seriously consider it" /><span>I'd seriously consider it</span></label>
-            <label class="ph-check-row"><input type="radio" name="g_pilot_500" value="Maybe — I'd need someone's approval" /><span>Maybe — I'd need someone's approval</span></label>
-            <label class="ph-check-row"><input type="radio" name="g_pilot_500" value="Only if it were free" /><span>Only if it were free</span></label>
-            <label class="ph-check-row"><input type="radio" name="g_pilot_500" value="I wouldn't trial it at all" /><span>I wouldn't trial it at all</span></label>
+            <label class="ph-check-row"><input type="radio" name="g_paid_trial_interest" value="I'd seriously consider it" /><span>I'd seriously consider it</span></label>
+            <label class="ph-check-row"><input type="radio" name="g_paid_trial_interest" value="Maybe — I'd need someone's approval" /><span>Maybe — I'd need someone's approval</span></label>
+            <label class="ph-check-row"><input type="radio" name="g_paid_trial_interest" value="Only if it were free" /><span>Only if it were free</span></label>
+            <label class="ph-check-row"><input type="radio" name="g_paid_trial_interest" value="I wouldn't trial it at all" /><span>I wouldn't trial it at all</span></label>
           </div>
         </fieldset>
         <div class="ph-field conditional" data-pilot-approver hidden data-required data-key="g_pilot_approver">
@@ -1547,14 +1543,6 @@
             <div class="opt-grid" data-w="narrow">
               <label class="ph-check-row"><input type="radio" name="h_interview" value="Yes" /><span>Yes</span></label>
               <label class="ph-check-row"><input type="radio" name="h_interview" value="No" /><span>No</span></label>
-            </div>
-          </fieldset>
-          <fieldset class="ph-field" data-required data-key="h_pilot">
-            <legend class="ph-label">Would your team try a 4-week trial on one real project?</legend>
-            <div class="opt-grid" data-w="narrow">
-              <label class="ph-check-row"><input type="radio" name="h_pilot" value="Yes" /><span>Yes</span></label>
-              <label class="ph-check-row"><input type="radio" name="h_pilot" value="Maybe" /><span>Maybe</span></label>
-              <label class="ph-check-row"><input type="radio" name="h_pilot" value="No" /><span>No</span></label>
             </div>
           </fieldset>
           <div class="ph-field ph-field-full" data-key="h_referral">
@@ -1588,9 +1576,9 @@
       <div class="study-footer-inner"><a href="privacy.html">Privacy</a></div>
     </footer>
 
-    <script defer src="assets/js/config.js?v=4"></script>
+    <script defer src="assets/js/config.js?v=6"></script>
     <script defer src="assets/js/store.js?v=4"></script>
-    <script defer src="assets/js/survey.js?v=4"></script>
+    <script defer src="assets/js/survey.js?v=6"></script>
     <script defer src="assets/js/calc.js"></script>
     <script defer src="assets/js/demo-compact.js?v=4"></script>
   </body>

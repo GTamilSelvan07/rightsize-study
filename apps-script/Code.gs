@@ -29,6 +29,7 @@ var HEADERS = [
   "calc_hours_month", "calc_money_month",
   "e_demo_option", "e_demo_seconds", "e_demo_steps_done", "e_demo_completed", "e_full_demo_clicked", "e_clarity",
   "ai_q1", "ai_a1", "ai_q2", "ai_a2", "ai_gen_ok",
+  // f_least_valuable and h_pilot are retained as legacy columns for responses collected before schema v3.
   "f_value", "f_most_valuable", "f_least_valuable", "f_concern", "f_solves_problem", "f_blocker",
   "g_vw_too_cheap", "g_vw_bargain", "g_vw_expensive", "g_vw_too_expensive", "g_vw_order_ok",
   "g_pilot_500", "g_pilot_approver",
@@ -40,8 +41,12 @@ var HEADERS = [
   "story_walkthrough_clicked", "story_seconds",
   "story_meeting_reply1", "story_meeting_reply2", "story_meeting_completed",
   "t_seconds_total", "t_sections_json",
-  // Version 2 fields are appended so existing response columns never shift.
-  "schema_version", "e_scenario_generated", "e_scenario_route", "e_understanding"
+  // Schema additions are appended so existing response columns never shift.
+  "schema_version", "e_scenario_generated", "e_scenario_route", "e_understanding",
+  // Version 3 fields: local-currency pricing and trial interest without a fixed US price.
+  "g_currency", "g_paid_trial_interest",
+  // Version 4 field: free-text value not covered by the fixed feature choices.
+  "f_most_valuable_other"
 ];
 // demo_full_* now refers to the step-by-step walkthrough page; story_* is the
 // playable-episode demo; ai_* holds the AI-tailored follow-up questions and answers;
@@ -64,7 +69,7 @@ function doGet() {
   return out({
     ok: true,
     ping: true,
-    schemaVersion: 2,
+    schemaVersion: 4,
     features: { aiq: true, scenario: true },
   });
 }
@@ -140,8 +145,16 @@ function ensureColumns(sheet, required) {
 
 function ensureResponseSheet(sheet) {
   ensureColumns(sheet, HEADERS.length);
-  if (sheet.getLastColumn() < HEADERS.length) {
-    sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]);
+  var headers = sheet.getRange(1, 1, 1, HEADERS.length).getValues()[0];
+  var changed = false;
+  for (var i = 0; i < HEADERS.length; i++) {
+    if (!headers[i]) {
+      headers[i] = HEADERS[i];
+      changed = true;
+    }
+  }
+  if (changed) {
+    sheet.getRange(1, 1, 1, HEADERS.length).setValues([headers]);
   }
 }
 

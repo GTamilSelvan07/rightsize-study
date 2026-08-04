@@ -3,5 +3,5 @@
 window.STUDY_CONFIG = {
   SCRIPT_URL: "https://script.google.com/macros/s/AKfycbxJG3WxDorRyZ6phThCwphKbtQS64maaF7vV5jBAdxnQaa2mSENmpOxcChaDaHHJRiF/exec",
   FORM_TOKEN: "rs-2026-08",
-  SCHEMA_VERSION: 2,
+  SCHEMA_VERSION: 4,
 };

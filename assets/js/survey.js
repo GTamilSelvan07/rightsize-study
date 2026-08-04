@@ -353,11 +353,21 @@
 
   const updatePilotApprover = () => {
     const field = document.querySelector("[data-pilot-approver]");
-    const needsApproval = selectedValue("g_pilot_500") === "Maybe — I'd need someone's approval";
+    const needsApproval = selectedValue("g_paid_trial_interest") === "Maybe — I'd need someone's approval";
     field.hidden = !needsApproval;
     if (!needsApproval) {
       field.querySelector("input").value = "";
       window.Store.removeAnswers(["g_pilot_approver"]);
+    }
+  };
+
+  const updateMostValuableOther = () => {
+    const field = document.querySelector("[data-most-valuable-other]");
+    const isOther = selectedValue("f_most_valuable") === "Other — tell us";
+    field.hidden = !isOther;
+    if (!isOther) {
+      field.querySelector("textarea").value = "";
+      window.Store.removeAnswers(["f_most_valuable_other"]);
     }
   };
 
@@ -601,6 +611,7 @@
     updateC2Visibility();
     updateBUsesVisibility();
     updatePilotApprover();
+    updateMostValuableOther();
     updateVanWestendorp();
     syncSelectedCardStates();
   };
@@ -743,8 +754,11 @@
     if (name === "c2_incident_when") {
       updateC2Visibility();
     }
-    if (name === "g_pilot_500") {
+    if (name === "g_paid_trial_interest") {
       updatePilotApprover();
+    }
+    if (name === "f_most_valuable") {
+      updateMostValuableOther();
     }
     if (name === "h_interview") {
       clearFieldError(document.querySelector('[name="h_email"]').closest("[data-key]"));
